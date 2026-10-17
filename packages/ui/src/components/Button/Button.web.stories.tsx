@@ -51,3 +51,12 @@ export const IgnoresPressWhenDisabled: Story = {
     await expect(args.onPress).not.toHaveBeenCalled();
   },
 };
+
+/** Estados forzados con storybook-addon-pseudo-states, para capturarlos en Chromatic sin interacción. */
+export const Hovered: Story = {
+  parameters: { pseudo: { hover: true } },
+};
+
+export const FocusVisible: Story = {
+  parameters: { pseudo: { focusVisible: true } },
+};
