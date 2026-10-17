@@ -24,6 +24,7 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "@base-ui/react": "catalog:",
     "@yesid/tokens": "workspace:*",
     "tailwind-merge": "catalog:",
     "tailwind-variants": "catalog:"

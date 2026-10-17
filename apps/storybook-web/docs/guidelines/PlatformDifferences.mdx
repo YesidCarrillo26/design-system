@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guidelines/Platform differences" />
+
+# Diferencias entre plataformas
+
+Los componentes comparten contrato (props), variantes y stories. Donde la plataforma no ofrece lo mismo, el comportamiento cambia de forma **documentada**:
+
+| Componente | Web | Native |
+|---|---|---|
+| `Dialog` | Base UI: foco atrapado, Escape, devuelve el foco | `Modal` con `accessibilityViewIsModal` |
+| `Sheet` | Diálogo anclado abajo | `Modal` inferior con animación `slide` |
+| `Popover` | Flotante anclado al disparador, con posicionamiento automático | Panel centrado en un `Modal` (no hay anclaje) |
+| `Menu` | Menú flotante con flechas, Enter y Escape | Hoja de acciones inferior |
+| `Tooltip` | Aparece con hover o foco de teclado | Solo `accessibilityHint` (no existe el hover) |
+| `Select` | `<select>` nativo del navegador | Control que abre una hoja con las opciones |
+| `Tabs`, `Accordion` | Base UI (flechas, `aria-selected`/`aria-expanded`) | Implementación propia con los mismos roles |
+| `Toast` | Región `aria-live` abajo a la derecha | Capa superior abajo |
+
+Cada story de estos componentes declara `parameters.platforms` con su comportamiento.
+
+## Reglas
+
+- Una story compartida describe **estados**; el teclado y el DOM se prueban en `X.web.stories.tsx`.
+- Si una interacción no existe en una plataforma (hover, foco por teclado), no se simula: se ofrece la alternativa equivalente.
+- Las diferencias nuevas se agregan a esta tabla en el mismo cambio que las introduce.
