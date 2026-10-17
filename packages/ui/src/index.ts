@@ -26,3 +26,6 @@ export * from './components/Sheet';
 export * from './components/Tabs';
 export * from './components/Toast';
 export * from './components/Tooltip';
+export * from './patterns/EmptyState';
+export * from './patterns/ListItem';
+export * from './patterns/PageHeader';

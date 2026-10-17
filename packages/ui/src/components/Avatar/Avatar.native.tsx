@@ -10,7 +10,7 @@ export function Avatar({ name, src, size, className }: AvatarProps) {
   const { showImage, onError } = useAvatar(src);
   const { root, label, image } = avatarStyles({ size });
   return (
-    <View role="img" aria-label={name} className={root({ className })}>
+    <View accessible role="img" aria-label={name} className={root({ className })}>
       {showImage ? (
         <Image source={{ uri: src }} onError={onError} className={image()} accessibilityIgnoresInvertColors />
       ) : (

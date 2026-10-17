@@ -18,3 +18,11 @@ describe('Avatar (native)', () => {
     expect(initials('Ana María Pérez')).toBe('AM');
   });
 });
+
+describe('Avatar (native, accesibilidad)', () => {
+  test('se expone como imagen con el nombre de la persona', async () => {
+    await render(<Initials />);
+
+    expect(screen.getByRole('img', { name: 'Ada Lovelace' })).toBeOnTheScreen();
+  });
+});

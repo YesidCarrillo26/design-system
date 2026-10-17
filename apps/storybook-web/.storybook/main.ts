@@ -3,11 +3,13 @@ import type { StorybookConfig } from '@storybook/react-vite';
 // Los componentes viven en el paquete; este Storybook solo los muestra. `titlePrefix` agrupa
 // todo bajo "Components", y el glob excluye las stories exclusivas de native.
 const components = '../../../packages/ui/src/components';
+const patterns = '../../../packages/ui/src/patterns';
 
 const config: StorybookConfig = {
   framework: '@storybook/react-vite',
   stories: [
     { directory: components, titlePrefix: 'Components', files: '**/!(*.native).stories.tsx' },
+    { directory: patterns, titlePrefix: 'Patterns', files: '**/!(*.native).stories.tsx' },
     '../docs/**/*.mdx',
   ],
   addons: [
