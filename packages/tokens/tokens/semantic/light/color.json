@@ -1,0 +1,14 @@
+{
+  "color": {
+    "$type": "color",
+    "background": { "$value": "{color.neutral.0}", "$description": "Fondo de la página" },
+    "foreground": { "$value": "{color.neutral.950}", "$description": "Texto principal" },
+    "muted-foreground": { "$value": "{color.neutral.500}", "$description": "Texto secundario" },
+    "primary": { "$value": "{color.brand.600}", "$description": "Acción principal" },
+    "primary-foreground": { "$value": "{color.neutral.0}", "$description": "Texto sobre primary" },
+    "secondary": { "$value": "{color.neutral.100}", "$description": "Acción secundaria" },
+    "secondary-foreground": { "$value": "{color.neutral.900}", "$description": "Texto sobre secondary" },
+    "border": { "$value": "{color.neutral.200}", "$description": "Bordes y divisores" },
+    "ring": { "$value": "{color.brand.500}", "$description": "Anillo de foco" }
+  }
+}

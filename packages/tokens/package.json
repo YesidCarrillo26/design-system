@@ -1,0 +1,38 @@
+{
+  "name": "@yesid/tokens",
+  "version": "0.0.0",
+  "description": "Design tokens (DTCG) y sus salidas para Tailwind v4 (web), Uniwind (native) y TypeScript",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./web.css": "./dist/web.css",
+    "./native.css": "./dist/native.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./tw-merge": {
+      "types": "./dist/tw-merge.d.ts",
+      "default": "./dist/tw-merge.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node sd/build.ts",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "node --test \"sd/**/*.test.ts\""
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@yesid/tsconfig": "workspace:*",
+    "style-dictionary": "catalog:",
+    "tailwind-merge": "catalog:",
+    "typescript": "catalog:"
+  }
+}

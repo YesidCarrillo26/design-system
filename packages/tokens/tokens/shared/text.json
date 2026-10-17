@@ -1,0 +1,25 @@
+{
+  "text": {
+    "$type": "dimension",
+    "caption": {
+      "size": { "$value": "12px" },
+      "line-height": { "$value": "16px" }
+    },
+    "body-sm": {
+      "size": { "$value": "14px" },
+      "line-height": { "$value": "20px" }
+    },
+    "body-md": {
+      "size": { "$value": "16px" },
+      "line-height": { "$value": "24px" }
+    },
+    "body-lg": {
+      "size": { "$value": "18px" },
+      "line-height": { "$value": "28px" }
+    },
+    "title": {
+      "size": { "$value": "24px" },
+      "line-height": { "$value": "32px" }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "extends": "@yesid/tsconfig/base.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": ["sd"]
+}
