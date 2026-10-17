@@ -15,7 +15,7 @@
 > | 8. Native en el navegador | ✅ | [fase-8](../learning/fase-8.md) |
 > | 9+ | pendientes | — |
 >
-> Guía de lo construido: [guia-paso-a-paso](../guia-paso-a-paso.md).
+> Qué falta: [pendientes](../pendientes.md). Guía de lo construido: [guia-paso-a-paso](../guia-paso-a-paso.md).
 >
 > ### Desviaciones del plan
 >

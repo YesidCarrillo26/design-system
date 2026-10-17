@@ -11,6 +11,7 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - `apps/storybook-native-web` — las implementaciones native en el navegador (react-native-web), puerto 6008.
 - `apps/storybook-native` — app Expo con Storybook on-device y tests Jest.
 - `tooling/typescript` — tsconfig compartidos.
+- `docs/pendientes.md` — tareas pendientes y siguientes pasos.
 - `docs/guia-paso-a-paso.md` — guía completa de cómo se construyó (tecnologías y comandos).
 - `docs/adr` — decisiones de arquitectura. Léelas antes de cambiar algo estructural.
 - `docs/plan` — el plan inicial con el estado por fase.
