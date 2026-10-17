@@ -1,0 +1,93 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc", "import"],
+  "categories": {
+    "correctness": "error"
+  },
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/storybook-static/**",
+    "**/coverage/**",
+    "**/.expo/**",
+    "**/storybook.requires.ts"
+  ],
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "typescript/consistent-type-imports": "error"
+  },
+  "overrides": [
+    // ── Fronteras entre plataformas (ver docs/adr/0001-hybrid-per-platform.md) ──
+    // Web: React DOM puro. Nada de React Native ni Uniwind.
+    {
+      "files": ["packages/ui/src/**/*.web.ts", "packages/ui/src/**/*.web.tsx"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              { "name": "react-native", "message": "Los archivos .web no pueden depender de React Native." },
+              { "name": "uniwind", "message": "Los archivos .web no pueden depender de Uniwind." }
+            ],
+            "patterns": [
+              { "group": ["react-native/*", "react-native-*", "uniwind/*"], "message": "Los archivos .web no pueden depender de React Native ni Uniwind." }
+            ]
+          }
+        ]
+      }
+    },
+    // Native: nada de DOM.
+    {
+      "files": ["packages/ui/src/**/*.native.ts", "packages/ui/src/**/*.native.tsx"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [{ "name": "react-dom", "message": "Los archivos .native no pueden depender de react-dom." }],
+            "patterns": [{ "group": ["react-dom/*"], "message": "Los archivos .native no pueden depender de react-dom." }]
+          }
+        ],
+        "no-restricted-globals": [
+          "error",
+          { "name": "window", "message": "No existe window en native." },
+          { "name": "document", "message": "No existe document en native." }
+        ]
+      }
+    },
+    // Compartidos: contratos, variantes, hooks, lib y stories compartidas no pueden
+    // importar ninguna de las dos plataformas. De `storybook/test` solo se permite `fn`,
+    // para que Metro no empaquete helpers de DOM.
+    {
+      "files": [
+        "packages/ui/src/**/*.types.ts",
+        "packages/ui/src/**/*.variants.ts",
+        "packages/ui/src/**/use*.ts",
+        "packages/ui/src/lib/**",
+        "packages/ui/src/**/*.stories.tsx"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              { "name": "react-native", "message": "Los archivos compartidos no pueden importar React Native." },
+              { "name": "react-dom", "message": "Los archivos compartidos no pueden importar react-dom." },
+              {
+                "name": "storybook/test",
+                "importNames": ["expect", "userEvent", "within", "waitFor", "waitForElementToBeRemoved", "fireEvent", "screen", "spyOn", "mocked", "clearAllMocks", "resetAllMocks", "restoreAllMocks"],
+                "message": "En stories compartidas solo se permite `fn` de storybook/test. Mueve el play a X.web.stories.tsx."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    // Las stories específicas de plataforma sí pueden usar su entorno completo.
+    {
+      "files": ["packages/ui/src/**/*.web.stories.tsx", "packages/ui/src/**/*.native.stories.tsx"],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ]
+}

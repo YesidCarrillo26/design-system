@@ -1,0 +1,27 @@
+# Dependencias y builds
+node_modules
+dist
+storybook-static
+coverage
+.turbo
+*.tsbuildinfo
+.cache
+
+# Expo / Metro
+.expo
+ios
+android
+expo-env.d.ts
+
+# Entorno
+.env
+.env.*
+!.env.example
+*.local
+
+# Editor / SO
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+*.log

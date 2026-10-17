@@ -1,0 +1,80 @@
+packages:
+  - apps/*
+  - packages/*
+  - tooling/*
+  - examples/*
+
+# Hoisted desde el día 1 (ver docs/adr/0003-pnpm-hoisted.md): Uniwind declara como
+# peers piezas internas de Metro y, con instalación aislada, puede resolver un Metro
+# distinto al de Expo.
+nodeLinker: hoisted
+
+# Scripts de build permitidos. Se deniegan los paquetes que traen binarios precompilados
+# como dependencias opcionales (su postinstall es solo un respaldo). Revisar si algo falla.
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: true
+  unrs-resolver: false
+
+# Una sola versión de cada dependencia compartida para todo el monorepo.
+# React lo dicta Expo SDK 58 (ver bundledNativeModules.json): no subirlo por separado.
+catalog:
+  # Runtime
+  react: 19.3.0
+  react-dom: 19.3.0
+  react-native: 0.88.0
+  react-native-web: ~0.21.4
+  # Tooling
+  typescript: ~6.0.3
+  '@types/node': ^24.13.3
+  '@types/react': ^19.3.0
+  '@types/react-dom': ^19.3.0
+  oxlint: ^1.88.0
+  turbo: ^2.11.9
+  '@changesets/cli': ^3.0.3
+  # Estilos
+  tailwindcss: ^4.3.3
+  '@tailwindcss/vite': ^4.3.3
+  tailwind-variants: ^3.3.1
+  tailwind-merge: ^3.7.0
+  uniwind: ^1.12.2
+  style-dictionary: ^5.7.0
+  # Storybook
+  storybook: ^10.6.2
+  '@storybook/react': ^10.6.2
+  '@storybook/react-vite': ^10.6.2
+  '@storybook/addon-docs': ^10.6.2
+  '@storybook/addon-a11y': ^10.6.2
+  '@storybook/addon-vitest': ^10.6.2
+  '@storybook/addon-themes': ^10.6.2
+  '@storybook/react-native': ^10.7.0
+  '@storybook/addon-ondevice-controls': ^10.7.0
+  '@storybook/addon-ondevice-actions': ^10.7.0
+  '@storybook/addon-ondevice-backgrounds': ^10.7.0
+  '@storybook/addon-ondevice-notes': ^10.7.0
+  # Web build / test
+  vite: ^8.3.4
+  '@vitejs/plugin-react': ^6.1.2
+  vitest: ^5.0.5
+  '@vitest/browser-playwright': ^5.0.5
+  '@vitest/coverage-v8': ^5.0.5
+  playwright: ^1.64.1
+  # Native test
+  jest: ^30.5.2
+  jest-expo: ~58.0.11
+  '@types/jest': ^30.0.0
+  '@testing-library/react-native': ^14.1.0
+
+minimumReleaseAgeExclude:
+  - '@turbo/darwin-64@2.11.9'
+  - '@turbo/darwin-arm64@2.11.9'
+  - '@turbo/linux-64@2.11.9'
+  - '@turbo/linux-arm64@2.11.9'
+  - '@turbo/windows-64@2.11.9'
+  - '@turbo/windows-arm64@2.11.9'
+  - turbo@2.11.9
+  - '@expo/cli@58.1.11'
+  - '@expo/schema-utils@58.0.2'
+  - expo-modules-core@58.0.22
+  - expo-modules-jsi@58.0.15
+  - expo@58.0.14
