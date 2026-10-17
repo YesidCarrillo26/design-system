@@ -1,0 +1,14 @@
+{
+  "extends": "@yesid/tsconfig/web.json",
+  "compilerOptions": {
+    // `composite` obliga a emitir; solo se emiten declaraciones, a una carpeta de caché.
+    "composite": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "outDir": "node_modules/.cache/tsc/web",
+    "tsBuildInfoFile": "node_modules/.cache/tsc/web.tsbuildinfo"
+  },
+  "include": ["src"],
+  // `*.native.*` (no solo `.native.tsx`) para excluir también stories y tests native.
+  "exclude": ["src/**/*.native.*"]
+}

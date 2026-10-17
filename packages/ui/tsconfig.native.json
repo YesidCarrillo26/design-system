@@ -1,0 +1,13 @@
+{
+  "extends": "@yesid/tsconfig/native.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "outDir": "node_modules/.cache/tsc/native",
+    "tsBuildInfoFile": "node_modules/.cache/tsc/native.tsbuildinfo",
+    "types": ["jest"]
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.web.*"]
+}

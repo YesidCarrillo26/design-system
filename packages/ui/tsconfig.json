@@ -1,0 +1,6 @@
+{
+  // Solution-style: el paquete se verifica dos veces, una por plataforma.
+  // Los archivos compartidos (tipos, variantes, stories) se comprueban en ambas.
+  "files": [],
+  "references": [{ "path": "./tsconfig.web.json" }, { "path": "./tsconfig.native.json" }]
+}
