@@ -10,13 +10,14 @@
 > | 3. Tokens completos + Foundations | ✅ | [fase-3](../learning/fase-3.md) |
 > | 4. Primitivos + testing | ✅ (falta el token de Chromatic) | [fase-4](../learning/fase-4.md) |
 > | 5. Formularios | ✅ (hechos a mano, sin librería headless) | [fase-5](../learning/fase-5.md) |
-> | 6. Overlays y feedback | 🚧 en curso | — |
+> | 6. Overlays y feedback | ✅ (Sheet native con `Modal`, no gorhom) | [fase-6](../learning/fase-6.md) |
 > | 7–9+ | pendientes | — |
 >
 > ### Desviaciones del plan
 >
 > - **TypeScript 6.0**, no 7: TS 7 ya es el `latest`, pero falta comprobar `moduleSuffixes`.
 > - `titlePrefix` también se aplica a títulos explícitos (el plan suponía que no).
+> - Fase 6: Base UI en web; `Sheet` native con `Modal` en lugar de `@gorhom/bottom-sheet`.
 > - Fase 5 sin librería headless: elementos nativos del DOM en web y `Pressable` con roles en native.
 > - Los tokens se generan con un script propio sobre Style Dictionary (resuelve referencias), no con sus formats, porque cada salida mezcla temas.
 
