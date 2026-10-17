@@ -41,6 +41,10 @@ catalog:
   '@tailwindcss/vite': ^4.3.3
   tailwind-variants: ^3.3.1
   tailwind-merge: ^3.7.0
+  '@reduxjs/toolkit': ^2.13.0
+  react-redux: ^9.3.0
+  msw: ^3.0.3
+  msw-storybook-addon: ^3.0.3
   '@base-ui/react': ^1.9.0
   uniwind: ^1.12.2
   style-dictionary: ^5.7.0

@@ -11,7 +11,8 @@
 > | 4. Primitivos + testing | ✅ (falta el token de Chromatic) | [fase-4](../learning/fase-4.md) |
 > | 5. Formularios | ✅ (hechos a mano, sin librería headless) | [fase-5](../learning/fase-5.md) |
 > | 6. Overlays y feedback | ✅ (Sheet native con `Modal`, no gorhom) | [fase-6](../learning/fase-6.md) |
-> | 7–9+ | pendientes | — |
+> | 7. Patrones + Taskbox | ✅ | [fase-7](../learning/fase-7.md) |
+> | 8–9+ | pendientes | — |
 >
 > ### Desviaciones del plan
 >

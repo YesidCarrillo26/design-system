@@ -1,0 +1,9 @@
+{
+  "extends": "@yesid/tsconfig/web.json",
+  "compilerOptions": {
+    "moduleSuffixes": [""],
+    "types": ["node", "vite/client", "msw-storybook-addon/csf3"],
+    "allowImportingTsExtensions": true
+  },
+  "include": ["src", ".storybook", "vite.config.ts", "vitest.config.ts"]
+}

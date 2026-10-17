@@ -33,3 +33,7 @@ Guía viva: cada vez que un error inesperado cueste tiempo, se agrega aquí con 
 | `expo start --ios` quiere reemplazar Expo Go | CLI actualiza Expo Go al del SDK | No ejecutarlo sin preguntar; alternativa `expo run:ios` |
 | `changeset status` falla | `main` sin commits | Hacer el primer commit |
 | Push rechazado por `workflow` scope | Token de `gh` sin ese permiso | `gh auth refresh -h github.com -s workflow` (lo hace la persona) |
+| `does not provide an export named 'initialize'` (msw-storybook-addon) | La **versión mayor cambió la API** (v3: addon en `main.ts`, `mswLoader()` desde `/csf3`, handlers con `msw.use()` en `beforeEach`) | Con una versión mayor nueva, leer el `README.md` del paquete **instalado** (`node_modules/<pkg>/README.md`) antes de usar ejemplos de memoria |
+| Vitest: `Vite unexpectedly reloaded a test` / `failed to find the current suite` en la primera ejecución | Vite descubre dependencias en frío y reoptimiza a mitad de la corrida | Repetir una vez con la caché caliente; si persiste, `optimizeDeps.include` |
+| axe `heading-order` en un patrón | Nivel de título fijo que no encaja tras otro encabezado | Exponer `headingLevel` en el patrón (por defecto 2) y no fijar el nivel |
+| Un test pasa en claro y falla en oscuro (o al revés) | Combinación de tokens o color fijo | `VITE_SB_THEME=dark` en la suite; corregir el token |
