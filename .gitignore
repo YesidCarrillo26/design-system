@@ -25,3 +25,7 @@ expo-env.d.ts
 .vscode/*
 !.vscode/extensions.json
 *.log
+
+# Next.js
+.next
+next-env.d.ts

@@ -2,35 +2,58 @@
   "$schema": "https://turborepo.com/schema.json",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
     "build-storybook": {
-      "dependsOn": ["@yesid/tokens#build"],
-      "outputs": ["storybook-static/**"]
+      "dependsOn": [
+        "@yesid/tokens#build"
+      ],
+      "outputs": [
+        "storybook-static/**"
+      ]
     },
     "storybook": {
-      "dependsOn": ["@yesid/tokens#build"],
+      "dependsOn": [
+        "@yesid/tokens#build"
+      ],
       "cache": false,
       "persistent": true
     },
     "start": {
-      "dependsOn": ["@yesid/tokens#build"],
+      "dependsOn": [
+        "@yesid/tokens#build"
+      ],
       "cache": false,
       "persistent": true
     },
     "typecheck": {
-      "dependsOn": ["@yesid/tokens#build"]
+      "dependsOn": [
+        "@yesid/tokens#build",
+        "^build"
+      ]
     },
     "test:unit": {
-      "dependsOn": ["@yesid/tokens#build"]
+      "dependsOn": [
+        "@yesid/tokens#build"
+      ]
     },
     "test:storybook": {
-      "dependsOn": ["@yesid/tokens#build"],
-      "outputs": ["coverage/**"]
+      "dependsOn": [
+        "@yesid/tokens#build"
+      ],
+      "outputs": [
+        "coverage/**"
+      ]
     },
     "test:native": {
-      "dependsOn": ["@yesid/tokens#build"]
+      "dependsOn": [
+        "@yesid/tokens#build"
+      ]
     }
   }
 }

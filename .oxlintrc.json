@@ -7,6 +7,8 @@
   "ignorePatterns": [
     "**/node_modules/**",
     "**/dist/**",
+    "**/.next/**",
+    "**/uniwind-types.d.ts",
     "**/storybook-static/**",
     "**/coverage/**",
     "**/.expo/**",
