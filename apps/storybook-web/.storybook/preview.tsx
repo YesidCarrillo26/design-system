@@ -1,6 +1,14 @@
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react-vite';
+import { breakpoint } from '@yesid/tokens';
 import './preview.css';
+
+// Viewports derivados de los breakpoints de los tokens.
+const viewports = {
+  mobile: { name: 'Mobile', styles: { width: '375px', height: '812px' } },
+  tablet: { name: `Tablet (md ${breakpoint.md}px)`, styles: { width: `${breakpoint.md}px`, height: '1024px' } },
+  desktop: { name: `Desktop (lg ${breakpoint.lg}px)`, styles: { width: `${breakpoint.lg}px`, height: '800px' } },
+};
 
 const preview: Preview = {
   tags: ['autodocs'],
@@ -26,11 +34,12 @@ const preview: Preview = {
       sort: 'requiredFirst',
       matchers: { color: /(background|color)$/i, date: /Date$/i },
     },
+    viewport: { options: viewports },
     // El fondo lo pone el tema (ver decorador), no el addon de backgrounds.
     backgrounds: { disabled: true },
     options: {
       storySort: {
-        order: ['Introduction', 'Foundations', 'Components', 'Patterns', '*'],
+        order: ['Introduction', 'Foundations', ['Colors', 'Typography', 'Spacing', 'Radius', 'Elevation', 'Motion'], 'Components', 'Patterns', '*'],
       },
     },
   },

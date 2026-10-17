@@ -1,0 +1,12 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ColorSwatches } from '../blocks/ColorSwatches';
+
+<Meta title="Foundations/Colors" />
+
+# Colores
+
+Solo existen **colores semánticos**: describen el rol (`primary`, `foreground`…) y no el tono. Cada uno tiene un valor por tema, así que los componentes no necesitan variantes `dark:`. Cambia el tema en la barra superior.
+
+<ColorSwatches />
+
+Uso: `bg-primary`, `text-muted-foreground`, `border-border`. Funcionan igual en web (Tailwind) y native (Uniwind).

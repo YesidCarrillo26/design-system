@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { MotionDemo } from '../blocks/Specimens';
+import { TokenTable } from '../blocks/TokenTable';
+
+<Meta title="Foundations/Motion" />
+
+# Movimiento
+
+Tres duraciones y tres curvas. En web se usan como variables CSS; en native están como constantes en `@yesid/tokens` (`duration`, `ease`) para Reanimated.
+
+<MotionDemo />
+
+## Duraciones
+<TokenTable type="duration" />
+
+## Curvas
+<TokenTable type="ease" />
+
+## Breakpoints
+<TokenTable type="breakpoint" />
