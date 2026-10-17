@@ -1,0 +1,5 @@
+{
+  "extends": "@yesid/tsconfig/native.json",
+  "compilerOptions": { "moduleSuffixes": [""], "types": [] },
+  "include": ["index.ts", "src"]
+}
