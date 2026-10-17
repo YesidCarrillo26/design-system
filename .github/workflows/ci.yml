@@ -35,3 +35,20 @@ jobs:
 
       - name: Build
         run: pnpm turbo run build
+
+      - name: Calidad del paquete (publint + attw)
+        working-directory: packages/ui
+        run: |
+          npx publint
+          npx attw --pack . --profile esm-only
+
+      - name: Tests de Storybook (navegador)
+        run: |
+          pnpm --filter @yesid/storybook-web exec playwright install --with-deps chromium
+          pnpm turbo run test:storybook
+
+      - name: Tests native (Jest)
+        run: pnpm turbo run test:native
+
+      - name: La web no debe traer react-native
+        run: "! grep -rlE 'from.?.react-native.' examples/next-app/.next/static"
