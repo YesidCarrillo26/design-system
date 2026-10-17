@@ -40,3 +40,12 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - **Cada componente nuevo** cumple la Definition of Done del plan (contrato, variantes, stories
   compartidas, tests, a11y sin errores, docs y un changeset).
 - **Secretos:** nunca en el repo. Los tokens de Chromatic y npm van solo en GitHub secrets.
+
+## Storybook MCP (agentes)
+
+Con `pnpm storybook` corriendo, el servidor MCP está en `http://localhost:6006/mcp` (ver `.mcp.json`).
+Al trabajar con componentes de este sistema, **consúltalo antes de usar una prop**: no inventes props.
+
+- `docs-list` lista los componentes; `docs-show` muestra las props y los ejemplos de uno.
+- `get-storybook-story-instructions` da las convenciones vigentes para crear o actualizar stories.
+- Verifica tu trabajo con `test-run`.
