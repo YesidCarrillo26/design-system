@@ -15,7 +15,13 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
     '@storybook/addon-vitest',
     '@storybook/addon-themes',
+    '@storybook/addon-designs',
+    'storybook-addon-pseudo-states',
+    '@chromatic-com/storybook',
+    // Expone /mcp en el servidor de desarrollo para que agentes (Claude Code) consulten los componentes.
+    '@storybook/addon-mcp',
   ],
+  features: { experimentalCodeExamples: true },
   typescript: {
     // react-docgen-typescript sí resuelve props heredadas de `ButtonBaseProps` (otro archivo),
     // que es de donde sale la documentación de los controles.

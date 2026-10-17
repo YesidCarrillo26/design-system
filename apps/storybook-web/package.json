@@ -2,13 +2,14 @@
   "name": "@yesid/storybook-web",
   "version": "0.0.0",
   "private": true,
-  "description": "Storybook principal: documentación, tests y revisión visual",
+  "description": "Storybook principal: documentaci\u00f3n, tests y revisi\u00f3n visual",
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test:storybook": "vitest run --project=storybook",
-    "typecheck": "tsc --noEmit"
+    "test:storybook": "vitest run --project=storybook && VITE_SB_THEME=dark vitest run --project=storybook",
+    "typecheck": "tsc --noEmit",
+    "test:coverage": "vitest run --project=storybook --coverage"
   },
   "dependencies": {
     "@yesid/tokens": "workspace:*",
@@ -17,8 +18,11 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "catalog:",
     "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-designs": "catalog:",
     "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-mcp": "catalog:",
     "@storybook/addon-themes": "catalog:",
     "@storybook/addon-vitest": "catalog:",
     "@storybook/react-vite": "catalog:",
@@ -32,6 +36,7 @@
     "@yesid/tsconfig": "workspace:*",
     "playwright": "catalog:",
     "storybook": "catalog:",
+    "storybook-addon-pseudo-states": "catalog:",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",

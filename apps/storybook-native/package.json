@@ -2,7 +2,7 @@
   "name": "@yesid/storybook-native",
   "version": "0.0.0",
   "private": true,
-  "description": "App Expo con Storybook on-device para ver y probar la implementación native",
+  "description": "App Expo con Storybook on-device para ver y probar la implementaci\u00f3n native",
   "main": "index.ts",
   "scripts": {
     "start": "expo start",
@@ -32,7 +32,8 @@
     "react-native-web": "catalog:",
     "react-native-worklets": "0.13.0",
     "tailwindcss": "catalog:",
-    "uniwind": "catalog:"
+    "uniwind": "catalog:",
+    "react-native-svg": "catalog:"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",

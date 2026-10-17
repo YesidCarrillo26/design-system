@@ -2,6 +2,7 @@ import { withThemeByDataAttribute } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react-vite';
 import { breakpoint } from '@yesid/tokens';
 import './preview.css';
+import { chromaticModes } from './modes';
 
 // Viewports derivados de los breakpoints de los tokens.
 const viewports = {
@@ -12,6 +13,8 @@ const viewports = {
 
 const preview: Preview = {
   tags: ['autodocs'],
+  // Permite correr toda la suite de tests en tema oscuro: VITE_SB_THEME=dark.
+  initialGlobals: { theme: import.meta.env.VITE_SB_THEME === 'dark' ? 'dark' : 'light' },
   decorators: [
     // Alterna data-theme="light|dark" en <html>: los tokens cambian solos.
     withThemeByDataAttribute({
@@ -35,6 +38,7 @@ const preview: Preview = {
       matchers: { color: /(background|color)$/i, date: /Date$/i },
     },
     viewport: { options: viewports },
+    chromatic: { modes: chromaticModes },
     // El fondo lo pone el tema (ver decorador), no el addon de backgrounds.
     backgrounds: { disabled: true },
     options: {
