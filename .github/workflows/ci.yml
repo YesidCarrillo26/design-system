@@ -50,5 +50,10 @@ jobs:
       - name: Tests native (Jest)
         run: pnpm turbo run test:native
 
+      - name: Storybook native en el navegador (build + bundle solo native)
+        run: |
+          pnpm turbo run build-storybook --filter=@yesid/storybook-native-web
+          pnpm --filter @yesid/storybook-native-web check:bundle
+
       - name: La web no debe traer react-native
         run: "! grep -rlE 'from.?.react-native.' examples/next-app/.next/static"

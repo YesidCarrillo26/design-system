@@ -37,3 +37,6 @@ Guía viva: cada vez que un error inesperado cueste tiempo, se agrega aquí con 
 | Vitest: `Vite unexpectedly reloaded a test` / `failed to find the current suite` en la primera ejecución | Vite descubre dependencias en frío y reoptimiza a mitad de la corrida | Repetir una vez con la caché caliente; si persiste, `optimizeDeps.include` |
 | axe `heading-order` en un patrón | Nivel de título fijo que no encaja tras otro encabezado | Exponer `headingLevel` en el patrón (por defecto 2) y no fijar el nivel |
 | Un test pasa en claro y falla en oscuro (o al revés) | Combinación de tokens o color fijo | `VITE_SB_THEME=dark` en la suite; corregir el token |
+| Build: `Rolldown failed to resolve import "@react-native/assets-registry/registry"` | React Native 0.88 ya no depende de ese paquete, pero `react-native-svg` (web) lo importa | Dependencia directa `@react-native/assets-registry` con la versión de RN en la app que lo necesite |
+| En react-native-web, `flex-1` deja el fondo en blanco bajo el contenido | La raíz no tiene altura | `html, body, #storybook-root { height: 100% }` y raíz `display: flex` |
+| No se sabe si un Storybook cargó la implementación web o la native | react-native-web pinta `role="button"` como `<button>` | Buscar cadenas exclusivas de cada implementación en el bundle (`check:bundle`) |

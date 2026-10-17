@@ -12,7 +12,8 @@
 > | 5. Formularios | ✅ (hechos a mano, sin librería headless) | [fase-5](../learning/fase-5.md) |
 > | 6. Overlays y feedback | ✅ (Sheet native con `Modal`, no gorhom) | [fase-6](../learning/fase-6.md) |
 > | 7. Patrones + Taskbox | ✅ | [fase-7](../learning/fase-7.md) |
-> | 8–9+ | pendientes | — |
+> | 8. Native en el navegador | ✅ | [fase-8](../learning/fase-8.md) |
+> | 9+ | pendientes | — |
 >
 > Guía de lo construido: [guia-paso-a-paso](../guia-paso-a-paso.md).
 >

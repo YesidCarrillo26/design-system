@@ -268,6 +268,22 @@ pnpm --filter @yesid/example-taskbox test:storybook
 
 ---
 
+## 9b. Native en el navegador (`apps/storybook-native-web`)
+
+Un tercer Storybook (`@storybook/react-native-web-vite`, puerto 6008) que renderiza las implementaciones **native** con react-native-web, para revisarlas sin simulador.
+
+- `.storybook/prefer-native.ts`: plugin de Vite (`resolveId`, `enforce: 'pre'`) que elige `.native.tsx` **solo para los archivos de `packages/ui`**.
+- `viteFinal`: `tailwindcss()` + `uniwind({ cssEntryFile })`; tema con `Uniwind.setTheme` desde un decorador.
+- `refs` en `apps/storybook-web/.storybook/main.ts` lo muestra dentro del Storybook web (en desarrollo, `http://localhost:6008`).
+
+```sh
+pnpm --filter @yesid/storybook-native-web storybook         # :6008
+pnpm --filter @yesid/storybook-native-web build-storybook
+pnpm --filter @yesid/storybook-native-web check:bundle      # ¿solo implementaciones native?
+```
+
+---
+
 ## 10. CI/CD, versiones y publicación
 
 - **`ci.yml`:** lint, typecheck, tests (unit, Storybook, Jest), build, publint + attw, y la comprobación de que la web no trae `react-native`.

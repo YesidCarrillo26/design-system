@@ -8,6 +8,7 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - `packages/tokens` — tokens DTCG → `web.css`, `native.css`, constantes TS, `tokens.json`, `tw-merge`.
 - `packages/ui` — componentes. Cada uno tiene implementación `.web.tsx` y `.native.tsx`.
 - `apps/storybook-web` — Storybook principal (react-vite): docs, tests, visual.
+- `apps/storybook-native-web` — las implementaciones native en el navegador (react-native-web), puerto 6008.
 - `apps/storybook-native` — app Expo con Storybook on-device y tests Jest.
 - `tooling/typescript` — tsconfig compartidos.
 - `docs/guia-paso-a-paso.md` — guía completa de cómo se construyó (tecnologías y comandos).

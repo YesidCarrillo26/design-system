@@ -24,6 +24,13 @@ const config: StorybookConfig = {
     '@storybook/addon-mcp',
   ],
   features: { experimentalCodeExamples: true },
+  // Composición: el Storybook que muestra las implementaciones NATIVE (react-native-web) aparece en
+  // el sidebar. En desarrollo apunta al servidor local (pnpm --filter @yesid/storybook-native-web
+  // storybook, puerto 6008); en producción se define NATIVE_STORYBOOK_URL con la URL publicada.
+  refs: (_config, { configType }) => {
+    const url = configType === 'DEVELOPMENT' ? 'http://localhost:6008' : process.env.NATIVE_STORYBOOK_URL;
+    return url ? { native: { title: 'Native (react-native-web)', url } } : {};
+  },
   typescript: {
     // react-docgen-typescript sí resuelve props heredadas de `ButtonBaseProps` (otro archivo),
     // que es de donde sale la documentación de los controles.

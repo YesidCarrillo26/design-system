@@ -1,0 +1,38 @@
+{
+  "name": "@yesid/storybook-native-web",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Las implementaciones NATIVE de @yesid/ui renderizadas en el navegador (react-native-web), para revisarlas sin simulador",
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6008",
+    "build-storybook": "storybook build",
+    "typecheck": "tsc --noEmit",
+    "check:bundle": "node scripts/check-bundle.mjs"
+  },
+  "dependencies": {
+    "@react-native/assets-registry": "0.88.0",
+    "@yesid/tokens": "workspace:*",
+    "@yesid/ui": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-native": "catalog:",
+    "react-native-svg": "catalog:",
+    "react-native-web": "catalog:",
+    "uniwind": "catalog:"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/react": "catalog:",
+    "@storybook/react-native-web-vite": "^10.6.2",
+    "@tailwindcss/vite": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@yesid/tsconfig": "workspace:*",
+    "storybook": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

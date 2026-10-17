@@ -1,0 +1,5 @@
+{
+  "extends": "@yesid/tsconfig/native.json",
+  "compilerOptions": { "types": ["node", "vite/client"] },
+  "include": ["src", ".storybook"]
+}
