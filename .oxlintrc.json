@@ -84,6 +84,16 @@
         ]
       }
     },
+    // Utilidades exclusivas de una plataforma dentro de lib/ (p. ej. useTokenColor.native.ts).
+    {
+      "files": ["packages/ui/src/lib/**/*.native.ts", "packages/ui/src/lib/**/*.native.tsx"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          { "paths": [{ "name": "react-dom", "message": "Los archivos .native no pueden depender de react-dom." }] }
+        ]
+      }
+    },
     // Las stories específicas de plataforma sí pueden usar su entorno completo.
     {
       "files": ["packages/ui/src/**/*.web.stories.tsx", "packages/ui/src/**/*.native.stories.tsx"],

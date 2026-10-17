@@ -11,7 +11,8 @@
     },
     "build-storybook": {
       "dependsOn": [
-        "@yesid/tokens#build"
+        "@yesid/tokens#build",
+        "^build"
       ],
       "outputs": [
         "storybook-static/**"
@@ -44,7 +45,8 @@
     },
     "test:storybook": {
       "dependsOn": [
-        "@yesid/tokens#build"
+        "@yesid/tokens#build",
+        "^build"
       ],
       "outputs": [
         "coverage/**"
@@ -52,7 +54,8 @@
     },
     "test:native": {
       "dependsOn": [
-        "@yesid/tokens#build"
+        "@yesid/tokens#build",
+        "^build"
       ]
     }
   }

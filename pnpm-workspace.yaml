@@ -24,6 +24,7 @@ catalog:
   react-dom: 19.3.0
   react-native: 0.88.0
   react-native-web: ~0.21.4
+  react-native-svg: 15.16.0
   # Tooling
   typescript: ~6.0.3
   '@types/node': ^24.13.3
@@ -50,6 +51,10 @@ catalog:
   '@storybook/addon-a11y': ^10.6.2
   '@storybook/addon-vitest': ^10.6.2
   '@storybook/addon-themes': ^10.6.2
+  '@storybook/addon-mcp': ^10.6.2
+  '@storybook/addon-designs': ^11.1.4
+  storybook-addon-pseudo-states: ^10.6.2
+  '@chromatic-com/storybook': ^5.5.1
   '@storybook/react-native': ^10.7.0
   '@storybook/addon-ondevice-controls': ^10.7.0
   '@storybook/addon-ondevice-actions': ^10.7.0
