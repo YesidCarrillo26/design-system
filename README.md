@@ -31,6 +31,6 @@ pnpm turbo run test:unit test:storybook test:native    # tokens, stories en nave
 | `tooling/typescript` | tsconfig compartidos |
 | `docs/adr` | Decisiones de arquitectura |
 | `docs/plan` | El plan inicial y su estado por fase |
-| `docs/learning` | Bitácora de lo aprendido de Storybook, por fase |
+| `docs/learning` | Bitácora por fase, buenas prácticas y catálogo de errores |
 
 Las reglas del proyecto están en [`AGENTS.md`](./AGENTS.md).

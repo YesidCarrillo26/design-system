@@ -13,6 +13,8 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - `docs/adr` — decisiones de arquitectura. Léelas antes de cambiar algo estructural.
 - `docs/plan` — el plan inicial con el estado por fase.
 - `docs/learning` — bitácora de lo aprendido de Storybook por fase.
+  Antes de depurar, lee `docs/learning/errores-y-soluciones.md`; al resolver algo nuevo, agrégalo ahí.
+  Las decisiones de diseño y su "si pasa X, hazlo así" están en `docs/learning/buenas-practicas.md`.
 
 ## Comandos
 
