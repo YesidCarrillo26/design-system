@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "DS Storybook",
+    "slug": "design-system-storybook",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "dev.yesid.dsstorybook"
+    },
+    "android": {
+      "package": "dev.yesid.dsstorybook"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "extends": "@yesid/tsconfig/native.json",
+  "compilerOptions": {
+    "types": ["jest"]
+  },
+  "include": ["index.ts", "src", ".rnstorybook", "jest.setup.ts"]
+}
