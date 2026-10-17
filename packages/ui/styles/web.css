@@ -1,0 +1,3 @@
+/* Un solo import para apps web: tokens + escaneo de las clases del paquete. */
+@import '@yesid/tokens/web.css';
+@source '../dist/web';

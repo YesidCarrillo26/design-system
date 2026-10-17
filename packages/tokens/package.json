@@ -34,5 +34,14 @@
     "style-dictionary": "catalog:",
     "tailwind-merge": "catalog:",
     "typescript": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YesidCarrillo26/design-system.git",
+    "directory": "packages/tokens"
   }
 }

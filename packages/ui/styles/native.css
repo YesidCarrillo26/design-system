@@ -1,0 +1,9 @@
+/* Solo escaneo de clases del paquete. Uniwind no descubre los temas (`@variant light/dark`)
+   a través de imports anidados, así que la app importa los tokens ella misma:
+
+     @import 'tailwindcss';
+     @import 'uniwind';
+     @import '@yesid/tokens/native.css';
+     @import '@yesid/ui/native.css';
+*/
+@source '../dist/native';
