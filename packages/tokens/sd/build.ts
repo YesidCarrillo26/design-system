@@ -50,6 +50,15 @@ const lightColors = group(light, 'color');
 const darkColors = group(dark, 'color');
 const radius = group(shared, 'radius');
 const text = group(shared, 'text');
+const shadow = group(shared, 'shadow');
+const duration = group(shared, 'duration');
+const ease = group(shared, 'ease');
+const breakpoint = group(shared, 'breakpoint');
+const font = group(shared, 'font');
+/** font.sans.ios → ['sans', 'ios'] */
+const fontValue = (family: string, platform: string) =>
+  font.find((t) => t.path[1] === family && t.path[2] === platform)?.value ?? '';
+const families = [...new Set(font.map((t) => t.path[1] ?? ''))];
 
 // Cada color semántico debe existir en ambos temas: si no, un tema queda con huecos.
 const lightNames = new Set(lightColors.map(colorName));
@@ -90,6 +99,19 @@ const webCss = `${BANNER}
 ${lines(radius.map((t) => `  --radius-${t.path[1]}: ${toRem(t.value)};`))}
 
 ${lines(textVars(toRem))}
+
+${lines(shadow.map((t) => `  --shadow-${t.path[1]}: ${t.value};`))}
+
+${lines(ease.map((t) => `  --ease-${t.path[1]}: ${t.value};`))}
+
+${lines(breakpoint.map((t) => `  --breakpoint-${t.path[1]}: ${toRem(t.value)};`))}
+
+${lines(families.map((f) => `  --font-${f}: ${fontValue(f, 'web')};`))}
+}
+
+/* Duraciones: no son un namespace de Tailwind; se usan como duration-(--ds-duration-base). */
+:root {
+${lines(duration.map((t) => `  --ds-duration-${t.path[1]}: ${t.value};`))}
 }
 
 /* "inline" hace que bg-primary emita var(--ds-primary) directamente, así el cambio de
@@ -117,10 +139,20 @@ const nativeCss = `${BANNER}
 ${lines(radius.map((t) => `  --radius-${t.path[1]}: ${t.value};`))}
 
 ${lines(textVars((px) => px))}
+
+${lines(shadow.map((t) => `  --shadow-${t.path[1]}: ${t.value};`))}
 }
 
 @layer theme {
   :root {
+    @variant ios {
+${lines(families.map((f) => `      --font-${f}: ${fontValue(f, 'ios')};`))}
+    }
+
+    @variant android {
+${lines(families.map((f) => `      --font-${f}: ${fontValue(f, 'android')};`))}
+    }
+
     @variant light {
 ${lines(lightColors.map((t) => `      --color-${colorName(t)}: ${t.value};`))}
     }
@@ -149,6 +181,13 @@ const constants = {
   colors: { light: colorsObject(lightColors), dark: colorsObject(darkColors) },
   radius: radiusObject,
   text: textObject,
+  shadow: Object.fromEntries(shadow.map((t) => [t.path[1], t.value])),
+  duration: Object.fromEntries(duration.map((t) => [t.path[1], Number.parseFloat(t.value)])),
+  ease: Object.fromEntries(ease.map((t) => [t.path[1], t.value])),
+  breakpoint: Object.fromEntries(breakpoint.map((t) => [t.path[1], Number.parseFloat(t.value)])),
+  fontFamily: Object.fromEntries(
+    families.map((f) => [f, { web: fontValue(f, 'web'), ios: fontValue(f, 'ios'), android: fontValue(f, 'android') }]),
+  ),
 };
 
 const indexJs = `// Generado por @yesid/tokens. No editar a mano.
@@ -159,6 +198,19 @@ export const radius = ${JSON.stringify(constants.radius, null, 2)};
 
 /** Tamaño de fuente y alto de línea en px. */
 export const text = ${JSON.stringify(constants.text, null, 2)};
+
+/** Sombras como valor CSS box-shadow (web y React Native 0.76+). */
+export const shadow = ${JSON.stringify(constants.shadow, null, 2)};
+
+/** Duraciones en ms. */
+export const duration = ${JSON.stringify(constants.duration, null, 2)};
+
+export const ease = ${JSON.stringify(constants.ease, null, 2)};
+
+/** Breakpoints en px. */
+export const breakpoint = ${JSON.stringify(constants.breakpoint, null, 2)};
+
+export const fontFamily = ${JSON.stringify(constants.fontFamily, null, 2)};
 `;
 
 const union = (keys: string[]) => keys.map((k) => JSON.stringify(k)).join(' | ');
@@ -171,6 +223,11 @@ export type ThemeName = 'light' | 'dark';
 export declare const colors: Record<ThemeName, Record<ColorToken, string>>;
 export declare const radius: Record<RadiusToken, number>;
 export declare const text: Record<TextToken, { size: number; lineHeight: number }>;
+export declare const shadow: Record<'sm' | 'md' | 'lg', string>;
+export declare const duration: Record<'fast' | 'base' | 'slow', number>;
+export declare const ease: Record<'standard' | 'in' | 'out', string>;
+export declare const breakpoint: Record<'sm' | 'md' | 'lg' | 'xl', number>;
+export declare const fontFamily: Record<'sans' | 'mono', { web: string; ios: string; android: string }>;
 `;
 
 // ── tw-merge ─────────────────────────────────────────────────────────────────
@@ -216,6 +273,11 @@ const docsTokens = [
     cssVar: `--text-${name}`,
     values: { all: `${v.size}px / ${v.lineHeight}px` },
   })),
+  ...shadow.map((t) => ({ name: t.path[1], type: 'shadow', cssVar: `--shadow-${t.path[1]}`, values: { all: t.value }, description: t.description })),
+  ...duration.map((t) => ({ name: t.path[1], type: 'duration', cssVar: `--ds-duration-${t.path[1]}`, values: { all: t.value } })),
+  ...ease.map((t) => ({ name: t.path[1], type: 'ease', cssVar: `--ease-${t.path[1]}`, values: { all: t.value } })),
+  ...breakpoint.map((t) => ({ name: t.path[1], type: 'breakpoint', cssVar: `--breakpoint-${t.path[1]}`, values: { all: t.value } })),
+  ...families.map((f) => ({ name: f, type: 'font', cssVar: `--font-${f}`, values: { web: fontValue(f, 'web'), ios: fontValue(f, 'ios'), android: fontValue(f, 'android') } })),
 ];
 
 await mkdir(dist, { recursive: true });

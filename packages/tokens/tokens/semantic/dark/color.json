@@ -1,14 +1,53 @@
 {
   "color": {
     "$type": "color",
-    "background": { "$value": "{color.neutral.950}", "$description": "Fondo de la página" },
-    "foreground": { "$value": "{color.neutral.50}", "$description": "Texto principal" },
-    "muted-foreground": { "$value": "{color.neutral.400}", "$description": "Texto secundario" },
-    "primary": { "$value": "{color.brand.400}", "$description": "Acción principal" },
-    "primary-foreground": { "$value": "{color.neutral.950}", "$description": "Texto sobre primary" },
-    "secondary": { "$value": "{color.neutral.800}", "$description": "Acción secundaria" },
-    "secondary-foreground": { "$value": "{color.neutral.50}", "$description": "Texto sobre secondary" },
-    "border": { "$value": "{color.neutral.800}", "$description": "Bordes y divisores" },
-    "ring": { "$value": "{color.brand.400}", "$description": "Anillo de foco" }
+    "background": {
+      "$value": "{color.neutral.950}",
+      "$description": "Fondo de la página"
+    },
+    "foreground": {
+      "$value": "{color.neutral.50}",
+      "$description": "Texto principal"
+    },
+    "muted-foreground": {
+      "$value": "{color.neutral.400}",
+      "$description": "Texto secundario"
+    },
+    "primary": {
+      "$value": "{color.brand.400}",
+      "$description": "Acción principal"
+    },
+    "primary-foreground": {
+      "$value": "{color.neutral.950}",
+      "$description": "Texto sobre primary"
+    },
+    "secondary": {
+      "$value": "{color.neutral.800}",
+      "$description": "Acción secundaria"
+    },
+    "secondary-foreground": {
+      "$value": "{color.neutral.50}",
+      "$description": "Texto sobre secondary"
+    },
+    "border": {
+      "$value": "{color.neutral.800}",
+      "$description": "Bordes y divisores"
+    },
+    "ring": {
+      "$value": "{color.brand.400}",
+      "$description": "Anillo de foco"
+    },
+    "muted": {
+      "$value": "{color.neutral.800}",
+      "$description": "Superficies atenuadas"
+    },
+    "destructive": {
+      "$value": "#f87171",
+      "$description": "Acciones destructivas y errores"
+    },
+    "destructive-foreground": {
+      "$value": "{color.neutral.950}",
+      "$description": "Texto sobre destructive"
+    }
   }
 }
