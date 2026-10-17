@@ -11,6 +11,7 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - `apps/storybook-native` — app Expo con Storybook on-device y tests Jest.
 - `tooling/typescript` — tsconfig compartidos.
 - `docs/adr` — decisiones de arquitectura. Léelas antes de cambiar algo estructural.
+- `docs/plan` — el plan inicial con el estado por fase.
 - `docs/learning` — bitácora de lo aprendido de Storybook por fase.
 
 ## Comandos

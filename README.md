@@ -30,6 +30,7 @@ pnpm turbo run test:unit test:storybook test:native    # tokens, stories en nave
 | `apps/storybook-native` | App Expo con Storybook on-device y tests Jest |
 | `tooling/typescript` | tsconfig compartidos |
 | `docs/adr` | Decisiones de arquitectura |
+| `docs/plan` | El plan inicial y su estado por fase |
 | `docs/learning` | Bitácora de lo aprendido de Storybook, por fase |
 
 Las reglas del proyecto están en [`AGENTS.md`](./AGENTS.md).
