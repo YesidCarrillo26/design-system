@@ -1,0 +1,7 @@
+{
+  "extends": "@yesid/tsconfig/web.json",
+  "compilerOptions": {
+    "types": ["node", "vite/client"]
+  },
+  "include": [".storybook", "docs", "vite.config.ts", "vitest.config.ts"]
+}

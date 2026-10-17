@@ -1,0 +1,16 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Design system
+
+Componentes para **web** (React DOM + Tailwind v4) y **mobile** (React Native + Uniwind), con los
+mismos tokens, contratos de props y stories.
+
+Cambia el tema con el botón de la barra superior: todos los componentes siguen los tokens
+semánticos (`background`, `foreground`, `primary`…), así que no hay nada que cambiar por componente.
+
+## Cómo está organizado
+
+- **Components**: el catálogo. Cada componente tiene una implementación web (la que ves aquí) y una native.
+- Las stories marcadas `web-only` prueban comportamiento del navegador (teclado, foco). Las del resto se comparten con el Storybook native.

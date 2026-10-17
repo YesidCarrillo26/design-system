@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+@import '@yesid/tokens/web.css';
+
+/* Tailwind solo escanea el proyecto actual: hay que indicarle dónde están los componentes. */
+@source '../../../packages/ui/src';
+@source not '../../../packages/ui/src/**/*.native.*';
+@source '../docs';
