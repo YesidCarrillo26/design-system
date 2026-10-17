@@ -1,0 +1,42 @@
+# Design system multiplataforma (`@yesid/*`)
+
+Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4) y mobile
+(React Native, Uniwind), documentado y probado con Storybook 10.
+
+## Estructura
+
+- `packages/tokens` — tokens DTCG → `web.css`, `native.css`, constantes TS, `tokens.json`, `tw-merge`.
+- `packages/ui` — componentes. Cada uno tiene implementación `.web.tsx` y `.native.tsx`.
+- `apps/storybook-web` — Storybook principal (react-vite): docs, tests, visual.
+- `apps/storybook-native` — app Expo con Storybook on-device y tests Jest.
+- `tooling/typescript` — tsconfig compartidos.
+- `docs/adr` — decisiones de arquitectura. Léelas antes de cambiar algo estructural.
+- `docs/learning` — bitácora de lo aprendido de Storybook por fase.
+
+## Comandos
+
+- `pnpm install`
+- `pnpm lint` — oxlint (incluye las fronteras entre plataformas).
+- `pnpm turbo run typecheck` — `packages/ui` se compila dos veces (web y native).
+- `pnpm --filter @yesid/tokens build` — regenera `packages/tokens/dist` (necesario antes de storybook/typecheck).
+- `pnpm storybook` — Storybook web en :6006.
+- `pnpm storybook:native` — Storybook on-device (Expo).
+
+## Reglas
+
+- **Archivos por plataforma:** `X.web.tsx` nunca importa `react-native` ni `uniwind`; `X.native.tsx`
+  nunca importa `react-dom` ni usa `window`/`document`. Nunca dejes un `X.tsx` sin sufijo junto a los
+  archivos de plataforma.
+- **Archivos compartidos** (`*.types.ts`, `*.variants.ts`, `use*.ts`, `X.stories.tsx`): sin imports de
+  ninguna plataforma. En stories compartidas solo se importa `fn` de `storybook/test`; los `play` van en
+  `X.web.stories.tsx`.
+- **Estilos:** solo clases semánticas de los tokens (`bg-primary`, `text-foreground`, `text-body-md`).
+  No hay paleta de Tailwind por defecto. Las variantes compartidas solo usan clases válidas en ambas
+  plataformas (sin `hover:`, sin `grid`); lo específico se agrega en cada implementación.
+- **Clases literales:** Tailwind y Uniwind escanean el código, así que nunca construyas nombres de clase
+  dinámicamente (`bg-${x}`).
+- **Tokens:** no edites `packages/tokens/dist`. Cambia los JSON en `packages/tokens/tokens` y reconstruye.
+- **React:** la versión la dicta Expo SDK (ver `catalog:` en `pnpm-workspace.yaml`). No la subas sola.
+- **Cada componente nuevo** cumple la Definition of Done del plan (contrato, variantes, stories
+  compartidas, tests, a11y sin errores, docs y un changeset).
+- **Secretos:** nunca en el repo. Los tokens de Chromatic y npm van solo en GitHub secrets.
