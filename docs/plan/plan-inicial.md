@@ -14,6 +14,8 @@
 > | 7. Patrones + Taskbox | ✅ | [fase-7](../learning/fase-7.md) |
 > | 8–9+ | pendientes | — |
 >
+> Guía de lo construido: [guia-paso-a-paso](../guia-paso-a-paso.md).
+>
 > ### Desviaciones del plan
 >
 > - **TypeScript 6.0**, no 7: TS 7 ya es el `latest`, pero falta comprobar `moduleSuffixes`.
