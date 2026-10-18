@@ -113,3 +113,17 @@ Decisiones que ya se tomaron (y por qué), en formato **"si pasa X, hazlo así"*
 - Prueba el tarball **como consumidor** (proyecto vacío, otra versión de React) antes de publicar: `pnpm pack`, `npm install ./x.tgz` y renderiza algo. Los linters de paquete no ven problemas de peers ni de instalación.
 - Los `peerDependencies` son rangos; el catálogo (`catalog:`) fija versiones exactas solo para desarrollo.
 - Antes de publicar a mano: `turbo run build --force` y `pnpm publish --dry-run`. Cada versión publicada es definitiva (el número no se reutiliza).
+
+## Agentes remotos
+
+**Si escribes un issue para un agente** (plantilla *Tarea para un agente*)
+- Una tarea por issue, con un objetivo que se pueda comprobar. Un issue que mezcla dos cosas produce un PR difícil de revisar.
+- Los criterios de aceptación son comprobables (un test, una story, una página de docs, un comando), no deseos ("que se vea bien").
+- Nombra los archivos o ADR de partida y di qué queda fuera de alcance.
+- Si necesita una cuenta, 2FA o un dispositivo, no es para un agente: etiqueta `needs-human`.
+- El issue es un borrador hasta que le pones la etiqueta del agente. Esa etiqueta es el botón de arranque.
+
+**Si añades un workflow que usa un agente o su token**
+- Que el agente actúe con una identidad que dispare CI (App o PAT), no con `GITHUB_TOKEN`.
+- Que no pueda fusionar, publicar ni editar `.github/workflows/`: restríngelo con `--disallowedTools`, no solo con el prompt.
+- Valida el workflow en local antes del PR (`actionlint`; sin él, `npx @action-validator/cli <archivo>`, de uno en uno) y haz un piloto con un issue mínimo antes de confiarle trabajo real.

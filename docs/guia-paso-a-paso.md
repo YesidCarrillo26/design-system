@@ -309,6 +309,47 @@ pnpm --filter @chroma-yesid/storybook-native-web check:bundle      # ¿solo impl
 
 ---
 
+## 10b. Agentes remotos (trabajar sin tu equipo)
+
+Un issue de GitHub se convierte en un PR aunque tu equipo esté apagado. La decisión y sus límites
+están en `docs/adr/0004-agentes-remotos.md`; las reglas que sigue el agente, en `AGENTS.md` (*Modo remoto*).
+
+**Flujo:** issue (plantilla *Tarea para un agente*) → etiqueta `claude` → Claude crea la rama
+`claude/issue-N-…`, corre los checks y abre el PR → `verify` corre solo → ajustes con `@claude …` en
+el PR → **tú fusionas**. El agente nunca fusiona ni publica en npm.
+
+**Configuración (una sola vez)**
+
+1. Instala la Claude GitHub App solo en este repo: <https://github.com/apps/claude>. No uses
+   `/install-github-app`: crea su propio workflow.
+2. Genera el token con `claude setup-token` y guárdalo con `gh secret set CLAUDE_CODE_OAUTH_TOKEN`
+   (pégalo cuando lo pida; nunca en el repo ni en un chat).
+3. Para empujar workflows hace falta el scope `workflow`: `gh auth refresh -h github.com -s workflow`.
+4. Crea las etiquetas: `claude` (dispara a Claude) y `needs-human` (exige cuentas, 2FA o dispositivo).
+
+**Uso diario**
+
+- Crea el issue con la plantilla (desde la web o la app de GitHub; `gh` no rellena formularios).
+  Mientras no tenga la etiqueta `claude` es un borrador.
+- Para empezar: pon la etiqueta `claude` (`gh issue edit <n> --add-label claude`).
+- Para seguirlo: `gh run list --workflow claude.yml` y `gh run watch`.
+- Para pedir cambios: comenta `@claude …` en el PR. Si `verify` falla: `@claude revisa el fallo de
+  verify`. Si `main` avanzó: `@claude rebasa sobre main`.
+
+**Añadir otro agente (checklist)**
+
+1. Guarda su credencial como secret de GitHub.
+2. Elige el disparo: un workflow adaptador (como `claude.yml`) o la integración nativa del agente.
+3. Dale una etiqueta y un prefijo de rama propios (`codex`, `codex/issue-N-…`).
+4. Que actúe con una identidad que dispare CI: una App o un PAT, **nunca** `GITHUB_TOKEN` (el PR
+   quedaría `BLOCKED` sin `verify`).
+5. En un runner, reutiliza `./.github/actions/preparar-entorno`; en un entorno en la nube, usa como
+   preparación `pnpm install --frozen-lockfile && pnpm --filter @chroma-yesid/tokens build`.
+6. Comprueba que lee `AGENTS.md` (o enlázalo desde su archivo de instrucciones).
+7. Haz un piloto con un issue mínimo y anota lo aprendido en `docs/learning/`.
+
+---
+
 ## 11. Storybook para agentes (MCP)
 
 `@storybook/addon-mcp` expone `http://localhost:6006/mcp` (ver `.mcp.json`). Con `pnpm storybook` activo, un agente puede listar componentes (`docs-list`), ver props y ejemplos (`docs-show`) y correr tests (`test-run`) en lugar de inventar props. Las instrucciones están en `AGENTS.md`.
