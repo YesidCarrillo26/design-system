@@ -49,3 +49,24 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 - ⚠️ Un `render` que devuelve texto plano rompía solo en native (*Text strings must be rendered within a <Text>*): ahora se envuelve en `Text`. Lo detectó el test native, no la suite web.
 - ⚠️ En native los `role` de tabla son metadatos (un `View` no es elemento de accesibilidad salvo que sea `accessible`). Se documentó en *Diferencias entre plataformas* y los tests cuentan la estructura en `screen.toJSON()` en vez de usar `getByRole`.
 - Fuera de alcance por ahora: orden, selección de filas, paginación integrada, virtualización.
+
+## 2026-10-18 — Skills de agente: globales, no en el repo
+
+- `npx skills add` desde una carpeta del proyecto instala la skill **en el proyecto** (`.agents/skills/`, symlink en `.claude/skills/` y un `skills-lock.json`); desde `apps/storybook-web` creó además un segundo lock. Las demás skills del autor viven globales (`~/.agents/skills` + symlinks en `~/.claude/skills`).
+- Decisión: la skill de Turborepo (`vercel/turborepo`) se instaló global (`npx skills add vercel/turborepo --skill turborepo -g -y`) y se quitaron las copias del repo. Sirve para otros proyectos y no añade archivos ajenos al código. Si en el futuro se quiere que todo colaborador la tenga, instalarla en la raíz del repo y versionar `.agents/`, `.claude/` y `skills-lock.json` (nunca en subcarpetas).
+
+## 2026-10-18 — Primera revisión en simulador (iPhone 17, iOS 26.5)
+
+**Cómo se hizo** (sin tocar Expo Go): `cd apps/storybook-native && npx expo run:ios --device <id> --no-bundler` (compila el dev client, ~minutos la primera vez; `ios/` está en `.gitignore`), luego `npx expo start --dev-client` y abrir `dev.yesid.dsstorybook://expo-development-client/?url=http%3A%2F%2Flocalhost%3A8081` con `xcrun simctl openurl`. Capturas con `xcrun simctl io booted screenshot`. Para ver una story concreta sin tocar la pantalla se fijó **temporalmente** `getStorybookUI({ onDeviceUI: false, initialSelection: '<id>', shouldPersistSelection: false })` en `.rnstorybook/index.tsx` (no se commitea).
+
+**Resultado:** los estilos de Uniwind **sí se aplican** en iOS (color primario del token, radios, bordes, tipografía, color de error). La duda de las fases anteriores ("los estilos no se ven") queda resuelta para iOS claro.
+
+**Bugs reales encontrados (no los detectaba ningún test):**
+1. `Accordion` y `Table` (native): el `border-b` de la última fila sobresalía bajo el contenedor redondeado. Arreglo: `overflow-hidden` en el contenedor y `border-b-0` en la última fila (en web ya se hacía con `last:border-b-0`).
+2. `Pagination` (native): con 10 páginas la fila no cabía en el ancho del teléfono y "Anterior"/"Siguiente" quedaban cortados. Arreglo: `flex-wrap` y centrado, en native y en web.
+
+**Lecciones del montaje:**
+- ⚠️ `CI=1 expo start` **desactiva la recarga** ("Metro is running in CI mode, reloads are disabled"): los cambios en archivos no llegan y parece que la configuración se ignora. No usar `CI=1` para depurar.
+- ⚠️ Lanzar la app con `simctl launch` da "No script URL provided"; hay que abrirla con el enlace del dev client.
+- Las pruebas Jest y la suite web no ven desbordes ni bordes que sobresalen: la revisión visual en dispositivo sigue siendo necesaria para cada componente nuevo (Definition of Done, punto 7).
+- Mejora menor pendiente: al envolverse, el "…" puede quedar solo al final de una línea en `Pagination`.

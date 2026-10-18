@@ -53,3 +53,7 @@ Guía viva: cada vez que un error inesperado cueste tiempo, se agrega aquí con 
 | RNTL: `getByRole('table'/'row')` no encuentra un `View` con `role` | Un `View` con `role` no es elemento de accesibilidad si no es `accessible` | No marcar `accessible` en contenedores (se vuelven una sola parada para el lector); probar la estructura recorriendo `screen.toJSON()` |
 | Story web compartida: `Cannot read properties of undefined (reading 'map')` | Se importó `Default.args` (vacío); los datos están en el `meta` | Sacar los datos a `X.fixtures.ts` y usarlos en ambas stories |
 | TS4023 `... cannot be named` al reutilizar un `meta` genérico entre stories | Tipos locales no exportados | Exportar los tipos desde un `*.fixtures.ts` |
+| Metro: `Metro is running in CI mode, reloads are disabled`; mis cambios no aparecen en el simulador | Se arrancó con `CI=1` | Arrancar `npx expo start --dev-client` sin `CI` |
+| Dev client: `No script URL provided ... unsanitizedScriptURLString = (null)` | La app se lanzó sin la URL de Metro (`simctl launch`) | `xcrun simctl openurl booted "<scheme>://expo-development-client/?url=http%3A%2F%2Flocalhost%3A8081"` |
+| Native: línea gris que sobresale bajo un contenedor con `rounded` + `border` | El `border-b` de la última fila queda fuera del recorte; en native no hay `last:` ni `overflow` implícito | `overflow-hidden` en el contenedor y `border-b-0` a la última fila (por índice) |
+| Native: una fila de botones queda cortada en pantallas estrechas | `flex-row` sin `flex-wrap` | `flex-wrap` (y `justify-center`) |
