@@ -12,7 +12,7 @@ Lista para continuar más adelante. Estado al final de la **Fase 8** (2026-10-17
 - [~] **Ver los estilos en un dispositivo/simulador:** revisado en iPhone 17 (iOS 26.5) con `expo run:ios`: Button, Accordion, Table, Pagination, Skeleton y TextField se ven bien (ver `docs/learning/fase-9.md`). Tema oscuro, `Sheet` y `Dialog` también revisados. **Falta comprobar:** `Select`, `Menu`, `Popover` y `Toast` (se abren con un toque) y un dispositivo Android.
 - [x] **Dependabot** para las GitHub Actions: `.github/dependabot.yml` (semanal, agrupado).
 
-- [ ] **Release falla en cada push a `main` hasta configurar npm** (2026-10-18): tras fusionar "Version Packages" (`0.1.0`), `changeset publish` responde `404 Not Found` al publicar `@chroma-yesid/tokens@0.1.0` porque el scope `@chroma-yesid` no existe/no es tuyo en npm y falta el trusted publisher. No se publicó nada. Para resolverlo: crear/confirmar el scope en npmjs.com, publicar `0.1.0` a mano y configurar *trusted publishing* para `release.yml` (ver sección 1). Si se decide aplazar, considerar desactivar el paso de publicación para que el pipeline no quede en rojo.
+- [x] **Release fallaba en cada push a `main`** (2026-10-18): el scope `@chroma-yesid` no existía y faltaba el trusted publisher. Resuelto: scope creado, `0.1.0` publicada a mano y trusted publishing configurado; `release.yml` publicó `0.1.1` y `0.1.2` (ver `docs/learning/fase-9.md`).
 
 ## 2. Publicar los Storybooks (aplazado)
 
@@ -48,6 +48,18 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 - [x] **`knip`** (paso en CI, config en `knip.json`). Pendiente: `size-limit`.
 - [ ] **Probar el flujo MCP con un agente real** (`.mcp.json`, `docs-list`/`docs-show`/`test-run`) y dejarlo en una guía.
 - [ ] **Docs versionadas** (`/v1`) cuando haya más de una versión publicada.
+
+## 4b. Delegar a agentes (issues → PR)
+
+Montado en `.github/workflows/claude.yml` (decisión en `docs/adr/0004-agentes-remotos.md`, uso en `docs/guia-paso-a-paso.md` §10b). Para que funcione falta lo que solo puede hacer una persona:
+
+- [ ] **Configuración única (tuya):** instalar la Claude GitHub App en el repo, guardar `CLAUDE_CODE_OAUTH_TOKEN` (`claude setup-token` + `gh secret set`), crear las etiquetas `claude` y `needs-human`, y tener el scope `workflow` de `gh` para empujar workflows.
+- [ ] **Piloto de documentación:** un issue mínimo con la etiqueta `claude`. Comprobar: comentario de progreso de `claude[bot]`, rama `claude/issue-…`, PR abierto por el agente con `verify` corriendo solo (no `BLOCKED`), commits con gitmoji y una entrada en `fase-9.md`.
+- [ ] **Comprobar en el piloto** que el agente abre el PR (no deja solo un enlace), que `@claude` en el PR agrega un commit a la misma rama, y que un comentario sin `@claude` queda como *skipped*.
+- [ ] **Piloto de código:** un issue pequeño real (p. ej. `size-limit`) para ejercitar `preparar-entorno`, Playwright y todos los checks; anotar duración y consumo de la suscripción.
+- [ ] **Sembrar el backlog:** un issue por cada pendiente automatizable de este archivo, sin etiqueta de agente; los que exigen una persona (`npm deprecate`, dispositivos, Figma, segundo proyecto de Chromatic) con `needs-human`.
+- [ ] **Adaptador de Codex** (integración nativa `@codex` u `openai/codex-action`): evaluado en el ADR 0004, sin implementar.
+- [ ] _Opcional:_ migrar `ci.yml` a `./.github/actions/preparar-entorno` y activar *Automatically delete head branches* para que no se acumulen las ramas `claude/`.
 
 ## 1b. Arreglos del pipeline (detectados 2026-10-17)
 

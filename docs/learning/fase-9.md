@@ -128,3 +128,19 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 - `ui@0.1.1` depende de `tokens` con versión exacta (`0.1.1`, la que sustituye a `workspace:*`); está bien porque van juntos.
 
 **Pendiente:** marcar `@chroma-yesid/ui@0.1.0` como obsoleta (peers exactos) con `npm deprecate` (requiere 2FA; no lo puede hacer un agente sin terminal interactiva).
+
+## 2026-10-18 — Agentes remotos a demanda (issues → PR)
+
+**Qué se añadió:** una base común para cualquier agente (sección *Modo remoto* de `AGENTS.md`, acción compuesta `.github/actions/preparar-entorno`, plantilla `tarea-agente.yml`) y el adaptador de Claude `.github/workflows/claude.yml` (etiqueta `claude` en un issue o `@claude` en un comentario). Decisión, límites y cómo sumar Codex: `docs/adr/0004-agentes-remotos.md`. Uso y checklist para otro agente: `docs/guia-paso-a-paso.md` §10b.
+
+**Por qué la Action de Claude:** las *routines* de Claude Code solo se disparan con eventos de PR o release, no de issues. Y el PR tiene que salir con una identidad que dispare CI: la Action usa el token de la Claude GitHub App (no `GITHUB_TOKEN`), por eso **no** se le pasa `github_token`. En el código de la Action: `git-config.ts` limpia el `extraheader` de `actions/checkout` y deja `GH_TOKEN` con el token de la App.
+
+**Trampas encontradas al prepararlo:**
+- `gh api repos/<o>/<r>/git/ref/tags/v1` devuelve `type: tag` (tag **anotado**): su `sha` es el del tag, no el del commit. Para fijar por SHA hay que dereferenciarlo con `git/tags/<sha>`. Aquí `v1` y `v1.0.252` son el mismo commit (`f27be6b…`) y se fija la versión exacta.
+- El prompt integrado de la Action manda a Claude **dejar un enlace "Create a PR"** y le dice que no puede rebasar. Se corrige con `--append-system-prompt` más `Bash(gh pr create:*)` en `--allowedTools`. **Por confirmar en el piloto.**
+- Si se usa el input `prompt:`, la Action cambia de modo y pierde el contexto del issue; se deja en modo etiqueta/mención y las instrucciones van en `AGENTS.md`.
+- La concurrencia a nivel de workflow dejaría que un evento descartado por el `if` (otra etiqueta) desplace a un `@claude` pendiente (un grupo admite una ejecución en curso y una pendiente, y la pendiente se reemplaza). Se pone a nivel de job. **Por confirmar en el piloto.**
+- `dependabot.yml` con `directory: /` no mira las acciones compuestas de `.github/actions/*`; se añadió con `directories`.
+- Validación local: sin `actionlint` ni Docker encendido, se usó `npx @action-validator/cli` (valida el esquema, **un archivo por ejecución**; no valida expresiones como el `fromJSON` del `if`). Se comprobó con un workflow roto que sí falla.
+
+**Pendiente (lo hace una persona):** instalar la Claude GitHub App, guardar `CLAUDE_CODE_OAUTH_TOKEN`, crear las etiquetas y correr el piloto (ver la guía §10b y la verificación del ADR).
