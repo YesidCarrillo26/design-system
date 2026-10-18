@@ -145,3 +145,11 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 - La revisión automática de seguridad del PR señaló los comodines `Bash(pnpm:*)` y `Bash(git:*)`. Se estrechó `git` a subcomandos y se vetó `pnpm dlx`/`pnpm create`; `pnpm:*` se mantiene (ver el límite en el ADR). Y destapó un hueco mayor: el `if` autorizaba a quien **etiqueta o comenta**, no a quien **escribió** el issue o el PR, así que un issue malicioso de un externo habría llegado al agente con solo etiquetarlo. Ahora el autor también debe ser de confianza (o `claude[bot]`). **Por confirmar en el piloto** que `@claude` sigue funcionando en los PR del agente (depende de que `issue.user.login` sea `claude[bot]`).
 
 **Pendiente (lo hace una persona):** instalar la Claude GitHub App, guardar `CLAUDE_CODE_OAUTH_TOKEN`, crear las etiquetas y correr el piloto (ver la guía §10b y la verificación del ADR).
+
+## 2026-10-18 — Primer piloto de los agentes remotos (issue #17)
+
+**Lo que funcionó:** la etiqueta `claude` disparó el workflow, `preparar-entorno` corrió, la Claude GitHub App estaba instalada (token de App por OIDC), pasó la comprobación de permisos y `claude[bot]` comentó en el issue. Los comentarios sin `@claude` quedaron como *skipped*, así que el filtro funciona.
+
+**Lo que falló:** Claude terminaba en menos de 1 s, sin turnos ni coste. Se activó `show_full_output: true` (PR #18, temporal, revertido) y el error era `CLAUDE_CODE_OAUTH_TOKEN ... contains a line break at character 91 (110 characters on 2 lines)`: el token se había pegado partido en dos líneas. Cómo guardarlo bien, en `errores-y-soluciones.md`.
+
+**Lección:** `show_full_output` publica la transcripción completa en logs que son públicos (el repo lo es); úsalo solo para un run que falla antes de hacer nada y revierte enseguida.
