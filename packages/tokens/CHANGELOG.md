@@ -1,5 +1,11 @@
 # @chroma-yesid/tokens
 
+## 0.1.2
+
+### Patch Changes
+
+- 093e70e: Agrega un README a cada paquete para que npm muestre cómo instalarlos y usarlos.
+
 ## 0.1.1
 
 ### Patch Changes
