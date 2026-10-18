@@ -55,7 +55,7 @@ Montado en `.github/workflows/claude.yml` (decisión en `docs/adr/0004-agentes-r
 
 - [ ] **Configuración única (tuya):** instalar la Claude GitHub App en el repo, guardar `CLAUDE_CODE_OAUTH_TOKEN` (`claude setup-token` + `gh secret set`), crear las etiquetas `claude` y `needs-human`, y tener el scope `workflow` de `gh` para empujar workflows.
 - [ ] **Piloto de documentación:** un issue mínimo con la etiqueta `claude`. Comprobar: comentario de progreso de `claude[bot]`, rama `claude/issue-…`, PR abierto por el agente con `verify` corriendo solo (no `BLOCKED`), commits con gitmoji y una entrada en `fase-9.md`.
-- [ ] **Comprobar en el piloto** que el agente abre el PR (no deja solo un enlace), que `@claude` en el PR agrega un commit a la misma rama, y que un comentario sin `@claude` queda como *skipped*.
+- [ ] **Comprobar en el piloto** que el agente abre el PR (no deja solo un enlace), que `@claude` en el PR agrega un commit a la misma rama (si queda *skipped*, revisar la condición de autor `claude[bot]` del `if`), y que un comentario sin `@claude` queda como *skipped*.
 - [ ] **Piloto de código:** un issue pequeño real (p. ej. `size-limit`) para ejercitar `preparar-entorno`, Playwright y todos los checks; anotar duración y consumo de la suscripción.
 - [ ] **Sembrar el backlog:** un issue por cada pendiente automatizable de este archivo, sin etiqueta de agente; los que exigen una persona (`npm deprecate`, dispositivos, Figma, segundo proyecto de Chromatic) con `needs-human`.
 - [ ] **Adaptador de Codex** (integración nativa `@codex` u `openai/codex-action`): evaluado en el ADR 0004, sin implementar.

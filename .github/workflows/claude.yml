@@ -17,16 +17,31 @@ on:
 
 jobs:
   claude:
-    # Etiquetar exige permiso de triage. En los comentarios, además de que la Action comprueba que
-    # quien escribe tenga permiso de escritura, se exige ser propietario, miembro o colaborador.
+    # Dos condiciones de confianza, porque el agente lee texto que no controlas:
+    #   1. Quien dispara (etiqueta o comenta) es propietario, miembro o colaborador. Además, la
+    #      Action comprueba que tenga permiso de escritura.
+    #   2. Quien escribió el issue o el PR también lo es (o es `claude[bot]`, para poder pedirle
+    #      ajustes en sus propios PR). Así no procesa un issue o un PR de un externo aunque lo etiquetes.
+    # Los comentarios de terceros dentro de un issue propio sí llegan al contexto: revísalos antes.
     if: |
-      (github.event_name == 'issues' && github.event.label.name == 'claude') ||
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude') &&
-        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)) ||
-      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude') &&
-        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)) ||
-      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude') &&
-        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.review.author_association))
+      (github.event_name == 'issues' &&
+        github.event.label.name == 'claude' &&
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)) ||
+      (github.event_name == 'issue_comment' &&
+        contains(github.event.comment.body, '@claude') &&
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association) &&
+        (contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) ||
+          github.event.issue.user.login == 'claude[bot]')) ||
+      (github.event_name == 'pull_request_review_comment' &&
+        contains(github.event.comment.body, '@claude') &&
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association) &&
+        (contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.pull_request.author_association) ||
+          github.event.pull_request.user.login == 'claude[bot]')) ||
+      (github.event_name == 'pull_request_review' &&
+        contains(github.event.review.body, '@claude') &&
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.review.author_association) &&
+        (contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.pull_request.author_association) ||
+          github.event.pull_request.user.login == 'claude[bot]'))
     runs-on: ubuntu-latest
     timeout-minutes: 60
     # A nivel de job (no de workflow): un evento que el `if` descarta no entra en el grupo ni
@@ -61,6 +76,6 @@ jobs:
           claude_args: |
             --model claude-opus-5-5
             --max-turns 100
-            --allowedTools "Bash(pnpm:*),Bash(npx publint:*),Bash(npx attw:*),Bash(git:*),Bash(gh pr create:*),Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr checks:*),Bash(gh issue view:*),Bash(gh run view:*),Bash(gh run list:*)"
-            --disallowedTools "Bash(gh pr merge:*),Bash(pnpm publish:*),Bash(pnpm release:*),Bash(npm publish:*),Bash(pnpm changeset publish:*),Edit(.github/workflows/**),Write(.github/workflows/**)"
+            --allowedTools "Bash(pnpm:*),Bash(npx publint:*),Bash(npx attw:*),Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git fetch:*),Bash(git rebase:*),Bash(git switch:*),Bash(git checkout:*),Bash(git restore:*),Bash(git mv:*),Bash(git rm:*),Bash(git rev-parse:*),Bash(git merge-base:*),Bash(gh pr create:*),Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr checks:*),Bash(gh issue view:*),Bash(gh run view:*),Bash(gh run list:*)"
+            --disallowedTools "Bash(gh pr merge:*),Bash(pnpm publish:*),Bash(pnpm release:*),Bash(npm publish:*),Bash(pnpm changeset publish:*),Bash(pnpm dlx:*),Bash(pnpm create:*),Edit(.github/workflows/**),Write(.github/workflows/**)"
             --append-system-prompt "Estás en GitHub Actions y no hay nadie delante. Sigue la sección Modo remoto de AGENTS.md. Al terminar abre tú el PR con gh pr create (esto reemplaza la instrucción de dejar solo un enlace) y pon el enlace del PR en tu comentario. Cuando te lo pidan puedes rebasar tu propia rama con git rebase origin/main y git push --force-with-lease. Nunca fusiones un PR."
