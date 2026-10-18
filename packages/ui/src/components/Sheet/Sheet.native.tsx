@@ -1,4 +1,5 @@
-import { Modal, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
+import { Modal } from '../../lib/Modal.native';
 import type { SheetBaseProps } from './Sheet.types';
 import { sheetStyles } from './sheet.variants';
 

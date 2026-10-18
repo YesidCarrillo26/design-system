@@ -86,3 +86,24 @@ Decisiones que ya se tomaron (y por qué), en formato **"si pasa X, hazlo así"*
 
 **Si ejecutas algo con efectos fuera del repo** (instalar apps, tocar el simulador, cuentas)
 - Pregunta antes. Si es reversible y mínimo, déjalo como estaba y avisa.
+
+**Si documentas una regla o una convención**
+- Contrástala con el código antes de publicarla (`grep`). Una guía que describe lo que "debería" pasar y no lo que pasa es peor que no tener guía.
+
+**Si añades una animación o transición**
+- Web: usa `motion-reduce:` o confía en el bloque global de `web.css` (lleva las duraciones a `1ms`, no a `0`). Native: usa `useReducedMotion` / el `Modal` de `lib`, no `Modal` de `react-native` directamente.
+
+**Si añades una herramienta de calidad al CI** (knip, lint…)
+- Primero llévala a cero hallazgos en local, justificando cada falso positivo en su configuración; una herramienta que falla siempre se acaba ignorando.
+
+**Si guardas un token o secreto**
+- Solo en GitHub secrets o variables de entorno; nunca en `package.json`, scripts ni docs. Si se escribió en un archivo, regenerarlo aunque no se haya hecho commit.
+
+**Si un componente acepta contenido personalizado (`render`, `children`)**
+- En native, los textos deben ir en `Text`: envuelve `string`/`number` y deja pasar los elementos. Escribe una story con un `render` que devuelva texto plano, porque en web no revela el problema.
+
+**Si necesitas semántica que React Native no ofrece** (tablas, `aria-current`)
+- Usa el `role`/`accessibilityState` más cercano, documenta la limitación en *Diferencias entre plataformas* y no fuerces `accessible` en contenedores.
+
+**Si `main` está protegida**
+- Rama → PR → esperar `verify` y Chromatic → `gh pr merge --rebase`. No intentes saltarte la regla.

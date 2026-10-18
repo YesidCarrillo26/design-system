@@ -313,6 +313,7 @@ pnpm turbo run build                                 # tokens, ui, ejemplos
 pnpm turbo run test:unit test:storybook test:native  # toda la batería
 pnpm changeset                                       # registrar un cambio de paquete
 pnpm peers check                                     # peers sin cumplir
+pnpm knip                                            # dependencias y exports sin usar
 ```
 
 **Agregar un componente nuevo (receta):**
@@ -322,7 +323,8 @@ pnpm peers check                                     # peers sin cumplir
 4. `Foo.native.test.tsx` (portable stories).
 5. `pnpm --filter @yesid/storybook-native storybook-generate`.
 6. `pnpm lint && pnpm turbo run typecheck test:storybook test:native`.
-7. `pnpm changeset` y commit con el formato `:sparkles: feat(ui): …`.
+7. `pnpm knip`.
+8. `pnpm changeset` y commit con el formato `:sparkles: feat(ui): …`.
 
 ---
 

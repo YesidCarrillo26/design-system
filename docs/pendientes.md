@@ -26,7 +26,7 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 - [ ] **Addon propio "Platform Parity"** (`packages/storybook-addon-parity`): panel que lee `parameters.platforms`, enlaza la story equivalente en native y muestra una captura; estados en el sidebar.
 - [ ] **Migrar a CSF Next** (`preview.meta`, `meta.story`, `.test()`): primero las stories web-only. Las compartidas siguen en CSF3 hasta comprobar soporte en Storybook native.
 - [ ] **i18n y RTL:** globals `locale` y `dir` con un decorador; en React Native `I18nManager` exige recargar; comprobar `rtl:` en Uniwind.
-- [ ] **Movimiento:** tokens ya existen; animaciones de entrada/salida de overlays (CSS en web, Reanimated en native) y `prefers-reduced-motion` como global.
+- [ ] **Movimiento:** tokens ya existen; faltan las animaciones de entrada/salida de overlays (CSS en web, Reanimated en native). `prefers-reduced-motion` global ya está hecho (web y native, ver `docs/learning/fase-9.md`); las animaciones nuevas deben respetarlo.
 - [ ] **Figma:** `parameters.design` (addon-designs ya instalado) y Code Connect; Figma Variables → DTCG.
 - [ ] **Paquete de iconos** (SVGR + `react-native-svg`) en lugar de la lista de paths en `Icon/icons.ts`.
 - [ ] **Multi-marca:** `extraThemes` de Uniwind y temas extra en `web.css`.
@@ -38,7 +38,7 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 
 - [x] **Tema oscuro del panel de Storybook** (`manager.ts`, sigue la preferencia del sistema).
 - [x] **Páginas de Guidelines:** accesibilidad, reglas multiplataforma y contribución (`apps/storybook-web/docs/guidelines`).
-- [ ] **Componentes:** `Select` con búsqueda (`Combobox`) y `Popover` posicionado en native; `Sheet` con arrastre (`@gorhom/bottom-sheet`) si hace falta; `Skeleton`, `Table`, `Pagination`.
+- [ ] **Componentes:** `Select` con búsqueda (`Combobox`) y `Popover` posicionado en native; `Sheet` con arrastre (`@gorhom/bottom-sheet`) si hace falta. Hechos: `Skeleton`, `Pagination`, `Table` (solo lectura; faltan orden y selección de filas).
 - [ ] **Validación de formularios** (esquemas y mensajes), fuera de alcance hasta ahora.
 - [ ] **Pruebas de overlays native en dispositivo real** (foco, lectores de pantalla): hoy solo hay Jest y el export de Metro.
 - [ ] **Taskbox native** reutilizando store y stories de patrones.

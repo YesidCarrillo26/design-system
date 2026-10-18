@@ -16,6 +16,9 @@ Los componentes comparten contrato (props), variantes y stories. Donde la plataf
 | `Select` | `<select>` nativo del navegador | Control que abre una hoja con las opciones |
 | `Tabs`, `Accordion` | Base UI (flechas, `aria-selected`/`aria-expanded`) | Implementación propia con los mismos roles |
 | `Toast` | Región `aria-live` abajo a la derecha | Capa superior abajo |
+| `Pagination` | `<nav>` con `aria-current="page"` y botones `sm` | `role="navigation"`, página actual como seleccionada, botones `md` (44 pt) |
+| `Table` | `<table>` real con `<caption>` y `scope="col"`; desplazamiento horizontal | `View`s con `role` de tabla (solo metadatos: un `View` no es elemento de accesibilidad salvo que sea `accessible`); columnas de igual ancho |
+| `Skeleton` | Pulso con `animate-pulse` (respeta `prefers-reduced-motion`) | Estático, sin pulso |
 
 Cada story de estos componentes declara `parameters.platforms` con su comportamiento.
 
