@@ -38,7 +38,7 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 
 - [x] **Tema oscuro del panel de Storybook** (`manager.ts`, sigue la preferencia del sistema).
 - [x] **Páginas de Guidelines:** accesibilidad, reglas multiplataforma y contribución (`apps/storybook-web/docs/guidelines`).
-- [ ] **Componentes:** `Select` con búsqueda (`Combobox`) y `Popover` posicionado en native; `Sheet` con arrastre (`@gorhom/bottom-sheet`) si hace falta; `Table`, `Pagination` (`Skeleton` ya está).
+- [ ] **Componentes:** `Select` con búsqueda (`Combobox`) y `Popover` posicionado en native; `Sheet` con arrastre (`@gorhom/bottom-sheet`) si hace falta. Hechos: `Skeleton`, `Pagination`, `Table` (solo lectura; faltan orden y selección de filas).
 - [ ] **Validación de formularios** (esquemas y mensajes), fuera de alcance hasta ahora.
 - [ ] **Pruebas de overlays native en dispositivo real** (foco, lectores de pantalla): hoy solo hay Jest y el export de Metro.
 - [ ] **Taskbox native** reutilizando store y stories de patrones.
