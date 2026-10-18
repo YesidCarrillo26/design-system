@@ -10,6 +10,8 @@ Lista para continuar más adelante. Estado al final de la **Fase 8** (2026-10-17
 - [~] **Ver los estilos en un dispositivo/simulador:** revisado en iPhone 17 (iOS 26.5) con `expo run:ios`: Button, Accordion, Table, Pagination, Skeleton y TextField se ven bien (ver `docs/learning/fase-9.md`). **Falta comprobar:** cambio claro/oscuro en el dispositivo, `Sheet`/`Select`/`Menu` (Modal), `Toast` y un dispositivo Android.
 - [x] **Dependabot** para las GitHub Actions: `.github/dependabot.yml` (semanal, agrupado).
 
+- [ ] **Release falla en cada push a `main` hasta configurar npm** (2026-10-18): tras fusionar "Version Packages" (`0.1.0`), `changeset publish` responde `404 Not Found` al publicar `@yesid/tokens@0.1.0` porque el scope `@yesid` no existe/no es tuyo en npm y falta el trusted publisher. No se publicó nada. Para resolverlo: crear/confirmar el scope en npmjs.com, publicar `0.1.0` a mano y configurar *trusted publishing* para `release.yml` (ver sección 1). Si se decide aplazar, considerar desactivar el paso de publicación para que el pipeline no quede en rojo.
+
 ## 2. Publicar los Storybooks (aplazado)
 
 _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
@@ -48,7 +50,7 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 ## 1b. Arreglos del pipeline (detectados 2026-10-17)
 
 - [x] **CI** fallaba en `attw` por los entrypoints CSS (`web.css`, `native.css`); ahora se excluyen con `--exclude-entrypoints`.
-- [ ] **Release** falla con "GitHub Actions is not permitted to create or approve pull requests": activar en Settings → Actions → General → *Allow GitHub Actions to create and approve pull requests*.
+- [x] **Release** ya puede abrir el PR "Version Packages" (permiso de Actions activado).
 
 ## 5. Al retomar
 
