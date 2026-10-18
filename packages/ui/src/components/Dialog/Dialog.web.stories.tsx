@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, screen, waitFor } from 'storybook/test';
-import { DialogExample } from './DialogExample';
+import { DialogExample } from './Dialog.example';
 
 // Solo web: foco atrapado, Escape y rol. El diálogo se renderiza en un portal (fuera del canvas),
 // por eso se consulta con `screen` y no con `canvas`.

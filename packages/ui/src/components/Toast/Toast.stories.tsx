@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ToastExample } from './ToastExample';
+import { ToastExample } from './Toast.example';
 
 const meta = {
   component: ToastExample,

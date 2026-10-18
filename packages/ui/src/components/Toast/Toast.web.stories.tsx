@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, waitFor } from 'storybook/test';
-import { ToastExample } from './ToastExample';
+import { ToastExample } from './Toast.example';
 
 // Solo web: anuncio por la región aria-live, rol según la gravedad y cierre automático.
 const meta = {

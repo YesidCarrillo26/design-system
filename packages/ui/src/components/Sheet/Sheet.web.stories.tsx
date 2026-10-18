@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, screen, waitFor } from 'storybook/test';
-import { SheetExample } from './SheetExample';
+import { SheetExample } from './Sheet.example';
 
 const meta = {
   title: 'Sheet',

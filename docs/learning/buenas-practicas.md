@@ -58,7 +58,7 @@ Decisiones que ya se tomaron (y por qué), en formato **"si pasa X, hazlo así"*
 **Si escribes una story**
 - Estados (error, disabled, vacío) en `X.stories.tsx` compartida, con solo `fn` de `storybook/test`. Teclado y DOM en `X.web.stories.tsx` con `play`.
 - Datos de ejemplo reutilizables en `*.fixtures.tsx`; no leas `Default.args` desde otro archivo.
-- Para un componente controlado desde fuera (Dialog, Sheet, Toast) crea un `XExample.tsx` con el estado.
+- Para un componente controlado desde fuera (Dialog, Sheet, Toast) crea un `X.example.tsx` con el estado (solo para stories: `tsdown` lo excluye del paquete publicado).
 
 **Si necesitas datos de red en una story**
 - MSW (`parameters.msw.handlers`), con un handler por escenario (éxito, error, vacío, carga infinita). Estado de Redux: `makeStore(preloadedState)` por story, nunca un singleton.

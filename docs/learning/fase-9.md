@@ -86,3 +86,10 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 - **Resultado:** correcto en `Button` (Primary con el índigo claro del tema oscuro y texto oscuro, Secondary gris, Outline con borde sutil), `Table`, `Pagination`, `TextField` con error (salmón del token), `Sheet` y `Dialog` (el `Modal` hereda el tema).
 - **No bug:** con el panel oculto (`onDeviceUI: false`) se ve un marco negro alrededor de la story; viene de ese modo de captura, no de la librería.
 - **Límite:** `Select`, `Menu`, `Popover` y `Toast` se abren con su propio estado y no se pudieron abrir sin tocar la pantalla (el simulador corre sin ventana y `simctl` no simula toques). Para revisarlos hace falta abrir el Simulator con interfaz o añadir una story con estado abierto.
+
+## 2026-10-18 — Los ayudantes de stories dejan de publicarse
+
+- **Problema:** `DialogExample`, `SheetExample` y `ToastExample` vivían como `XExample.tsx` dentro de `src/`, así que `tsdown` los compilaba a `dist/` (había `SheetExample.d.ts` en el paquete). Son código solo de stories.
+- **Decisión:** se renombran a `X.example.tsx` y `tsdown.config.ts` los excluye (`!src/**/*.example.tsx`), igual que `*.stories.tsx` y `*.test.tsx`. Siguen junto al componente (colocation, como recomienda Storybook). No hace falta ADR: no cambia la estructura de carpetas.
+- **No se renombró** `x.variants.ts`: la minúscula es la convención de todo el repo.
+- **Se descartó** crear subcarpetas `stories/` y `__tests__/`: obligaba a cambiar los globs de Storybook, imports y reglas de oxlint en +30 componentes por un beneficio solo visual.
