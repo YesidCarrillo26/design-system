@@ -7,9 +7,7 @@ Lista para continuar más adelante. Estado al final de la **Fase 8** (2026-10-17
 - [x] **Chromatic:** proyecto creado y secret `CHROMATIC_PROJECT_TOKEN` guardado (nunca en `package.json`). Falta ver la primera build verde en el pipeline.
 - [ ] **Scope npm `@yesid`:** confirmar que es tuyo (o cambiarlo en todos los `package.json`, imports y docs). Hace falta antes del primer `pnpm release`.
 - [ ] **Primera publicación a npm:** publicar `0.0.1` a mano (`pnpm --filter @yesid/tokens publish`, luego `@yesid/ui`), y configurar *trusted publishing* para `release.yml` en npmjs.com (o un `NPM_TOKEN` granular como respaldo).
-- [ ] **Ver los estilos en un dispositivo/simulador** (aún no se han visto en pantalla):
-  `cd apps/storybook-native && npx expo run:ios` (no toca tu Expo Go) o actualizar Expo Go a la versión del SDK 58 con `pnpm storybook:native` y pulsar `i`.
-  Comprobar: color del Button, tamaños de texto, cambio claro/oscuro, `Sheet`/`Select`/`Menu` (Modal) y `Toast`.
+- [~] **Ver los estilos en un dispositivo/simulador:** revisado en iPhone 17 (iOS 26.5) con `expo run:ios`: Button, Accordion, Table, Pagination, Skeleton y TextField se ven bien (ver `docs/learning/fase-9.md`). **Falta comprobar:** cambio claro/oscuro en el dispositivo, `Sheet`/`Select`/`Menu` (Modal), `Toast` y un dispositivo Android.
 - [x] **Dependabot** para las GitHub Actions: `.github/dependabot.yml` (semanal, agrupado).
 
 ## 2. Publicar los Storybooks (aplazado)
