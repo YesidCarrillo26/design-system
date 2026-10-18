@@ -1,4 +1,4 @@
-import { twMergeConfig } from '@yesid/tokens/tw-merge';
+import { twMergeConfig } from '@chroma-yesid/tokens/tw-merge';
 import { createTV } from 'tailwind-variants';
 
 /**

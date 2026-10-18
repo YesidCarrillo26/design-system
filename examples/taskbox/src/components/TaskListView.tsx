@@ -1,4 +1,4 @@
-import { EmptyState, Spinner, Stack } from '@yesid/ui';
+import { EmptyState, Spinner, Stack } from '@chroma-yesid/ui';
 import type { TaskData } from '../store/taskboxSlice';
 import { Task } from './Task';
 

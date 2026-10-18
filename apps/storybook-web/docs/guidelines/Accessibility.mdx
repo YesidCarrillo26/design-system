@@ -9,7 +9,7 @@ La accesibilidad no es una fase final: cada componente la cumple desde su contra
 ## Cómo se verifica
 
 - **a11y en modo `error`** (`parameters.a11y.test: 'error'` en `preview.tsx`): una violación de axe hace fallar el test de la story. Solo se baja a `'todo'` de forma temporal y con una nota.
-- **Tema claro y oscuro:** `pnpm --filter @yesid/storybook-web test:storybook` corre la suite en ambos temas. El contraste de los tokens se comprueba así, no a ojo.
+- **Tema claro y oscuro:** `pnpm --filter @chroma-yesid/storybook-web test:storybook` corre la suite en ambos temas. El contraste de los tokens se comprueba así, no a ojo.
 - **Teclado y foco:** se prueban en `X.web.stories.tsx` con `play` (Tab, Enter, Espacio, Escape, flechas).
 - **Native:** `accessibilityRole`, `accessibilityState` y `accessibilityLabel` se prueban con Jest y React Native Testing Library; los overlays además deben revisarse con VoiceOver/TalkBack en un dispositivo.
 

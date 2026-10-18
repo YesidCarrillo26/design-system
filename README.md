@@ -1,4 +1,4 @@
-# Design system (`@yesid/*`)
+# Design system (`@chroma-yesid/*`)
 
 Componentes para **web** (React DOM + Tailwind v4) y **mobile** (React Native + Uniwind) con los
 mismos tokens, contratos de props y stories. Documentado y probado con Storybook 10.
@@ -11,7 +11,7 @@ mismos tokens, contratos de props y stories. Documentado y probado con Storybook
 
 ```sh
 pnpm install
-pnpm --filter @yesid/tokens build   # genera los CSS y constantes de tokens
+pnpm --filter @chroma-yesid/tokens build   # genera los CSS y constantes de tokens
 pnpm storybook                      # Storybook web → http://localhost:6006
 pnpm storybook:native               # Storybook on-device (Expo)
 ```

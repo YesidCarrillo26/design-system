@@ -1,4 +1,4 @@
-import { IconButton, ListItem } from '@yesid/ui';
+import { IconButton, ListItem } from '@chroma-yesid/ui';
 import type { TaskData } from '../store/taskboxSlice';
 
 export interface TaskProps {

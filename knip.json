@@ -13,13 +13,13 @@
       "ignoreDependencies": ["@storybook/react-vite", "uniwind"]
     },
     "apps/storybook-native": {
-      "ignoreDependencies": ["react-native-svg", "test-renderer", "@testing-library/react-native", "expo-status-bar", "@yesid/ui"]
+      "ignoreDependencies": ["react-native-svg", "test-renderer", "@testing-library/react-native", "expo-status-bar", "@chroma-yesid/ui"]
     },
     "apps/storybook-native-web": {
-      "ignoreDependencies": ["@react-native/assets-registry", "react-native-svg", "@storybook/react", "@yesid/ui"]
+      "ignoreDependencies": ["@react-native/assets-registry", "react-native-svg", "@storybook/react", "@chroma-yesid/ui"]
     },
     "apps/storybook-web": {
-      "ignoreDependencies": ["@yesid/ui"]
+      "ignoreDependencies": ["@chroma-yesid/ui"]
     },
     "examples/expo-app": {
       "ignoreDependencies": ["@babel/core"]

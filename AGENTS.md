@@ -1,4 +1,4 @@
-# Design system multiplataforma (`@yesid/*`)
+# Design system multiplataforma (`@chroma-yesid/*`)
 
 Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4) y mobile
 (React Native, Uniwind), documentado y probado con Storybook 10.
@@ -27,7 +27,7 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - `pnpm lint` — oxlint (incluye las fronteras entre plataformas).
 - `pnpm knip` — dependencias, exports y archivos sin usar (corre en CI).
 - `pnpm turbo run typecheck` — `packages/ui` se compila dos veces (web y native).
-- `pnpm --filter @yesid/tokens build` — regenera `packages/tokens/dist` (necesario antes de storybook/typecheck).
+- `pnpm --filter @chroma-yesid/tokens build` — regenera `packages/tokens/dist` (necesario antes de storybook/typecheck).
 - `pnpm storybook` — Storybook web en :6006.
 - `pnpm storybook:native` — Storybook on-device (Expo).
 

@@ -1,5 +1,5 @@
 {
-  "name": "@yesid/tokens",
+  "name": "@chroma-yesid/tokens",
   "version": "0.1.0",
   "description": "Design tokens (DTCG) y sus salidas para Tailwind v4 (web), Uniwind (native) y TypeScript",
   "type": "module",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "@yesid/tsconfig": "workspace:*",
+    "@chroma-yesid/tsconfig": "workspace:*",
     "style-dictionary": "catalog:",
     "tailwind-merge": "catalog:",
     "typescript": "catalog:"

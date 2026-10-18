@@ -1,4 +1,4 @@
-# @yesid/tokens
+# @chroma-yesid/tokens
 
 ## 0.1.0
 

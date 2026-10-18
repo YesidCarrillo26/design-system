@@ -67,7 +67,7 @@ Decisiones que ya se tomaron (y por qué), en formato **"si pasa X, hazlo así"*
 - Aísla el reloj/ID en su propio módulo y simúlalo con `sb.mock` + `mocked(...)` en `beforeEach`.
 
 **Si agregas o cambias algo**
-- Corre claro **y** oscuro (`pnpm --filter @yesid/storybook-web test:storybook`) y los tests native.
+- Corre claro **y** oscuro (`pnpm --filter @chroma-yesid/storybook-web test:storybook`) y los tests native.
 - Valida que tu verificación detecta el fallo: rómpelo a propósito una vez.
 
 ## Monorepo, build y publicación

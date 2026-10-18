@@ -1,6 +1,6 @@
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react-vite';
-import { breakpoint } from '@yesid/tokens';
+import { breakpoint } from '@chroma-yesid/tokens';
 import './preview.css';
 import { chromaticModes } from './modes';
 

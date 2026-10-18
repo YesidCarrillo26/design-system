@@ -70,7 +70,7 @@ for (const name of darkNames) {
   if (!lightNames.has(name)) throw new Error(`El token de color "${name}" no existe en el tema light`);
 }
 
-const BANNER = '/* Generado por @yesid/tokens (pnpm --filter @yesid/tokens build). No editar a mano. */';
+const BANNER = '/* Generado por @chroma-yesid/tokens (pnpm --filter @chroma-yesid/tokens build). No editar a mano. */';
 
 /** Web usa rem (respeta el tamaño de fuente del usuario); native usa px. */
 const toRem = (px: string) => `${Number.parseFloat(px) / 16}rem`;
@@ -210,7 +210,7 @@ const constants = {
   ),
 };
 
-const indexJs = `// Generado por @yesid/tokens. No editar a mano.
+const indexJs = `// Generado por @chroma-yesid/tokens. No editar a mano.
 export const colors = ${JSON.stringify(constants.colors, null, 2)};
 
 /** Radios en px. */
@@ -234,7 +234,7 @@ export const fontFamily = ${JSON.stringify(constants.fontFamily, null, 2)};
 `;
 
 const union = (keys: string[]) => keys.map((k) => JSON.stringify(k)).join(' | ');
-const indexDts = `// Generado por @yesid/tokens. No editar a mano.
+const indexDts = `// Generado por @chroma-yesid/tokens. No editar a mano.
 export type ColorToken = ${union([...lightNames])};
 export type RadiusToken = ${union(radius.map((t) => t.path[1] ?? ''))};
 export type TextToken = ${union(Object.keys(textObject))};
@@ -254,7 +254,7 @@ export declare const fontFamily: Record<'sans' | 'mono', { web: string; ios: str
 // tailwind-merge clasifica `text-<valor desconocido>` como color. Sin esto,
 // `text-body-md` (tamaño) y `text-foreground` (color) se pisan entre sí.
 const textNames = Object.keys(textObject);
-const twMergeJs = `// Generado por @yesid/tokens. No editar a mano.
+const twMergeJs = `// Generado por @chroma-yesid/tokens. No editar a mano.
 export const twMergeConfig = {
   extend: {
     theme: {
@@ -263,7 +263,7 @@ export const twMergeConfig = {
   },
 };
 `;
-const twMergeDts = `// Generado por @yesid/tokens. No editar a mano.
+const twMergeDts = `// Generado por @chroma-yesid/tokens. No editar a mano.
 export declare const twMergeConfig: {
   extend: { theme: { text: string[] } };
 };

@@ -16,10 +16,10 @@ Guía viva: cada vez que un error inesperado cueste tiempo, se agrega aquí con 
 
 | Síntoma | Causa | Qué hacer |
 |---|---|---|
-| Un test/tipo "pasa" pero no cuenta lo nuevo (20 tests con 30 componentes más) | Turbo no hashea el código de un paquete del workspace si la tarea no depende de él | `dependsOn: ["^build"]` en toda tarea que consuma `@yesid/ui` o `@yesid/tokens` |
+| Un test/tipo "pasa" pero no cuenta lo nuevo (20 tests con 30 componentes más) | Turbo no hashea el código de un paquete del workspace si la tarea no depende de él | `dependsOn: ["^build"]` en toda tarea que consuma `@chroma-yesid/ui` o `@chroma-yesid/tokens` |
 | `Components/Components/Button` | `titlePrefix` del specifier también se antepone a títulos explícitos | En archivos con `title` explícito usar solo `'Button'` |
 | `Cannot read properties of undefined` al reutilizar `Default.args` | Los args suelen vivir en el `meta`, no en cada story | Extraer datos a `*.fixtures.tsx` y usarlos en ambos archivos de stories |
-| Uniwind: `Cannot use @variant with unknown variant: light` | Uniwind no descubre temas a través de `@import` anidados | La app importa `@yesid/tokens/native.css` directamente |
+| Uniwind: `Cannot use @variant with unknown variant: light` | Uniwind no descubre temas a través de `@import` anidados | La app importa `@chroma-yesid/tokens/native.css` directamente |
 | `ERR_PNPM_IGNORED_BUILDS` | pnpm 12 trata los postinstall sin aprobar como error | Decidir en `allowBuilds` (`true`/`false`) en `pnpm-workspace.yaml` |
 | `Edit` falla: "file modified since read" | pnpm reescribe `pnpm-workspace.yaml` | Releer el archivo y reintentar |
 | Peer sin cumplir con React 19.3.1 | Expo SDK fija React 19.3.0 | Fijar al exacto del SDK (`pnpm peers check`) |
@@ -40,7 +40,7 @@ Guía viva: cada vez que un error inesperado cueste tiempo, se agrega aquí con 
 | Build: `Rolldown failed to resolve import "@react-native/assets-registry/registry"` | React Native 0.88 ya no depende de ese paquete, pero `react-native-svg` (web) lo importa | Dependencia directa `@react-native/assets-registry` con la versión de RN en la app que lo necesite |
 | En react-native-web, `flex-1` deja el fondo en blanco bajo el contenido | La raíz no tiene altura | `html, body, #storybook-root { height: 100% }` y raíz `display: flex` |
 | No se sabe si un Storybook cargó la implementación web o la native | react-native-web pinta `role="button"` como `<button>` | Buscar cadenas exclusivas de cada implementación en el bundle (`check:bundle`) |
-| CI: `attw` → `"@yesid/ui/web.css": Resolution failed` | attw busca tipos y los entrypoints CSS no tienen | `attw --pack . --profile esm-only --exclude-entrypoints web.css native.css` |
+| CI: `attw` → `"@chroma-yesid/ui/web.css": Resolution failed` | attw busca tipos y los entrypoints CSS no tienen | `attw --pack . --profile esm-only --exclude-entrypoints web.css native.css` |
 | Release: `GitHub Actions is not permitted to create or approve pull requests` | Ajuste del repo desactivado, no es un error del workflow | Settings → Actions → General → *Allow GitHub Actions to create and approve pull requests* (o `gh api -X PUT …/actions/permissions/workflow -F can_approve_pull_request_reviews=true`) |
 | `npx chromatic` falla desde la raíz del monorepo | No encuentra `build-storybook`; el Storybook está en `apps/storybook-web` | Ejecutarlo en `apps/storybook-web` con `--build-script-name=build-storybook` y el token en una variable de entorno, **nunca** en un script de `package.json` |
 | knip: cientos de `Unresolved imports` (`./Accordion`) | Los componentes solo existen como `.web`/`.native` | `ignoreUnresolved: ["^\\./"]` y declarar como `entry` `*.{web,native}.{ts,tsx}`, tests native y stories |

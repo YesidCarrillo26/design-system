@@ -1,5 +1,5 @@
 {
-  "name": "@yesid/example-next",
+  "name": "@chroma-yesid/example-next",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@yesid/ui": "workspace:*",
+    "@chroma-yesid/ui": "workspace:*",
     "next": "^16.4.2",
     "next-themes": "^0.4.6",
     "react": "catalog:",
@@ -19,7 +19,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@yesid/tsconfig": "workspace:*",
+    "@chroma-yesid/tsconfig": "workspace:*",
     "tailwindcss": "catalog:",
     "typescript": "catalog:"
   }

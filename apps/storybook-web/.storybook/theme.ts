@@ -1,4 +1,4 @@
-import { colors } from '@yesid/tokens';
+import { colors } from '@chroma-yesid/tokens';
 import { create } from 'storybook/theming';
 
 // Marca del Storybook, tomada de los tokens (no se duplican colores).

@@ -1,5 +1,5 @@
 {
-  "name": "@yesid/example-expo",
+  "name": "@chroma-yesid/example-expo",
   "version": "0.0.0",
   "private": true,
   "main": "index.ts",
@@ -9,8 +9,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@yesid/tokens": "workspace:*",
-    "@yesid/ui": "workspace:*",
+    "@chroma-yesid/tokens": "workspace:*",
+    "@chroma-yesid/ui": "workspace:*",
     "expo": "~58.0.14",
     "react": "catalog:",
     "react-dom": "catalog:",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@types/react": "catalog:",
-    "@yesid/tsconfig": "workspace:*",
+    "@chroma-yesid/tsconfig": "workspace:*",
     "babel-preset-expo": "~58.0.17",
     "typescript": "catalog:"
   }

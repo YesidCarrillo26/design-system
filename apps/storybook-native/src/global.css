@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @import 'uniwind';
-@import '@yesid/tokens/native.css';
+@import '@chroma-yesid/tokens/native.css';
 
 /* Los componentes viven fuera de esta app: hay que decirle a Tailwind dónde mirar. */
 @source '../../../packages/ui/src';

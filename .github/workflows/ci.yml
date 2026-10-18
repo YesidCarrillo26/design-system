@@ -47,7 +47,7 @@ jobs:
 
       - name: Tests de Storybook (navegador)
         run: |
-          pnpm --filter @yesid/storybook-web exec playwright install --with-deps chromium
+          pnpm --filter @chroma-yesid/storybook-web exec playwright install --with-deps chromium
           pnpm turbo run test:storybook
 
       - name: Tests native (Jest)
@@ -55,8 +55,8 @@ jobs:
 
       - name: Storybook native en el navegador (build + bundle solo native)
         run: |
-          pnpm turbo run build-storybook --filter=@yesid/storybook-native-web
-          pnpm --filter @yesid/storybook-native-web check:bundle
+          pnpm turbo run build-storybook --filter=@chroma-yesid/storybook-native-web
+          pnpm --filter @chroma-yesid/storybook-native-web check:bundle
 
       - name: La web no debe traer react-native
         run: "! grep -rlE 'from.?.react-native.' examples/next-app/.next/static"

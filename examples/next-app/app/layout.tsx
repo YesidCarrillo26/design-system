@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import './globals.css';
 import { Providers } from './providers';
 
-export const metadata = { title: 'Ejemplo Next.js — @yesid/ui' };
+export const metadata = { title: 'Ejemplo Next.js — @chroma-yesid/ui' };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

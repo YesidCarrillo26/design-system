@@ -1,4 +1,4 @@
-# @yesid/ui
+# @chroma-yesid/ui
 
 ## 0.1.0
 
@@ -19,4 +19,4 @@
 - Updated dependencies [5ba10d9]
 - Updated dependencies [aa583c1]
 - Updated dependencies [9e4ff29]
-  - @yesid/tokens@0.1.0
+  - @chroma-yesid/tokens@0.1.0

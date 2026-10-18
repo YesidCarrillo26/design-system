@@ -1,5 +1,5 @@
 {
-  "name": "@yesid/storybook-web",
+  "name": "@chroma-yesid/storybook-web",
   "version": "0.0.0",
   "private": true,
   "description": "Storybook principal: documentaci\u00f3n, tests y revisi\u00f3n visual",
@@ -12,8 +12,8 @@
     "test:coverage": "vitest run --project=storybook --coverage"
   },
   "dependencies": {
-    "@yesid/tokens": "workspace:*",
-    "@yesid/ui": "workspace:*",
+    "@chroma-yesid/tokens": "workspace:*",
+    "@chroma-yesid/ui": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
@@ -33,7 +33,7 @@
     "@vitejs/plugin-react": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "@vitest/coverage-v8": "catalog:",
-    "@yesid/tsconfig": "workspace:*",
+    "@chroma-yesid/tsconfig": "workspace:*",
     "playwright": "catalog:",
     "storybook": "catalog:",
     "storybook-addon-pseudo-states": "catalog:",

@@ -3,7 +3,7 @@
 ## Qué se construyó
 
 - **Patrones** en `packages/ui/src/patterns`: `EmptyState`, `ListItem`, `PageHeader`. Cada uno es **un solo archivo** (sin `.web`/`.native`): solo compone primitivas, y las primitivas resuelven la plataforma.
-- **`examples/taskbox`**: el Taskbox del curso, modernizado (Vite + React 19 + TypeScript + Redux Toolkit 2 + `@yesid/ui`), con su propio Storybook (puerto 6007): 18 tests.
+- **`examples/taskbox`**: el Taskbox del curso, modernizado (Vite + React 19 + TypeScript + Redux Toolkit 2 + `@chroma-yesid/ui`), con su propio Storybook (puerto 6007): 18 tests.
 
 ## Qué cambió respecto al curso
 

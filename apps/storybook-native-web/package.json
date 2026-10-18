@@ -1,8 +1,8 @@
 {
-  "name": "@yesid/storybook-native-web",
+  "name": "@chroma-yesid/storybook-native-web",
   "version": "0.0.0",
   "private": true,
-  "description": "Las implementaciones NATIVE de @yesid/ui renderizadas en el navegador (react-native-web), para revisarlas sin simulador",
+  "description": "Las implementaciones NATIVE de @chroma-yesid/ui renderizadas en el navegador (react-native-web), para revisarlas sin simulador",
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6008",
@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@react-native/assets-registry": "0.88.0",
-    "@yesid/tokens": "workspace:*",
-    "@yesid/ui": "workspace:*",
+    "@chroma-yesid/tokens": "workspace:*",
+    "@chroma-yesid/ui": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-native": "catalog:",
@@ -29,7 +29,7 @@
     "@tailwindcss/vite": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
-    "@yesid/tsconfig": "workspace:*",
+    "@chroma-yesid/tsconfig": "workspace:*",
     "storybook": "catalog:",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",
