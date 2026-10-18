@@ -36,14 +36,14 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 
 ## 4. Mejoras de lo ya construido
 
-- [ ] **Tema oscuro del panel de Storybook** (`manager.ts`; hoy solo claro).
-- [ ] **Páginas de Guidelines** que faltan: accesibilidad, reglas multiplataforma, contribución (la Definition of Done).
+- [x] **Tema oscuro del panel de Storybook** (`manager.ts`, sigue la preferencia del sistema).
+- [x] **Páginas de Guidelines:** accesibilidad, reglas multiplataforma y contribución (`apps/storybook-web/docs/guidelines`).
 - [ ] **Componentes:** `Select` con búsqueda (`Combobox`) y `Popover` posicionado en native; `Sheet` con arrastre (`@gorhom/bottom-sheet`) si hace falta; `Skeleton`, `Table`, `Pagination`.
 - [ ] **Validación de formularios** (esquemas y mensajes), fuera de alcance hasta ahora.
 - [ ] **Pruebas de overlays native en dispositivo real** (foco, lectores de pantalla): hoy solo hay Jest y el export de Metro.
 - [ ] **Taskbox native** reutilizando store y stories de patrones.
 - [ ] **Segundo proyecto de Chromatic** para capturas aproximadas del Storybook native en el navegador.
-- [ ] **`knip`** (dependencias sin usar o no declaradas, útil con `nodeLinker: hoisted`) y límites de tamaño (`size-limit`).
+- [x] **`knip`** (paso en CI, config en `knip.json`). Pendiente: `size-limit`.
 - [ ] **Probar el flujo MCP con un agente real** (`.mcp.json`, `docs-list`/`docs-show`/`test-run`) y dejarlo en una guía.
 - [ ] **Docs versionadas** (`/v1`) cuando haya más de una versión publicada.
 

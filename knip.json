@@ -1,0 +1,31 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignoreUnresolved": ["^\\./"],
+  "ignoreDependencies": ["@changesets/config", "expo-updates", "expo-system-ui"],
+  "workspaces": {
+    ".": {},
+    "packages/ui": {
+      "entry": [
+        "src/**/*.{web,native}.{ts,tsx}",
+        "src/**/*.native.test.tsx",
+        "src/**/*.stories.tsx"
+      ],
+      "ignoreDependencies": ["@storybook/react-vite", "uniwind"]
+    },
+    "apps/storybook-native": {
+      "ignoreDependencies": ["react-native-svg", "test-renderer", "@testing-library/react-native", "expo-status-bar", "@yesid/ui"]
+    },
+    "apps/storybook-native-web": {
+      "ignoreDependencies": ["@react-native/assets-registry", "react-native-svg", "@storybook/react", "@yesid/ui"]
+    },
+    "apps/storybook-web": {
+      "ignoreDependencies": ["@yesid/ui"]
+    },
+    "examples/expo-app": {
+      "ignoreDependencies": ["@babel/core"]
+    },
+    "examples/taskbox": {
+      "ignoreIssues": { "src/store/**": ["types"] }
+    }
+  }
+}

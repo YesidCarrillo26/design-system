@@ -27,6 +27,9 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Dependencias sin usar (knip)
+        run: pnpm knip
+
       - name: Typecheck
         run: pnpm turbo run typecheck
 

@@ -15,10 +15,12 @@
     "storybook": "pnpm --filter @yesid/storybook-web storybook",
     "storybook:native": "pnpm --filter @yesid/storybook-native start",
     "changeset": "changeset",
-    "release": "turbo run build --filter=./packages/* && changeset publish"
+    "release": "turbo run build --filter=./packages/* && changeset publish",
+    "knip": "knip"
   },
   "devDependencies": {
     "@changesets/cli": "catalog:",
+    "knip": "catalog:",
     "oxlint": "catalog:",
     "turbo": "catalog:",
     "typescript": "catalog:"
