@@ -4,16 +4,17 @@ Lista para continuar más adelante. Estado al final de la **Fase 8** (2026-10-17
 
 ## 1. Acciones tuyas (bloquean cosas ya preparadas)
 
-- [ ] **Chromatic:** crear el proyecto en chromatic.com desde el repo y guardar el token:
-  `gh secret set CHROMATIC_PROJECT_TOKEN`. Hasta entonces `chromatic.yml` se omite (no falla).
+- [x] **Chromatic:** proyecto creado y secret `CHROMATIC_PROJECT_TOKEN` guardado (nunca en `package.json`). Falta ver la primera build verde en el pipeline.
 - [ ] **Scope npm `@yesid`:** confirmar que es tuyo (o cambiarlo en todos los `package.json`, imports y docs). Hace falta antes del primer `pnpm release`.
 - [ ] **Primera publicación a npm:** publicar `0.0.1` a mano (`pnpm --filter @yesid/tokens publish`, luego `@yesid/ui`), y configurar *trusted publishing* para `release.yml` en npmjs.com (o un `NPM_TOKEN` granular como respaldo).
 - [ ] **Ver los estilos en un dispositivo/simulador** (aún no se han visto en pantalla):
   `cd apps/storybook-native && npx expo run:ios` (no toca tu Expo Go) o actualizar Expo Go a la versión del SDK 58 con `pnpm storybook:native` y pulsar `i`.
   Comprobar: color del Button, tamaños de texto, cambio claro/oscuro, `Sheet`/`Select`/`Menu` (Modal) y `Toast`.
-- [ ] **Dependabot/Renovate** para actualizar los SHA de las GitHub Actions fijadas.
+- [x] **Dependabot** para las GitHub Actions: `.github/dependabot.yml` (semanal, agrupado).
 
-## 2. Siguiente fase recomendada: publicar los Storybooks
+## 2. Publicar los Storybooks (aplazado)
+
+_Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 
 - [ ] Crear `storybook-deploy.yml` (GitHub Pages): `build-storybook` de `apps/storybook-web`, `apps/storybook-native-web` y `examples/taskbox`, y subirlos como artefacto de Pages.
   - Nota: Pages en un repo **privado** requiere plan de pago; alternativa: repo público o Chromatic/Vercel.
@@ -45,6 +46,11 @@ Lista para continuar más adelante. Estado al final de la **Fase 8** (2026-10-17
 - [ ] **`knip`** (dependencias sin usar o no declaradas, útil con `nodeLinker: hoisted`) y límites de tamaño (`size-limit`).
 - [ ] **Probar el flujo MCP con un agente real** (`.mcp.json`, `docs-list`/`docs-show`/`test-run`) y dejarlo en una guía.
 - [ ] **Docs versionadas** (`/v1`) cuando haya más de una versión publicada.
+
+## 1b. Arreglos del pipeline (detectados 2026-10-17)
+
+- [x] **CI** fallaba en `attw` por los entrypoints CSS (`web.css`, `native.css`); ahora se excluyen con `--exclude-entrypoints`.
+- [ ] **Release** falla con "GitHub Actions is not permitted to create or approve pull requests": activar en Settings → Actions → General → *Allow GitHub Actions to create and approve pull requests*.
 
 ## 5. Al retomar
 

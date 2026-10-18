@@ -1,0 +1,10 @@
+version: 2
+updates:
+  # Mantiene al día los SHA fijados de las GitHub Actions.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
