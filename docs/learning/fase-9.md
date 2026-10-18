@@ -79,3 +79,10 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 - **Verificado:** `lint`, `knip`, `build`, `typecheck`, `test:unit`, `test:native`, `test:storybook`, `publint`, `attw`, `check:bundle` y `npm pack --dry-run` (`@chroma-yesid/ui@0.1.0`).
 - ⚠️ Las carpetas `node_modules/@yesid` vacías que quedan son residuos locales (ignorados por git); no afectan.
 - Para publicar, el scope `@chroma-yesid` debe existir en npm como **organización** (ver `docs/pendientes.md`).
+
+## 2026-10-18 — Tema oscuro en el simulador
+
+- **Cómo:** `xcrun simctl ui booted appearance dark` cambia la apariencia del iPhone y Uniwind lo sigue (no hace falta tocar la app). Volver con `appearance light`. Para ver `Sheet` y `Dialog` ya abiertos se usó una story temporal con `open` fijo (`*.native.stories.tsx`, no se commitea); al correr Metro, `storybook.requires.ts` se regenera solo con esa story: **revertirlo antes de commitear**.
+- **Resultado:** correcto en `Button` (Primary con el índigo claro del tema oscuro y texto oscuro, Secondary gris, Outline con borde sutil), `Table`, `Pagination`, `TextField` con error (salmón del token), `Sheet` y `Dialog` (el `Modal` hereda el tema).
+- **No bug:** con el panel oculto (`onDeviceUI: false`) se ve un marco negro alrededor de la story; viene de ese modo de captura, no de la librería.
+- **Límite:** `Select`, `Menu`, `Popover` y `Toast` se abren con su propio estado y no se pudieron abrir sin tocar la pantalla (el simulador corre sin ventana y `simctl` no simula toques). Para revisarlos hace falta abrir el Simulator con interfaz o añadir una story con estado abierto.
