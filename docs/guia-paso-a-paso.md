@@ -330,7 +330,8 @@ el PR → **tú fusionas**. El agente nunca fusiona ni publica en npm.
 **Uso diario**
 
 - Crea el issue con la plantilla (desde la web o la app de GitHub; `gh` no rellena formularios).
-  Mientras no tenga la etiqueta `claude` es un borrador.
+  Mientras no tenga la etiqueta `claude` es un borrador. Solo se procesan issues y PR escritos por ti
+  o por colaboradores (y los PR del propio agente): el issue de un externo se copia a uno propio.
 - Para empezar: pon la etiqueta `claude` (`gh issue edit <n> --add-label claude`).
 - Para seguirlo: `gh run list --workflow claude.yml` y `gh run watch`.
 - Para pedir cambios: comenta `@claude …` en el PR. Si `verify` falla: `@claude revisa el fallo de

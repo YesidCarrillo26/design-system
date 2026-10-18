@@ -122,6 +122,7 @@ Decisiones que ya se tomaron (y por qué), en formato **"si pasa X, hazlo así"*
 - Nombra los archivos o ADR de partida y di qué queda fuera de alcance.
 - Si necesita una cuenta, 2FA o un dispositivo, no es para un agente: etiqueta `needs-human`.
 - El issue es un borrador hasta que le pones la etiqueta del agente. Esa etiqueta es el botón de arranque.
+- El agente lee todo el texto del issue, incluidos los comentarios de terceros. No etiquetes un issue escrito por un externo (el workflow lo descarta): cópialo a uno propio y revisa lo que pegas.
 
 **Si añades un workflow que usa un agente o su token**
 - Que el agente actúe con una identidad que dispare CI (App o PAT), no con `GITHUB_TOKEN`.

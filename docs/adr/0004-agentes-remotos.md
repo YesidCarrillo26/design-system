@@ -52,15 +52,24 @@ menciones en issues y PRs, que es el flujo que busco.
 | Riesgo | Control |
 | --- | --- |
 | Que cualquiera lo dispare | Etiquetar exige permiso de triage. Los comentarios solo cuentan si quien escribe es `OWNER`, `MEMBER` o `COLLABORATOR`, y la Action además comprueba permiso de escritura. |
+| Que procese texto de un externo (inyección de instrucciones) | Quien **escribió** el issue o el PR también debe ser `OWNER`, `MEMBER` o `COLLABORATOR` (o `claude[bot]`, para poder pedirle ajustes en sus propios PR). Un issue o un PR de un externo no se procesa aunque lo etiquetes: si vale la pena, cópialo a un issue propio. |
+| Que ejecute comandos arbitrarios | `git` se permite por subcomando (sin `git config` ni `git -c`) y `pnpm dlx`/`pnpm create` están vetados. Ver el límite de `pnpm` más abajo. |
 | Que cambie los workflows | `--disallowedTools` sobre `.github/workflows/**` (el control real). Además, el prompt de la Action le indica a Claude que no puede modificarlos; no me apoyo en eso, porque la documentación de la App lista el permiso `workflows` entre los que pide. |
 | Que publique en npm | `--disallowedTools` de `publish`/`release`. El trusted publisher de npm está atado a `release.yml`, así que un token OIDC emitido desde `claude.yml` no sirve. |
 | Que fusione | `gh pr merge` denegado. El ruleset exige PR y `verify` de todos modos. |
 | Que corra para siempre | `timeout-minutes: 60` y `--max-turns 100`. |
 
-Lo que **no** se bloquea: `Bash(pnpm:*)` permite ejecutar cualquier script del repo (es inevitable
-para correr tests), y el secret `CLAUDE_CODE_OAUTH_TOKEN` está en el entorno del job. Se asume porque
-el disparo está restringido a colaboradores. **No usar `@claude` en PRs de forks**: su contenido no es
-confiable y podría intentar una inyección de instrucciones.
+Lo que **no** se bloquea, y por qué:
+
+- `Bash(pnpm:*)` permite ejecutar cualquier script del repo. Es inevitable para correr los tests, y
+  una lista de scripts permitidos no sería una frontera real: el agente puede editar `package.json` y
+  ejecutar el script. Por eso las fronteras que sí cuentan son quién puede disparar al agente, qué
+  puede hacer su token (el ruleset exige PR y `verify`, y no hay bypass) y qué secretos hay en el job.
+- El secret `CLAUDE_CODE_OAUTH_TOKEN` está en el entorno del job; es el único secret que ve (no
+  se referencian el de Chromatic ni ningún token de npm). Si se filtrara, regenerarlo con
+  `claude setup-token` y actualizar el secret.
+- Los comentarios de terceros dentro de un issue **propio** sí llegan al contexto del agente. Antes de
+  poner `claude` en un issue con comentarios ajenos, léelos.
 
 ## Consecuencias
 
@@ -75,6 +84,9 @@ confiable y podría intentar una inyección de instrucciones.
   acción compuesta queda como mejora opcional.
 - La concurrencia a nivel de job asume que el `if` se evalúa antes de entrar al grupo. Se comprueba
   en el piloto (un comentario sin `@claude` debe aparecer como *skipped*).
+- Poder pedir ajustes en los PR del agente asume que `issue.user.login` de esos PR es `claude[bot]`.
+  Se comprueba en el piloto; si `@claude` queda *skipped* en un PR del agente, esa es la causa.
+- Los PR de Dependabot y los de forks quedan fuera: `@claude` ahí se descarta a propósito.
 
 ## Cómo sumar Codex (evaluado, no implementado)
 
