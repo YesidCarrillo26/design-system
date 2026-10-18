@@ -24,7 +24,7 @@ function CellContent({ content, align }: { content: ReactNode; align?: TableAlig
 export function Table<Row>({ columns, rows, getRowKey, caption, emptyText = 'Sin datos', className }: TableProps<Row>) {
   const s = tableStyles();
   return (
-    <View role="table" aria-label={caption} className={`${s.root()} ${className ?? ''}`.trim()}>
+    <View role="table" aria-label={caption} className={`${s.root()} overflow-hidden ${className ?? ''}`.trim()}>
       <Text className={s.caption()}>{caption}</Text>
       <View role="row" className={`flex-row ${s.row()}`}>
         {columns.map((column) => (
@@ -37,7 +37,7 @@ export function Table<Row>({ columns, rows, getRowKey, caption, emptyText = 'Sin
         <Text className={s.empty()}>{emptyText}</Text>
       ) : (
         rows.map((row, index) => (
-          <View key={getRowKey(row, index)} role="row" className={`flex-row ${s.row()}`}>
+          <View key={getRowKey(row, index)} role="row" className={`flex-row ${s.row({ className: index === rows.length - 1 ? 'border-b-0' : undefined })}`}>
             {columns.map((column) => (
               <View key={column.key} role="cell" className="flex-1">
                 <CellContent
