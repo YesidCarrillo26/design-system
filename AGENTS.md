@@ -16,6 +16,8 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - `docs/adr` — decisiones de arquitectura. Léelas antes de cambiar algo estructural.
 - `docs/plan` — el plan inicial con el estado por fase.
 - `docs/learning` — bitácora de lo aprendido de Storybook por fase.
+  Después de la Fase 8, los cambios se registran en `docs/learning/fase-9.md` (bitácora cronológica;
+  actualízala en el mismo cambio que introduce algo, sin reescribir el pasado).
   Antes de depurar, lee `docs/learning/errores-y-soluciones.md`; al resolver algo nuevo, agrégalo ahí.
   Las decisiones de diseño y su "si pasa X, hazlo así" están en `docs/learning/buenas-practicas.md`.
 
@@ -23,6 +25,7 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 
 - `pnpm install`
 - `pnpm lint` — oxlint (incluye las fronteras entre plataformas).
+- `pnpm knip` — dependencias, exports y archivos sin usar (corre en CI).
 - `pnpm turbo run typecheck` — `packages/ui` se compila dos veces (web y native).
 - `pnpm --filter @yesid/tokens build` — regenera `packages/tokens/dist` (necesario antes de storybook/typecheck).
 - `pnpm storybook` — Storybook web en :6006.
@@ -45,7 +48,7 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - **React:** la versión la dicta Expo SDK (ver `catalog:` en `pnpm-workspace.yaml`). No la subas sola.
 - **Cada componente nuevo** cumple la Definition of Done del plan (contrato, variantes, stories
   compartidas, tests, a11y sin errores, docs y un changeset).
-- **Secretos:** nunca en el repo. Los tokens de Chromatic y npm van solo en GitHub secrets.
+- **Secretos:** nunca en el repo. Los tokens de Chromatic y npm van solo en GitHub secrets. 
 
 ## Storybook MCP (agentes)
 

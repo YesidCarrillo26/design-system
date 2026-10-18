@@ -26,7 +26,7 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 - [ ] **Addon propio "Platform Parity"** (`packages/storybook-addon-parity`): panel que lee `parameters.platforms`, enlaza la story equivalente en native y muestra una captura; estados en el sidebar.
 - [ ] **Migrar a CSF Next** (`preview.meta`, `meta.story`, `.test()`): primero las stories web-only. Las compartidas siguen en CSF3 hasta comprobar soporte en Storybook native.
 - [ ] **i18n y RTL:** globals `locale` y `dir` con un decorador; en React Native `I18nManager` exige recargar; comprobar `rtl:` en Uniwind.
-- [ ] **Movimiento:** tokens ya existen; animaciones de entrada/salida de overlays (CSS en web, Reanimated en native) y `prefers-reduced-motion` como global.
+- [ ] **Movimiento:** tokens ya existen; faltan las animaciones de entrada/salida de overlays (CSS en web, Reanimated en native). `prefers-reduced-motion` global ya está hecho (web y native, ver `docs/learning/fase-9.md`); las animaciones nuevas deben respetarlo.
 - [ ] **Figma:** `parameters.design` (addon-designs ya instalado) y Code Connect; Figma Variables → DTCG.
 - [ ] **Paquete de iconos** (SVGR + `react-native-svg`) en lugar de la lista de paths en `Icon/icons.ts`.
 - [ ] **Multi-marca:** `extraThemes` de Uniwind y temas extra en `web.css`.
