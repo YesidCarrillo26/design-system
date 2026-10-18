@@ -1,8 +1,11 @@
 version: 2
 updates:
   # Mantiene al día los SHA fijados de las GitHub Actions.
+  # `directory: /` solo ve `.github/workflows`; la acción compuesta se lista aparte.
   - package-ecosystem: github-actions
-    directory: /
+    directories:
+      - /
+      - /.github/actions/preparar-entorno
     schedule:
       interval: weekly
     groups:
