@@ -7,7 +7,8 @@ Lista para continuar más adelante. Estado al final de la **Fase 8** (2026-10-17
 - [x] **Chromatic:** proyecto creado y secret `CHROMATIC_PROJECT_TOKEN` guardado (nunca en `package.json`). Falta ver la primera build verde en el pipeline.
 - [x] **Scope npm:** decidido `@chroma-yesid` (antes `@yesid`; ver `docs/learning/fase-9.md`). Organización `chroma-yesid` creada en npm.
 - [x] **Primera publicación a npm:** `@chroma-yesid/tokens@0.1.0` y `@chroma-yesid/ui@0.1.0` publicados el 2026-10-18 (ver `docs/learning/fase-9.md`). La `0.1.0` de `ui` tiene peers exactos: corregido en `0.1.1`.
-- [ ] **Trusted Publisher** en npmjs.com para `tokens` y `ui` (repo `YesidCarrillo26/design-system`, workflow `release.yml`): hasta entonces Release sigue en rojo y la `0.1.1` no se publica sola.
+- [x] **Trusted Publisher** configurado para `tokens` y `ui`; `0.1.1` publicada por `release.yml` con firma de procedencia (ver `docs/learning/fase-9.md`).
+- [ ] **Marcar `@chroma-yesid/ui@0.1.0` como obsoleta:** `npm deprecate @chroma-yesid/ui@0.1.0 "peerDependencies exactos; usa >=0.1.1"` (requiere 2FA, lo ejecuta la persona).
 - [~] **Ver los estilos en un dispositivo/simulador:** revisado en iPhone 17 (iOS 26.5) con `expo run:ios`: Button, Accordion, Table, Pagination, Skeleton y TextField se ven bien (ver `docs/learning/fase-9.md`). Tema oscuro, `Sheet` y `Dialog` también revisados. **Falta comprobar:** `Select`, `Menu`, `Popover` y `Toast` (se abren con un toque) y un dispositivo Android.
 - [x] **Dependabot** para las GitHub Actions: `.github/dependabot.yml` (semanal, agrupado).
 

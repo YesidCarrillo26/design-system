@@ -113,3 +113,18 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 
 - Tras fusionar el PR de Dependabot (#2), `changesets/action` pasó a una versión con inputs renombrados (`publish` → `publish-script`, `version` → `version-script`) y Release falló al instante, antes de llegar a npm. Se corrigió `release.yml`.
 - Lección: el CI del PR de Dependabot no ejercita `release.yml` (solo corre en `push` a `main`), así que ese tipo de ruptura no se ve hasta después de fusionar. Revisar a mano los PR de Dependabot que tocan acciones usadas solo en `main`.
+
+## 2026-10-18 — Trusted publishing y publicación automática (`0.1.1`)
+
+**Resultado:** `@chroma-yesid/tokens@0.1.1` y `@chroma-yesid/ui@0.1.1` publicados **por el workflow `release.yml`**, sin tokens guardados y con firma de procedencia. Verificado como consumidor: `npm install @chroma-yesid/ui@0.1.1 react@19.3.1 react-dom@19.3.1` sin `--force`, `npm audit signatures` (*16 packages have verified registry signatures / attestations*) y `renderToString` correcto. Se creó el tag y la release de GitHub de cada paquete (`@chroma-yesid/ui@0.1.1`, …).
+
+**Cómo se configuró** (una sola vez, por paquete, tras la primera publicación manual): npmjs.com → paquete → *Settings* → *Trusted Publisher* → *GitHub Actions* con propietario `YesidCarrillo26`, repositorio `design-system`, workflow `release.yml` y entorno vacío. Alternativa por terminal: `npm trust github <paquete> --file release.yml --repo YesidCarrillo26/design-system --allow-publish -y` (pide 2FA).
+
+**Trampas encontradas:**
+- ⚠️ El formulario puede dejar solo el permiso **`npm stage publish`**. `changeset publish` hace un `npm publish` normal, así que hay que marcar **`npm publish`**. Se ve en la tarjeta como *Permissions*.
+- *Pending validation* no se valida a mano: se resuelve con la primera publicación exitosa desde el workflow (hay un plazo, aquí hasta el 2026-10-20).
+- ⚠️ El PR "Version Packages" lo abre el bot con `GITHUB_TOKEN` y **GitHub no ejecuta CI en esos PR**: queda `BLOCKED` porque falta el check obligatorio `verify`. Solución: `gh pr close <n> && gh pr reopen <n>` (lo dispara un usuario) y esperar los checks antes de fusionar.
+- Tras publicar, `npm view` tarda segundos en mostrar la versión nueva (primero `tokens`, luego `ui`).
+- `ui@0.1.1` depende de `tokens` con versión exacta (`0.1.1`, la que sustituye a `workspace:*`); está bien porque van juntos.
+
+**Pendiente:** marcar `@chroma-yesid/ui@0.1.0` como obsoleta (peers exactos) con `npm deprecate` (requiere 2FA; no lo puede hacer un agente sin terminal interactiva).
