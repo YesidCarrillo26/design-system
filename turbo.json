@@ -11,7 +11,7 @@
     },
     "build-storybook": {
       "dependsOn": [
-        "@yesid/tokens#build",
+        "@chroma-yesid/tokens#build",
         "^build"
       ],
       "outputs": [
@@ -20,32 +20,32 @@
     },
     "storybook": {
       "dependsOn": [
-        "@yesid/tokens#build"
+        "@chroma-yesid/tokens#build"
       ],
       "cache": false,
       "persistent": true
     },
     "start": {
       "dependsOn": [
-        "@yesid/tokens#build"
+        "@chroma-yesid/tokens#build"
       ],
       "cache": false,
       "persistent": true
     },
     "typecheck": {
       "dependsOn": [
-        "@yesid/tokens#build",
+        "@chroma-yesid/tokens#build",
         "^build"
       ]
     },
     "test:unit": {
       "dependsOn": [
-        "@yesid/tokens#build"
+        "@chroma-yesid/tokens#build"
       ]
     },
     "test:storybook": {
       "dependsOn": [
-        "@yesid/tokens#build",
+        "@chroma-yesid/tokens#build",
         "^build"
       ],
       "outputs": [
@@ -54,7 +54,7 @@
     },
     "test:native": {
       "dependsOn": [
-        "@yesid/tokens#build",
+        "@chroma-yesid/tokens#build",
         "^build"
       ]
     }

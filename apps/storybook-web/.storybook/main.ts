@@ -25,7 +25,7 @@ const config: StorybookConfig = {
   ],
   features: { experimentalCodeExamples: true },
   // Composición: el Storybook que muestra las implementaciones NATIVE (react-native-web) aparece en
-  // el sidebar. En desarrollo apunta al servidor local (pnpm --filter @yesid/storybook-native-web
+  // el sidebar. En desarrollo apunta al servidor local (pnpm --filter @chroma-yesid/storybook-native-web
   // storybook, puerto 6008); en producción se define NATIVE_STORYBOOK_URL con la URL publicada.
   refs: (_config, { configType }) => {
     const url = configType === 'DEVELOPMENT' ? 'http://localhost:6008' : process.env.NATIVE_STORYBOOK_URL;

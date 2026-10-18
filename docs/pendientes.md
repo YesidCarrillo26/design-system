@@ -5,12 +5,12 @@ Lista para continuar más adelante. Estado al final de la **Fase 8** (2026-10-17
 ## 1. Acciones tuyas (bloquean cosas ya preparadas)
 
 - [x] **Chromatic:** proyecto creado y secret `CHROMATIC_PROJECT_TOKEN` guardado (nunca en `package.json`). Falta ver la primera build verde en el pipeline.
-- [ ] **Scope npm `@yesid`:** confirmar que es tuyo (o cambiarlo en todos los `package.json`, imports y docs). Hace falta antes del primer `pnpm release`.
-- [ ] **Primera publicación a npm:** publicar `0.0.1` a mano (`pnpm --filter @yesid/tokens publish`, luego `@yesid/ui`), y configurar *trusted publishing* para `release.yml` en npmjs.com (o un `NPM_TOKEN` granular como respaldo).
+- [x] **Scope npm:** decidido `@chroma-yesid` (antes `@yesid`; ver `docs/learning/fase-9.md`). Falta crearlo en npm como organización.
+- [ ] **Primera publicación a npm:** publicar `0.1.0` a mano (con `--access public`, ya configurado en `publishConfig`) (`pnpm --filter @chroma-yesid/tokens publish`, luego `@chroma-yesid/ui`), y configurar *trusted publishing* para `release.yml` en npmjs.com (o un `NPM_TOKEN` granular como respaldo).
 - [~] **Ver los estilos en un dispositivo/simulador:** revisado en iPhone 17 (iOS 26.5) con `expo run:ios`: Button, Accordion, Table, Pagination, Skeleton y TextField se ven bien (ver `docs/learning/fase-9.md`). **Falta comprobar:** cambio claro/oscuro en el dispositivo, `Sheet`/`Select`/`Menu` (Modal), `Toast` y un dispositivo Android.
 - [x] **Dependabot** para las GitHub Actions: `.github/dependabot.yml` (semanal, agrupado).
 
-- [ ] **Release falla en cada push a `main` hasta configurar npm** (2026-10-18): tras fusionar "Version Packages" (`0.1.0`), `changeset publish` responde `404 Not Found` al publicar `@yesid/tokens@0.1.0` porque el scope `@yesid` no existe/no es tuyo en npm y falta el trusted publisher. No se publicó nada. Para resolverlo: crear/confirmar el scope en npmjs.com, publicar `0.1.0` a mano y configurar *trusted publishing* para `release.yml` (ver sección 1). Si se decide aplazar, considerar desactivar el paso de publicación para que el pipeline no quede en rojo.
+- [ ] **Release falla en cada push a `main` hasta configurar npm** (2026-10-18): tras fusionar "Version Packages" (`0.1.0`), `changeset publish` responde `404 Not Found` al publicar `@chroma-yesid/tokens@0.1.0` porque el scope `@chroma-yesid` no existe/no es tuyo en npm y falta el trusted publisher. No se publicó nada. Para resolverlo: crear/confirmar el scope en npmjs.com, publicar `0.1.0` a mano y configurar *trusted publishing* para `release.yml` (ver sección 1). Si se decide aplazar, considerar desactivar el paso de publicación para que el pipeline no quede en rojo.
 
 ## 2. Publicar los Storybooks (aplazado)
 
@@ -54,7 +54,7 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 
 ## 5. Al retomar
 
-1. `pnpm install && pnpm --filter @yesid/tokens build`
+1. `pnpm install && pnpm --filter @chroma-yesid/tokens build`
 2. `pnpm lint && pnpm turbo run build typecheck test:unit test:storybook test:native` (debe estar todo verde).
 3. Leer `docs/learning/errores-y-soluciones.md` y `docs/learning/buenas-practicas.md`.
 4. Cada cambio de paquete lleva un changeset; commits con `:emoji: tipo(alcance): descripción`.

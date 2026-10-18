@@ -3,7 +3,7 @@
 
      @import 'tailwindcss';
      @import 'uniwind';
-     @import '@yesid/tokens/native.css';
-     @import '@yesid/ui/native.css';
+     @import '@chroma-yesid/tokens/native.css';
+     @import '@chroma-yesid/ui/native.css';
 */
 @source '../dist/native';

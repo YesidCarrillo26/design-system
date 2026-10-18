@@ -7,6 +7,6 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   // Storybook 10 y sus dependencias son solo ESM: Babel tiene que transformarlas.
   transformIgnorePatterns: [
-    '/node_modules/(?!((jest-)?react-native|@react-native(-community)?|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|react-native-svg|storybook|@storybook/.*|@vitest/.*|@testing-library/.*|chai|loupe|tinyspy|@yesid/.*))',
+    '/node_modules/(?!((jest-)?react-native|@react-native(-community)?|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|react-native-svg|storybook|@storybook/.*|@vitest/.*|@testing-library/.*|chai|loupe|tinyspy|@chroma-yesid/.*))',
   ],
 };

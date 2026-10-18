@@ -1,5 +1,5 @@
 {
-  "extends": "@yesid/tsconfig/web.json",
+  "extends": "@chroma-yesid/tsconfig/web.json",
   "compilerOptions": {
     // `composite` obliga a emitir; solo se emiten declaraciones, a una carpeta de caché.
     "composite": true,

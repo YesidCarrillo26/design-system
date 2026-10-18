@@ -12,7 +12,7 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 
 **`knip`** (dependencias, exports y archivos sin usar; paso en CI)
 - La configuración (`knip.json`) existe porque este monorepo tiene archivos por plataforma: `./Accordion` solo existe como `.web`/`.native`, y knip lo ve como import sin resolver. Se ignoran los relativos (`tsc` ya los valida) y se declaran como entrada `*.{web,native}.tsx`, los tests native y las stories.
-- Falsos positivos justificados en el propio `knip.json`: plugins de Expo inferidos por `userInterfaceStyle` (`expo-updates`, `expo-system-ui`), peers de runtime (`react-native-svg`, `@react-native/assets-registry`, `test-renderer`) y `@yesid/ui` como dependencia de resolución en las apps.
+- Falsos positivos justificados en el propio `knip.json`: plugins de Expo inferidos por `userInterfaceStyle` (`expo-updates`, `expo-system-ui`), peers de runtime (`react-native-svg`, `@react-native/assets-registry`, `test-renderer`) y `@chroma-yesid/ui` como dependencia de resolución en las apps.
 - Hallazgo real: dos entradas del catálogo (`@storybook/addon-ondevice-backgrounds` y `-notes`) no las usaba nadie y se eliminaron.
 
 **Storybook web**
@@ -70,3 +70,12 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 - ⚠️ Lanzar la app con `simctl launch` da "No script URL provided"; hay que abrirla con el enlace del dev client.
 - Las pruebas Jest y la suite web no ven desbordes ni bordes que sobresalen: la revisión visual en dispositivo sigue siendo necesaria para cada componente nuevo (Definition of Done, punto 7).
 - Mejora menor pendiente: al envolverse, el "…" puede quedar solo al final de una línea en `Pagination`.
+
+## 2026-10-18 — El scope pasa de `@yesid` a `@chroma-yesid`
+
+- **Por qué:** que el nombre del paquete recuerde que es el sistema de diseño y sirva en otros proyectos. Aún no se había publicado nada (el primer `changeset publish` falló con 404), así que el cambio es gratis.
+- **Qué cambió:** `@yesid` → `@chroma-yesid` en todo lo versionado (≈180 ocurrencias: `package.json`, imports, filtros de pnpm/turbo, `knip.json`, `jest.config.js`, workflows, changesets, CHANGELOG y docs; el histórico de estas bitácoras también, por consistencia). Se reinstaló para regenerar `pnpm-lock.yaml` y los enlaces de workspace.
+- **No cambió:** el identificador de la app (`dev.yesid.dsstorybook`), el repo de GitHub y el nombre de la carpeta.
+- **Verificado:** `lint`, `knip`, `build`, `typecheck`, `test:unit`, `test:native`, `test:storybook`, `publint`, `attw`, `check:bundle` y `npm pack --dry-run` (`@chroma-yesid/ui@0.1.0`).
+- ⚠️ Las carpetas `node_modules/@yesid` vacías que quedan son residuos locales (ignorados por git); no afectan.
+- Para publicar, el scope `@chroma-yesid` debe existir en npm como **organización** (ver `docs/pendientes.md`).

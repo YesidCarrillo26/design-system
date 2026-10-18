@@ -3,7 +3,7 @@
 ## Qué se construyó
 
 - 10 componentes nuevos, cada uno con implementación web y native, contrato, variantes y stories compartidas: `Box`, `Heading`, `Icon`, `IconButton`, `Spinner`, `Badge`, `Avatar`, `Card`, `Divider`, `Link`.
-- Testing: a11y como error en **ambos temas** (la suite corre dos veces: `VITE_SB_THEME=dark`), cobertura (`pnpm --filter @yesid/storybook-web test:coverage`, ~97 % de líneas web), tests Jest native con portable stories.
+- Testing: a11y como error en **ambos temas** (la suite corre dos veces: `VITE_SB_THEME=dark`), cobertura (`pnpm --filter @chroma-yesid/storybook-web test:coverage`, ~97 % de líneas web), tests Jest native con portable stories.
 - Addons: `addon-mcp` (+ `.mcp.json`), `addon-designs`, `storybook-addon-pseudo-states`, `@chromatic-com/storybook`.
 - Chromatic: modos `light-mobile` y `dark-desktop`, y `chromatic.yml` que **se omite sin el secret** `CHROMATIC_PROJECT_TOKEN`.
 

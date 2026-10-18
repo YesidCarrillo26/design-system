@@ -1,4 +1,4 @@
-import type { ColorToken } from '@yesid/tokens';
+import type { ColorToken } from '@chroma-yesid/tokens';
 import { tv } from '../../lib/tv';
 import type { IconSize, IconTone } from './Icon.types';
 

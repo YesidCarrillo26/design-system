@@ -1,5 +1,5 @@
 {
-  "name": "@yesid/tsconfig",
+  "name": "@chroma-yesid/tsconfig",
   "version": "0.0.0",
   "private": true,
   "description": "tsconfig compartidos del monorepo (base, web y native)",

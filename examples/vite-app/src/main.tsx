@@ -1,4 +1,4 @@
-import { Button, Stack, Text } from '@yesid/ui';
+import { Button, Stack, Text } from '@chroma-yesid/ui';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 
@@ -10,7 +10,7 @@ function toggleTheme() {
 createRoot(document.getElementById('root')!).render(
   <main className="p-6">
     <Stack>
-      <Text variant="title">@yesid/ui en Vite</Text>
+      <Text variant="title">@chroma-yesid/ui en Vite</Text>
       <Text tone="muted">La misma librería, sin Next.js.</Text>
       <div><Button onPress={toggleTheme}>Cambiar tema</Button></div>
     </Stack>

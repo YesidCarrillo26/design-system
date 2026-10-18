@@ -1,4 +1,4 @@
-import { type ColorToken, colors } from '@yesid/tokens';
+import { type ColorToken, colors } from '@chroma-yesid/tokens';
 import { useColorScheme } from 'react-native';
 
 /**

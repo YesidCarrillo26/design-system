@@ -86,8 +86,8 @@ pnpm turbo run typecheck
 3. **Prueba:** `sd/tw-merge.test.ts` demuestra el bug y su corrección.
 
 ```sh
-pnpm --filter @yesid/tokens build        # regenerar dist/
-pnpm --filter @yesid/tokens test:unit    # node --test
+pnpm --filter @chroma-yesid/tokens build        # regenerar dist/
+pnpm --filter @chroma-yesid/tokens test:unit    # node --test
 ```
 
 > Regla: nunca edites `dist/`. Cambia el JSON y reconstruye. Los valores de color deben cumplir contraste AA (la suite de a11y lo comprueba).
@@ -119,7 +119,7 @@ Se comparte lo que no es render (tokens, contrato, variantes, lógica, stories) 
 `packages/ui` tiene tres tsconfig: `tsconfig.web.json` (excluye `*.native.*`), `tsconfig.native.json` (excluye `*.web.*`) y `tsconfig.json` (solo `references`). Los archivos compartidos se compilan **dos veces**: si una prop existe solo en una plataforma, falla `tsc -b`.
 
 ```sh
-pnpm --filter @yesid/ui typecheck        # tsc -b
+pnpm --filter @chroma-yesid/ui typecheck        # tsc -b
 ```
 
 ### Variantes con `slots`
@@ -149,13 +149,13 @@ pnpm add -D storybook @storybook/react-vite @storybook/addon-docs @storybook/add
 | `vite.config.ts` | Plugins de React y Tailwind; **`resolve.extensions` con `.web.tsx` primero** (así `./Button` → `Button.web.tsx`) |
 | `.storybook/main.ts` | `framework`, `addons` y `stories` con **specifiers** `{ directory, titlePrefix, files }`; el glob `!(*.native)` excluye stories native |
 | `.storybook/preview.tsx` | Decorador de tema (`withThemeByDataAttribute`), `tags: ['autodocs']`, `a11y.test: 'error'`, viewports desde los tokens, `storySort` |
-| `.storybook/preview.css` | `@import 'tailwindcss'; @import '@yesid/tokens/web.css'; @source …` (Tailwind solo escanea el proyecto actual) |
+| `.storybook/preview.css` | `@import 'tailwindcss'; @import '@chroma-yesid/tokens/web.css'; @source …` (Tailwind solo escanea el proyecto actual) |
 | `.storybook/manager.ts` + `theme.ts` | Marca del panel lateral con colores de los tokens |
 | `docs/*.mdx` | Introduction, Foundations (Colors, Typography…), Guidelines |
 
 ```sh
 pnpm storybook                                   # http://localhost:6006
-pnpm --filter @yesid/storybook-web build-storybook
+pnpm --filter @chroma-yesid/storybook-web build-storybook
 ```
 
 **Docs automáticas:** `typescript.reactDocgen: 'react-docgen-typescript'` lee los JSDoc de `X.types.ts`.
@@ -172,8 +172,8 @@ pnpm --filter @yesid/storybook-web build-storybook
 
 ```sh
 npx playwright install chromium                  # una sola vez
-pnpm --filter @yesid/storybook-web test:storybook  # claro y luego oscuro
-pnpm --filter @yesid/storybook-web test:coverage
+pnpm --filter @chroma-yesid/storybook-web test:storybook  # claro y luego oscuro
+pnpm --filter @chroma-yesid/storybook-web test:coverage
 ```
 
 **Cómo escribir un `play`** (archivo `X.web.stories.tsx`):
@@ -198,14 +198,14 @@ Una app **Expo** cuyo único contenido es Storybook en el dispositivo.
 | Archivo | Qué hace |
 |---|---|
 | `metro.config.js` | `withUniwindConfig(withStorybook(getDefaultConfig(__dirname), …), { cssEntryFile })` (Uniwind por fuera) |
-| `src/global.css` | `@import 'tailwindcss'; @import 'uniwind'; @import '@yesid/tokens/native.css'; @source …` |
+| `src/global.css` | `@import 'tailwindcss'; @import 'uniwind'; @import '@chroma-yesid/tokens/native.css'; @source …` |
 | `.rnstorybook/main.ts` | Mismo specifier que web pero con glob `!(*.web)` |
 | `.rnstorybook/preview.tsx` | Decorador con `className` de Uniwind |
-| `.rnstorybook/storybook.requires.ts` | **Generado** (`pnpm --filter @yesid/storybook-native storybook-generate`) |
+| `.rnstorybook/storybook.requires.ts` | **Generado** (`pnpm --filter @chroma-yesid/storybook-native storybook-generate`) |
 | `index.ts` | Importa el CSS y registra Storybook como raíz |
 
 ```sh
-pnpm --filter @yesid/storybook-native storybook-generate   # tras agregar/quitar stories
+pnpm --filter @chroma-yesid/storybook-native storybook-generate   # tras agregar/quitar stories
 cd apps/storybook-native && npx expo export --platform ios  # prueba de humo sin dispositivo
 pnpm storybook:native                                       # abrir en simulador (pulsar "i")
 ```
@@ -221,7 +221,7 @@ await user.press(screen.getByRole('button', { name: 'Button' }));
 ```
 
 ```sh
-pnpm --filter @yesid/storybook-native test:native
+pnpm --filter @chroma-yesid/storybook-native test:native
 ```
 
 ---
@@ -230,15 +230,30 @@ pnpm --filter @yesid/storybook-native test:native
 
 - **`tsdown.config.ts`**: dos builds (`dist/web`, `dist/native`), cada uno resolviendo su sufijo primero y **quitando el sufijo del nombre de salida** (`entryFileNames`). `unbundle: true` conserva `"use client"` por archivo.
 - **`package.json` → `exports`**: la condición `react-native` apunta a `dist/native`; `default` a `dist/web`; más `./web.css` y `./native.css`.
-- **CSS publicable:** `@yesid/ui/web.css` (tokens + `@source` del paquete) y `@yesid/ui/native.css` (solo `@source`; la app importa los tokens ella misma, porque Uniwind no descubre temas en imports anidados).
+- **CSS publicable:** `@chroma-yesid/ui/web.css` (tokens + `@source` del paquete) y `@chroma-yesid/ui/native.css` (solo `@source`; la app importa los tokens ella misma, porque Uniwind no descubre temas en imports anidados).
 
 ```sh
-pnpm --filter @yesid/ui build
+pnpm --filter @chroma-yesid/ui build
 cd packages/ui && npx publint && npx attw --pack . --profile esm-only
-pnpm --filter @yesid/ui publish --dry-run --no-git-checks
+pnpm --filter @chroma-yesid/ui publish --dry-run --no-git-checks
 ```
 
 **Apps consumidoras** (`examples/`): `next-app` (Server Components, `next-themes`), `vite-app`, `expo-app`. Comprueban que web no trae `react-native` (`grep` por imports en `.next/static`) y que Expo toma `dist/native`.
+
+---
+
+## 7b. Usar el sistema en otros proyectos (¿hace falta npm?)
+
+**No, publicar en npm no es obligatorio.** Es la vía estándar y la más cómoda, pero hay alternativas:
+
+| Vía | Cuándo | Cómo | Pegas |
+|---|---|---|---|
+| **npm público** (`@chroma-yesid/ui` y `/tokens`) | Quieres `pnpm add @chroma-yesid/ui` en cualquier proyecto y máquina, con versiones | Crear la organización `chroma-yesid` en npmjs.com, publicar y configurar *trusted publishing* | El código queda público (el repo ya lo es) |
+| **Enlace local** | Desarrollo en tu máquina, cambios en vivo | `pnpm build` aquí y en el otro proyecto `pnpm add link:../design-system/packages/ui` (y `tokens`) | Solo funciona en tu equipo; hay que reconstruir `dist` |
+| **Tarball** (`pnpm pack`) | Probar el paquete "como si estuviera publicado" antes de publicar | `pnpm --filter @chroma-yesid/ui pack` y `pnpm add ./chroma-yesid-ui-0.1.0.tgz` (también el de `tokens`) | Manual, sin versiones automáticas |
+| **GitHub Packages** | Privado dentro de tu cuenta/organización | Publicar en `npm.pkg.github.com` | El scope debe coincidir con el dueño en GitHub (aquí sería `@yesidcarrillo26`, no `@chroma-yesid`, salvo que exista una organización de GitHub con ese nombre) |
+
+Recomendación: **tarball o enlace local para probar ya**, npm público cuando quieras usarlo de verdad en proyectos reales.
 
 ---
 
@@ -262,8 +277,8 @@ pnpm --filter @yesid/ui publish --dry-run --no-git-checks
 
 ```sh
 npx msw init public --no-save        # genera mockServiceWorker.js
-pnpm --filter @yesid/example-taskbox storybook   # :6007  (con el DS en :6006 se ve compuesto)
-pnpm --filter @yesid/example-taskbox test:storybook
+pnpm --filter @chroma-yesid/example-taskbox storybook   # :6007  (con el DS en :6006 se ve compuesto)
+pnpm --filter @chroma-yesid/example-taskbox test:storybook
 ```
 
 ---
@@ -277,9 +292,9 @@ Un tercer Storybook (`@storybook/react-native-web-vite`, puerto 6008) que render
 - `refs` en `apps/storybook-web/.storybook/main.ts` lo muestra dentro del Storybook web (en desarrollo, `http://localhost:6008`).
 
 ```sh
-pnpm --filter @yesid/storybook-native-web storybook         # :6008
-pnpm --filter @yesid/storybook-native-web build-storybook
-pnpm --filter @yesid/storybook-native-web check:bundle      # ¿solo implementaciones native?
+pnpm --filter @chroma-yesid/storybook-native-web storybook         # :6008
+pnpm --filter @chroma-yesid/storybook-native-web build-storybook
+pnpm --filter @chroma-yesid/storybook-native-web check:bundle      # ¿solo implementaciones native?
 ```
 
 ---
@@ -304,7 +319,7 @@ pnpm --filter @yesid/storybook-native-web check:bundle      # ¿solo implementac
 
 ```sh
 pnpm install                                         # dependencias
-pnpm --filter @yesid/tokens build                    # regenerar tokens
+pnpm --filter @chroma-yesid/tokens build                    # regenerar tokens
 pnpm storybook                                       # Storybook web :6006
 pnpm storybook:native                                # Storybook on-device
 pnpm lint                                            # oxlint + fronteras
@@ -321,7 +336,7 @@ pnpm knip                                            # dependencias y exports si
 2. `Foo.web.tsx` y `Foo.native.tsx`; `index.ts`; exportar en `src/index.ts`.
 3. `Foo.stories.tsx` (estados) y `Foo.web.stories.tsx` (teclado/DOM con `play`).
 4. `Foo.native.test.tsx` (portable stories).
-5. `pnpm --filter @yesid/storybook-native storybook-generate`.
+5. `pnpm --filter @chroma-yesid/storybook-native storybook-generate`.
 6. `pnpm lint && pnpm turbo run typecheck test:storybook test:native`.
 7. `pnpm knip`.
 8. `pnpm changeset` y commit con el formato `:sparkles: feat(ui): …`.

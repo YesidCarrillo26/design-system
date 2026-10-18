@@ -33,7 +33,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
         if: env.HAS_TOKEN == 'true'
 
-      - run: pnpm --filter @yesid/tokens build
+      - run: pnpm --filter @chroma-yesid/tokens build
         if: env.HAS_TOKEN == 'true'
 
       - uses: chromaui/action@e50abd573c8a789526f165fec06137a7c21d7299 # latest

@@ -52,7 +52,7 @@ Quieres un sistema de componentes reutilizable en tus proyectos personales (web 
 3. **Tailwind v4 en web + Uniwind en native.** Ambos usan el mismo tema generado desde los tokens, y las variantes se comparten con `tailwind-variants`.
 4. **pnpm workspaces + Turborepo.** Distribución: primero paquetes npm con Changesets; después, un registro estilo shadcn.
 
-**Alcance de la ejecución:** al aprobar este plan ejecuto la **Fase 0 y la Fase 1** (el esqueleto que resuelve los riesgos técnicos). Cada fase siguiente se revisa y aprueba por separado. El repo nuevo vive en `/Users/yesidcarrillo/Documents/Personal/Proyects/design-system`, con scope npm `@yesid`, que es provisional: confirmo que esté libre en la Fase 0. Las carpetas `References/` no se tocan.
+**Alcance de la ejecución:** al aprobar este plan ejecuto la **Fase 0 y la Fase 1** (el esqueleto que resuelve los riesgos técnicos). Cada fase siguiente se revisa y aprueba por separado. El repo nuevo vive en `/Users/yesidcarrillo/Documents/Personal/Proyects/design-system`, con scope npm `@chroma-yesid`, que es provisional: confirmo que esté libre en la Fase 0. Las carpetas `References/` no se tocan.
 
 ---
 
@@ -69,9 +69,9 @@ design-system/
 │  │  └─ .rnstorybook/  src/global.css  metro.config.js  jest.config.js
 │  └─ storybook-native-web/ (Fase 8) implementaciones nativas en el navegador vía RNW
 ├─ packages/
-│  ├─ tokens/   @yesid/tokens  tokens/{primitives,semantic/{light,dark}}/*.json (DTCG) + sd/build.ts
-│  └─ ui/       @yesid/ui      src/{components,patterns,lib}  styles/{web,native}.css  tsdown.config.ts
-├─ tooling/typescript/        @yesid/tsconfig: base / web / native / next / vite
+│  ├─ tokens/   @chroma-yesid/tokens  tokens/{primitives,semantic/{light,dark}}/*.json (DTCG) + sd/build.ts
+│  └─ ui/       @chroma-yesid/ui      src/{components,patterns,lib}  styles/{web,native}.css  tsdown.config.ts
+├─ tooling/typescript/        @chroma-yesid/tsconfig: base / web / native / next / vite
 ├─ examples/  next-app  vite-app  expo-app  taskbox
 ├─ docs/adr/  docs/learning/  (ADRs + bitácora de aprendizaje por fase)
 ├─ .changeset/  .github/workflows/{ci,chromatic,release,storybook-deploy}.yml
@@ -85,7 +85,7 @@ design-system/
 
 **`turbo.json`**
 - `build` depende de `^build`.
-- `storybook`, `build-storybook`, `typecheck`, `test:storybook` y `test:native` dependen solo de `@yesid/tokens#build`, porque los Storybooks leen `packages/ui/src` directamente.
+- `storybook`, `build-storybook`, `typecheck`, `test:storybook` y `test:native` dependen solo de `@chroma-yesid/tokens#build`, porque los Storybooks leen `packages/ui/src` directamente.
 - Los `examples/*` dependen de `^build`: consumen el `dist` a propósito.
 
 **TypeScript con `moduleSuffixes` y una configuración raíz por referencias (solution-style)**
@@ -163,8 +163,8 @@ Un generador `turbo gen component` crea todo el andamiaje.
 
 **Escaneo de clases (`@source`)**
 - Cada Storybook declara `@source` hacia `packages/ui/src` y excluye los archivos de la otra plataforma con `@source not`.
-- El paquete publicado expone `@yesid/ui/web.css` y `@yesid/ui/native.css`, que importan los tokens y declaran `@source` sobre su propio `dist`. El consumidor solo escribe `@import '@yesid/ui/web.css'`.
-- Si Uniwind no respeta un `@source` anidado, el fallback documentado es que el consumidor escriba el `@source` hacia `node_modules/@yesid/ui/dist/native`.
+- El paquete publicado expone `@chroma-yesid/ui/web.css` y `@chroma-yesid/ui/native.css`, que importan los tokens y declaran `@source` sobre su propio `dist`. El consumidor solo escribe `@import '@chroma-yesid/ui/web.css'`.
+- Si Uniwind no respeta un `@source` anidado, el fallback documentado es que el consumidor escriba el `@source` hacia `node_modules/@chroma-yesid/ui/dist/native`.
 
 ---
 
@@ -193,7 +193,7 @@ Un generador `turbo gen component` crea todo el andamiaje.
   - `!dev` para stories que solo son de test; `!test` para stories pesadas de documentación.
   - `web-only` / `native-only`.
   - `status:experimental|beta|stable|deprecated`, para filtrar en el sidebar.
-- **Manager con tu marca:** `manager.ts` + `theme.ts` usando `create()` de `storybook/theming`, con valores de `@yesid/tokens`.
+- **Manager con tu marca:** `manager.ts` + `theme.ts` usando `create()` de `storybook/theming`, con valores de `@chroma-yesid/tokens`.
 - **Documentación MDX:**
   - Foundations: `ColorPalette`, `Typeset`, `IconGallery` y un `TokenTable` propio, alimentados por `tokens.json`.
   - Guidelines: accesibilidad, reglas multiplataforma, theming y contribución (la DoD).
@@ -308,15 +308,15 @@ Un generador `turbo gen component` crea todo el andamiaje.
 
 **Fases 0 y 1, lo que ejecuto tras aprobar:**
 1. `pnpm install && pnpm lint && pnpm turbo run typecheck` en verde.
-2. Detector de paridad: cambio a propósito una prop en `Button.native.tsx` y `pnpm --filter @yesid/ui typecheck` debe fallar; luego lo revierto.
-3. `pnpm --filter @yesid/storybook-web storybook`. En `localhost:6006/index.json` no puede aparecer ningún `importPath` con `.native`.
+2. Detector de paridad: cambio a propósito una prop en `Button.native.tsx` y `pnpm --filter @chroma-yesid/ui typecheck` debe fallar; luego lo revierto.
+3. `pnpm --filter @chroma-yesid/storybook-web storybook`. En `localhost:6006/index.json` no puede aparecer ningún `importPath` con `.native`.
 4. Botón con estilos en tema claro y oscuro (toolbar). Lo capturo con un navegador automatizado.
-5. `pnpm --filter @yesid/storybook-web test:storybook` pasa, con a11y incluido.
+5. `pnpm --filter @chroma-yesid/storybook-web test:storybook` pasa, con a11y incluido.
 6. `cd apps/storybook-native && EXPO_PUBLIC_STORYBOOK_ENABLED=true npx expo export -p ios` termina sin errores.
-7. `pnpm --filter @yesid/storybook-native test:native` pasa (portable stories).
-8. **Lo verificas tú en el simulador:** abrir la app con `pnpm --filter @yesid/storybook-native ios`. El Button debe verse con estilos; si sale sin estilos, el `@source` o Uniwind están mal.
+7. `pnpm --filter @chroma-yesid/storybook-native test:native` pasa (portable stories).
+8. **Lo verificas tú en el simulador:** abrir la app con `pnpm --filter @chroma-yesid/storybook-native ios`. El Button debe verse con estilos; si sale sin estilos, el `@source` o Uniwind están mal.
 
-**Fases siguientes:** cada una trae sus comandos de verificación. Por ejemplo, `publint`/`attw`, `next build` + grep, el check de Chromatic en el PR y `npm view @yesid/ui dist.attestations`.
+**Fases siguientes:** cada una trae sus comandos de verificación. Por ejemplo, `publint`/`attw`, `next build` + grep, el check de Chromatic en el PR y `npm view @chroma-yesid/ui dist.attestations`.
 
 ## Archivos críticos
 

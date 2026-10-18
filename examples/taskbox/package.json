@@ -1,5 +1,5 @@
 {
-  "name": "@yesid/example-taskbox",
+  "name": "@chroma-yesid/example-taskbox",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "catalog:",
-    "@yesid/ui": "workspace:*",
+    "@chroma-yesid/ui": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-redux": "catalog:"
@@ -29,7 +29,7 @@
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",
     "@vitest/browser-playwright": "catalog:",
-    "@yesid/tsconfig": "workspace:*",
+    "@chroma-yesid/tsconfig": "workspace:*",
     "msw": "catalog:",
     "msw-storybook-addon": "catalog:",
     "playwright": "catalog:",

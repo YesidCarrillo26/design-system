@@ -1,4 +1,4 @@
-import tokensJson from '@yesid/tokens/tokens.json';
+import tokensJson from '@chroma-yesid/tokens/tokens.json';
 
 export interface DocToken {
   name: string;

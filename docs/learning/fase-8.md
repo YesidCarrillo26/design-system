@@ -22,7 +22,7 @@
 | Cambio de tema | fondo de página `#fff` → `#09090b` |
 | Se cargó la implementación native | el bundle contiene `active:opacity-80` y **no** contiene `hover:opacity-90`, `focus-visible:ring-2` ni `@base-ui` |
 
-La última comprobación es el script `scripts/check-bundle.mjs` (`pnpm --filter @yesid/storybook-native-web check:bundle`), ejecutado en CI. Se probó que **falla** cuando falta una cadena nativa.
+La última comprobación es el script `scripts/check-bundle.mjs` (`pnpm --filter @chroma-yesid/storybook-native-web check:bundle`), ejecutado en CI. Se probó que **falla** cuando falta una cadena nativa.
 
 ## Lecciones
 

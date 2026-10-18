@@ -13,7 +13,7 @@ separadas por plataforma que comparten todo lo que no es render.
 
 Cada componente tiene `X.web.tsx` (React DOM puro) y `X.native.tsx` (React Native). Se comparten:
 
-- tokens (`@yesid/tokens`),
+- tokens (`@chroma-yesid/tokens`),
 - el contrato de props (`X.types.ts`),
 - las variantes (`x.variants.ts`, con `tailwind-variants`),
 - la lógica (`useX.ts`),

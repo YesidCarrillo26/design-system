@@ -1,5 +1,5 @@
 {
-  "extends": "@yesid/tsconfig/base.json",
+  "extends": "@chroma-yesid/tsconfig/base.json",
   "compilerOptions": {
     "types": ["node"]
   },
