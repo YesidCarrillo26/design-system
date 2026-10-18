@@ -1,6 +1,6 @@
 {
   "name": "@yesid/tokens",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Design tokens (DTCG) y sus salidas para Tailwind v4 (web), Uniwind (native) y TypeScript",
   "type": "module",
   "sideEffects": [
