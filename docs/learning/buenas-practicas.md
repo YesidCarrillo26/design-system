@@ -107,3 +107,9 @@ Decisiones que ya se tomaron (y por qué), en formato **"si pasa X, hazlo así"*
 
 **Si `main` está protegida**
 - Rama → PR → esperar `verify` y Chromatic → `gh pr merge --rebase`. No intentes saltarte la regla.
+
+
+**Si publicas un paquete**
+- Prueba el tarball **como consumidor** (proyecto vacío, otra versión de React) antes de publicar: `pnpm pack`, `npm install ./x.tgz` y renderiza algo. Los linters de paquete no ven problemas de peers ni de instalación.
+- Los `peerDependencies` son rangos; el catálogo (`catalog:`) fija versiones exactas solo para desarrollo.
+- Antes de publicar a mano: `turbo run build --force` y `pnpm publish --dry-run`. Cada versión publicada es definitiva (el número no se reutiliza).

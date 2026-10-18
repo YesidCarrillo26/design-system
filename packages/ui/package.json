@@ -21,7 +21,8 @@
   },
   "scripts": {
     "build": "tsdown",
-    "typecheck": "tsc -b"
+    "typecheck": "tsc -b",
+    "check:peers": "node scripts/check-peers.mjs"
   },
   "dependencies": {
     "@base-ui/react": "catalog:",
@@ -30,9 +31,9 @@
     "tailwind-variants": "catalog:"
   },
   "peerDependencies": {
-    "react": "catalog:",
-    "react-native": "catalog:",
-    "react-native-svg": "catalog:"
+    "react": ">=19.0.0 <20",
+    "react-native": ">=0.88.0 <1",
+    "react-native-svg": ">=15.0.0 <16"
   },
   "peerDependenciesMeta": {
     "react-native": {

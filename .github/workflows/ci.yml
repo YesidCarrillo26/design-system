@@ -43,6 +43,7 @@ jobs:
         working-directory: packages/ui
         run: |
           npx publint
+          pnpm check:peers
           npx attw --pack . --profile esm-only --exclude-entrypoints web.css native.css
 
       - name: Tests de Storybook (navegador)
