@@ -1,0 +1,53 @@
+name: Tarea para un agente
+description: Una tarea acotada que un agente (Claude, Codex…) pueda hacer solo y entregar como PR.
+title: '[tarea] '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Una tarea por issue. Este formulario **no** activa a ningún agente: cuando el issue esté
+        listo, ponle la etiqueta del agente (`claude`) y empieza.
+
+        Cuanto más verificables sean los criterios, mejor sale el PR. Si la tarea necesita una
+        cuenta, 2FA o un dispositivo, no es para un agente: usa la etiqueta `needs-human`.
+
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+      description: Qué debe existir o cambiar al terminar, y por qué.
+    validations:
+      required: true
+
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Criterios de aceptación
+      description: Cosas que se puedan comprobar (un test, una story, una página de docs, un comando).
+      value: '- [ ] '
+    validations:
+      required: true
+
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto y archivos
+      description: Rutas, componentes, ADR o secciones de `docs/pendientes.md` relacionados.
+
+  - type: textarea
+    id: fuera-de-alcance
+    attributes:
+      label: Fuera de alcance
+      description: Lo que el agente no debe tocar.
+
+  - type: dropdown
+    id: plataforma
+    attributes:
+      label: Plataforma
+      options:
+        - Web
+        - Native
+        - Ambas
+        - No aplica
+    validations:
+      required: true

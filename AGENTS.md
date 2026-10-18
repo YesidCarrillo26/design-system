@@ -59,3 +59,32 @@ Al trabajar con componentes de este sistema, **consúltalo antes de usar una pro
 - `docs-list` lista los componentes; `docs-show` muestra las props y los ejemplos de uno.
 - `get-storybook-story-instructions` da las convenciones vigentes para crear o actualizar stories.
 - Verifica tu trabajo con `test-run`.
+
+## Modo remoto (agentes en CI)
+
+Aplica cuando trabajas en un workflow de GitHub (`CI=true`), sin una persona delante: una tarea llega
+como un issue (etiqueta del agente) o como un comentario `@agente` en un issue o PR. Reemplaza lo que
+diga el resto del documento donde choque (por ejemplo, el último paso del flujo de cambios: **tú no
+fusionas**).
+
+- **Entorno:** ya están hechos `pnpm install` y la build de tokens. El MCP de Storybook no está
+  disponible: lee las props en `*.types.ts` y en las stories. Si la rama cambia `pnpm-lock.yaml`,
+  corre `pnpm install` otra vez.
+- **Rama:** el workflow ya la creó (`<agente>/issue-N-…`). Trabaja en ella, no crees otra. Si te piden
+  rebasar: `git rebase origin/main` y `git push --force-with-lease`, solo en tu propia rama.
+- **Alcance:** haz solo lo que pide el issue y sus criterios de aceptación. Si el trabajo se amplía,
+  deja el resto como pendiente en `docs/pendientes.md` o en el PR; no lo hagas.
+- **Antes de empujar** (lo mismo que exige `verify`): `pnpm lint`, `pnpm knip`,
+  `pnpm turbo run typecheck` y los tests de lo que tocaste (`test:unit`, `test:storybook`,
+  `test:native`). Si tocaste `packages/ui`: `npx publint`, `pnpm check:peers` y `npx attw` (ver `ci.yml`).
+  No empujes en rojo; si no logras ponerlo verde, dilo en el PR.
+- **Commits:** `:emoji: tipo(alcance): descripción`, en español, como el resto del repo.
+- **Changeset:** uno si cambia algún paquete publicado.
+- **Documentación:** entrada en `docs/learning/fase-9.md`, marca el ítem en `docs/pendientes.md` y,
+  si resolviste algo no obvio, agrégalo a `docs/learning/errores-y-soluciones.md`.
+- **PR:** ábrelo tú con `gh pr create`. Título con el formato de los commits; cuerpo con *Qué*,
+  *Cómo se verificó* y *Pendiente para una persona*, y `Closes #N`. Nunca `gh pr merge`.
+- **Límites duros:** no publiques en npm, no toques `.github/workflows/` y no pidas ni escribas
+  secretos. Esos cambios los hace una persona.
+- **Si te bloquea algo que no es de código** (una cuenta, 2FA, un dispositivo, una decisión de diseño
+  ambigua): pregunta en el issue y detente, no adivines.
