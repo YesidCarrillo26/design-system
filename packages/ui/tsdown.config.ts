@@ -10,6 +10,7 @@ function build(platform: 'web' | 'native'): UserConfig {
       'src/**/*.{ts,tsx}',
       '!src/**/*.stories.tsx',
       '!src/**/*.test.tsx',
+      '!src/**/*.example.tsx',
       '!src/**/*.d.ts',
       `!src/**/*.${other}.*`,
     ],
