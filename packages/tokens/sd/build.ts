@@ -131,6 +131,26 @@ ${lines(lightColors.map((t) => `  --ds-${colorName(t)}: ${t.value};`))}
   color-scheme: dark;
 ${lines(darkColors.map((t) => `  --ds-${colorName(t)}: ${t.value};`))}
 }
+
+/* Movimiento reducido: la preferencia del sistema gana a cualquier animación o transición,
+   también a las de componentes de terceros. Las duraciones no llegan a 0 para que los eventos
+   de fin de transición (transitionend) sigan disparándose. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ds-duration-fast: 1ms;
+    --ds-duration-base: 1ms;
+    --ds-duration-slow: 1ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 `;
 
 // ── native.css (Uniwind) ─────────────────────────────────────────────────────

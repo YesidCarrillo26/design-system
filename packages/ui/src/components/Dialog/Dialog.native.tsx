@@ -1,4 +1,5 @@
-import { Modal, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
+import { Modal } from '../../lib/Modal.native';
 import { tv } from '../../lib/tv';
 import { Icon } from '../Icon';
 import type { DialogBaseProps } from './Dialog.types';

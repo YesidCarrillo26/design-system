@@ -86,7 +86,7 @@
     },
     // Utilidades exclusivas de una plataforma dentro de lib/ (p. ej. useTokenColor.native.ts).
     {
-      "files": ["packages/ui/src/lib/**/*.native.ts", "packages/ui/src/lib/**/*.native.tsx"],
+      "files": ["packages/ui/src/lib/**/*.native.ts", "packages/ui/src/lib/**/*.native.tsx", "packages/ui/src/lib/**/*.native.test.tsx"],
       "rules": {
         "no-restricted-imports": [
           "error",

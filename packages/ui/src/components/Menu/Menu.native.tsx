@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Modal, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
+import { Modal } from '../../lib/Modal.native';
 import type { MenuBaseProps } from './Menu.types';
 import { menuStyles } from './menu.variants';
 

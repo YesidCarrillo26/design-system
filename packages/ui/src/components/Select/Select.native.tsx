@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Modal, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
+import { Modal } from '../../lib/Modal.native';
 import { useControllableState } from '../../lib/useControllableState';
 import { Field } from '../Field';
 import { Icon } from '../Icon';
