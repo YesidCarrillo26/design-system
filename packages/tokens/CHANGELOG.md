@@ -1,5 +1,11 @@
 # @chroma-yesid/tokens
 
+## 0.1.1
+
+### Patch Changes
+
+- bf640c0: Los paquetes pasan a llamarse `@chroma-yesid/tokens` y `@chroma-yesid/ui` (antes `@yesid/*`). Aún no se habían publicado.
+
 ## 0.1.0
 
 ### Minor Changes
