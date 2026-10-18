@@ -8,6 +8,7 @@ export * from './components/Heading';
 export * from './components/Icon';
 export * from './components/IconButton';
 export * from './components/Link';
+export * from './components/Skeleton';
 export * from './components/Spinner';
 export * from './components/Stack';
 export * from './components/Text';
