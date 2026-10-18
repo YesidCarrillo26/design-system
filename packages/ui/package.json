@@ -1,6 +1,6 @@
 {
   "name": "@chroma-yesid/ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Componentes del design system para web (React DOM) y native (React Native)",
   "type": "module",
   "sideEffects": [
