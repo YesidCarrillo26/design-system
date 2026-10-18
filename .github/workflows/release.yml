@@ -33,8 +33,8 @@ jobs:
       # Requiere el scope npm y un trusted publisher (o NPM_TOKEN) configurados.
       - uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v1
         with:
-          publish: pnpm release
-          version: pnpm changeset version
+          publish-script: pnpm release
+          version-script: pnpm changeset version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'true'
