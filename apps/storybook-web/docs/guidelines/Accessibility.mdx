@@ -1,0 +1,31 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guidelines/Accessibility" />
+
+# Accesibilidad
+
+La accesibilidad no es una fase final: cada componente la cumple desde su contrato.
+
+## Cómo se verifica
+
+- **a11y en modo `error`** (`parameters.a11y.test: 'error'` en `preview.tsx`): una violación de axe hace fallar el test de la story. Solo se baja a `'todo'` de forma temporal y con una nota.
+- **Tema claro y oscuro:** `pnpm --filter @yesid/storybook-web test:storybook` corre la suite en ambos temas. El contraste de los tokens se comprueba así, no a ojo.
+- **Teclado y foco:** se prueban en `X.web.stories.tsx` con `play` (Tab, Enter, Espacio, Escape, flechas).
+- **Native:** `accessibilityRole`, `accessibilityState` y `accessibilityLabel` se prueban con Jest y React Native Testing Library; los overlays además deben revisarse con VoiceOver/TalkBack en un dispositivo.
+
+## Reglas
+
+1. **Nombre accesible siempre.** Un control solo con icono recibe `aria-label` (web) y `accessibilityLabel` (native).
+2. **Rol y estado.** Se usa el elemento semántico en web (`<button>`, no `<div onClick>`); en native, el `accessibilityRole` equivalente.
+3. **Foco visible.** Todo elemento interactivo muestra el anillo `ring` al recibir foco de teclado. No se quita el contorno sin reemplazo.
+4. **Contraste.** Solo se usan pares de tokens ya validados (`primary` sobre `primary-foreground`, `foreground` sobre `background`). No se combinan colores sueltos.
+5. **Objetivo táctil.** En native el objetivo recomendado es de 44 pt. Los tamaños `md` y `lg` lo cumplen; `sm` (36) es la excepción y debe usarse solo en interfaces densas, con espacio alrededor (WCAG 2.2 pide mínimo 24 px).
+6. **Overlays.** `Dialog`, `Sheet`, `Menu` y `Popover` atrapan el foco, se cierran con Escape (web) y devuelven el foco al disparador. En native usan `accessibilityViewIsModal`.
+7. **Movimiento.** Ninguna información se transmite solo con animación. Hoy solo `Spinner` respeta `prefers-reduced-motion`; hacerlo global está pendiente (ver `docs/pendientes.md`).
+8. **No depender del color.** Los estados de error o éxito llevan además texto o icono.
+
+## Qué hacer cuando axe se queja
+
+1. Lee la regla en el panel *Accessibility* de la story.
+2. Corrige el componente o el uso en la story, no desactives la regla.
+3. Si es un falso positivo del entorno de pruebas, documenta el motivo en `docs/learning/errores-y-soluciones.md` antes de excluirla.

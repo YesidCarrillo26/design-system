@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guidelines/Cross-platform rules" />
+
+# Reglas multiplataforma
+
+Un componente tiene un contrato, dos implementaciones. Estas reglas lo hacen mantenible; el lint (`pnpm lint`) las hace cumplir.
+
+## Archivos
+
+| Archivo | Puede importar |
+|---|---|
+| `X.web.tsx` | `react`, `react-dom`, Base UI. **Nunca** `react-native` ni `uniwind`. |
+| `X.native.tsx` | `react`, `react-native`, `uniwind`. **Nunca** `react-dom`, `window` ni `document`. |
+| `*.types.ts`, `*.variants.ts`, `use*.ts`, `X.stories.tsx` | Nada específico de una plataforma. |
+| `X.web.stories.tsx` | Todo lo web, incluidos los `play`. |
+
+- No existe un `X.tsx` sin sufijo junto a los archivos de plataforma.
+- En stories compartidas solo se importa `fn` de `storybook/test`.
+
+## Estilos
+
+- Solo clases semánticas de los tokens: `bg-primary`, `text-foreground`, `text-body-md`. No hay paleta de Tailwind por defecto.
+- Las variantes compartidas usan únicamente clases válidas en ambas plataformas: sin `hover:` ni `grid`. Lo específico se agrega en cada implementación.
+- **Clases literales.** Tailwind y Uniwind escanean el código: nunca `bg-${x}`. Usa un mapa de nombres completos.
+
+## Eventos y props
+
+- La interacción se llama `onPress` en las dos plataformas (la web lo traduce a `onClick`).
+- Una prop que solo existe en una plataforma se documenta en su JSDoc indicando cuál.
+
+## Cuando difieren
+
+Si la plataforma no ofrece lo mismo, se documenta en [Diferencias entre plataformas](?path=/docs/guidelines-platform-differences--docs) y la story declara `parameters.platforms`.

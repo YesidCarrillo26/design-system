@@ -1,0 +1,46 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guidelines/Contributing" />
+
+# Contribuir
+
+## Antes de empezar
+
+1. `pnpm install && pnpm --filter @yesid/tokens build`
+2. Lee `docs/learning/errores-y-soluciones.md` y `docs/learning/buenas-practicas.md`.
+3. Si el cambio es estructural, revisa los ADR en `docs/adr`.
+
+## Definition of Done de un componente
+
+Un componente nuevo no se da por terminado hasta cumplir **todo**:
+
+1. **Contrato** con JSDoc en `X.types.ts` (alimenta los autodocs).
+2. **Variantes compartidas** (`x.variants.ts`) y las dos implementaciones (`.web.tsx`, `.native.tsx`).
+3. **Stories compartidas** que cubren todos los estados.
+4. **Tests de interacción web**: clic, teclado, `disabled`, foco.
+5. **a11y sin errores** en tema claro y oscuro.
+6. **Test Jest native** con las stories portables.
+7. **Se ve bien en un dispositivo o simulador.**
+8. **Baselines de Chromatic** aceptados.
+9. **`pnpm turbo run typecheck` y `pnpm lint`** en verde.
+10. **Documentación** (MDX solo en componentes insignia).
+11. **`parameters.platforms`** con el estado por plataforma.
+12. **Un changeset** (`pnpm changeset`).
+
+## Antes de abrir el PR
+
+```bash
+pnpm lint && pnpm turbo run build typecheck test:unit test:storybook test:native
+```
+
+## Commits
+
+Formato `:emoji: tipo(alcance): descripción`, por ejemplo `:sparkles: feat(button): agrega la variante ghost`.
+
+## Tokens
+
+No edites `packages/tokens/dist`. Cambia los JSON en `packages/tokens/tokens` y reconstruye.
+
+## Secretos
+
+Nunca en el repo ni en `package.json`. Los tokens de Chromatic y npm viven solo en GitHub secrets.
