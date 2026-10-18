@@ -48,6 +48,7 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - **React:** la versión la dicta Expo SDK (ver `catalog:` en `pnpm-workspace.yaml`). No la subas sola.
 - **Cada componente nuevo** cumple la Definition of Done del plan (contrato, variantes, stories
   compartidas, tests, a11y sin errores, docs y un changeset).
+- **Flujo de cambios:** `main` está protegida (exige PR y el check `verify`; solo `--rebase` o squash). Rama → PR → `gh pr merge --rebase`.
 - **Secretos:** nunca en el repo. Los tokens de Chromatic y npm van solo en GitHub secrets. 
 
 ## Storybook MCP (agentes)

@@ -98,3 +98,12 @@ Decisiones que ya se tomaron (y por qué), en formato **"si pasa X, hazlo así"*
 
 **Si guardas un token o secreto**
 - Solo en GitHub secrets o variables de entorno; nunca en `package.json`, scripts ni docs. Si se escribió en un archivo, regenerarlo aunque no se haya hecho commit.
+
+**Si un componente acepta contenido personalizado (`render`, `children`)**
+- En native, los textos deben ir en `Text`: envuelve `string`/`number` y deja pasar los elementos. Escribe una story con un `render` que devuelva texto plano, porque en web no revela el problema.
+
+**Si necesitas semántica que React Native no ofrece** (tablas, `aria-current`)
+- Usa el `role`/`accessibilityState` más cercano, documenta la limitación en *Diferencias entre plataformas* y no fuerces `accessible` en contenedores.
+
+**Si `main` está protegida**
+- Rama → PR → esperar `verify` y Chromatic → `gh pr merge --rebase`. No intentes saltarte la regla.

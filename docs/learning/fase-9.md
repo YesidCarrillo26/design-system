@@ -30,3 +30,22 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 - **Verificación:** `web-css.test.ts` (tokens) y `Modal.native.test.tsx`. Se comprobó que el test native **falla** si se quita la condición.
 - ⚠️ Lección de lint: la excepción de `lib/**` para importar `react-native` cubría `*.native.ts(x)` pero no `*.native.test.tsx`; se amplió en `.oxlintrc.json`.
 - Lo que sigue sin cubrir: `Toast` y los `Switch`/`Accordion` de native no animan hoy; si se agregan animaciones con Reanimated hay que respetar `useReducedMotion`.
+
+## 2026-10-18 — `main` protegida y flujo por PR
+
+- Al intentar subir a `main`: *push declined due to repository rule violations — Required status check "verify" is expected*. Se activó una regla en el repo; desde entonces: rama → PR → `verify` + Chromatic → merge con `--rebase` (el repo no admite merge commits). El PR #3 fue el primero por este camino.
+- Tras un rebase-merge los hashes de `main` local difieren de los remotos aunque el árbol sea idéntico; se alinea con `git reset --mixed origin/main` (no toca el directorio de trabajo).
+
+## 2026-10-18 — `Pagination` y `Table`
+
+**`Pagination`**
+- Contrato: `pageCount`, `page`/`defaultPage`, `onPageChange`, `siblingCount`, `label`. Controlado o no (con `useControllableState`).
+- La lógica es compartida (`usePagination.ts`): `getPageItems` devuelve siempre **7 elementos** cuando hay muchas páginas (primera, última, actual con vecinas y "…"), para que el control no cambie de ancho. Probada con valores fuera de rango.
+- Se compone con `Button`. Web: `<nav>` + `aria-current="page"`, botones `sm`. Native: `role="navigation"`, página actual con `accessibilityState.selected` (no existe `aria-current`), botones `md` por el área táctil de 44.
+
+**`Table`** (solo lectura)
+- API por datos (`columns` + `rows` + `getRowKey` + `caption`), como `Tabs`/`Select`; `render` por columna para celdas personalizadas y `align: 'end'` para cifras.
+- Web: `<table>` real con `<caption>` y `scope="col"`, dentro de un contenedor con scroll horizontal. Native: `View`s con `role` de tabla, columnas de igual ancho.
+- ⚠️ Un `render` que devuelve texto plano rompía solo en native (*Text strings must be rendered within a <Text>*): ahora se envuelve en `Text`. Lo detectó el test native, no la suite web.
+- ⚠️ En native los `role` de tabla son metadatos (un `View` no es elemento de accesibilidad salvo que sea `accessible`). Se documentó en *Diferencias entre plataformas* y los tests cuentan la estructura en `screen.toJSON()` en vez de usar `getByRole`.
+- Fuera de alcance por ahora: orden, selección de filas, paginación integrada, virtualización.
