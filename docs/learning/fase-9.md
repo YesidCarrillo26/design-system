@@ -108,3 +108,8 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 - Arreglo (`0.1.1`): rangos `>=19 <20`, `>=0.88 <1`, `>=15 <16`, y `packages/ui/scripts/check-peers.mjs` (`pnpm check:peers`, paso de CI) que falla si un peer es exacto o `catalog:`. Se comprobó que falla con el `package.json` anterior y pasa con el nuevo.
 - Verificación como consumidor: proyecto vacío, `npm install` de los dos `.tgz` + `react@19.3.1`, y `renderToString` de `Pagination`, `Table`, `Skeleton` y `Button` (`nav`, `aria-current`, `<caption>` y clases semánticas presentes).
 - Una versión publicada no se puede reutilizar: `0.1.0` queda con el defecto; los consumidores deben usar `>=0.1.1`. (Se puede marcar con `npm deprecate @chroma-yesid/ui@0.1.0 "peerDependencies exactos; usa >=0.1.1"` cuando salga la `0.1.1`.)
+
+## 2026-10-18 — Release roto por una actualización de Dependabot
+
+- Tras fusionar el PR de Dependabot (#2), `changesets/action` pasó a una versión con inputs renombrados (`publish` → `publish-script`, `version` → `version-script`) y Release falló al instante, antes de llegar a npm. Se corrigió `release.yml`.
+- Lección: el CI del PR de Dependabot no ejercita `release.yml` (solo corre en `push` a `main`), así que ese tipo de ruptura no se ve hasta después de fusionar. Revisar a mano los PR de Dependabot que tocan acciones usadas solo en `main`.
