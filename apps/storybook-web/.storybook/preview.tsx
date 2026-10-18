@@ -43,7 +43,7 @@ const preview: Preview = {
     backgrounds: { disabled: true },
     options: {
       storySort: {
-        order: ['Introduction', 'Foundations', ['Colors', 'Typography', 'Spacing', 'Radius', 'Elevation', 'Motion'], 'Components', 'Patterns', '*'],
+        order: ['Introduction', 'Foundations', ['Colors', 'Typography', 'Spacing', 'Radius', 'Elevation', 'Motion'], 'Components', 'Patterns', 'Guidelines', ['Accessibility', 'Cross-platform rules', 'Platform differences', 'Contributing'], '*'],
       },
     },
   },
