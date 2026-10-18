@@ -153,3 +153,7 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 **Lo que falló:** Claude terminaba en menos de 1 s, sin turnos ni coste. Se activó `show_full_output: true` (PR #18, temporal, revertido) y el error era `CLAUDE_CODE_OAUTH_TOKEN ... contains a line break at character 91 (110 characters on 2 lines)`: el token se había pegado partido en dos líneas. Cómo guardarlo bien, en `errores-y-soluciones.md`.
 
 **Lección:** `show_full_output` publica la transcripción completa en logs que son públicos (el repo lo es); úsalo solo para un run que falla antes de hacer nada y revierte enseguida.
+
+## 2026-10-18 — Piloto del agente: encabezado de `pendientes.md` (issue #17)
+
+Primera tarea completa del agente remoto (Claude) tras corregir el token: actualizar la línea 3 de `docs/pendientes.md` para que el estado sea del 2026-10-18 (tras `0.1.2` y los agentes remotos, ADR 0004). Tarea de solo documentación, elegida a propósito para probar el ciclo issue → rama → commit → PR (`gh pr create`) sin tocar código. Sin changeset: no cambia ningún paquete.

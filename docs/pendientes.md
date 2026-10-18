@@ -1,6 +1,6 @@
 # Tareas pendientes
 
-Lista para continuar más adelante. Estado al final de la **Fase 8** (2026-10-17). Referencias: plan en `docs/plan/plan-inicial.md`, bitácoras en `docs/learning/`, errores en `docs/learning/errores-y-soluciones.md`.
+Lista para continuar más adelante. Estado al 2026-10-18, tras publicar `0.1.2` y montar los agentes remotos (ADR 0004). Referencias: plan en `docs/plan/plan-inicial.md`, bitácoras en `docs/learning/`, errores en `docs/learning/errores-y-soluciones.md`.
 
 ## 1. Acciones tuyas (bloquean cosas ya preparadas)
 
