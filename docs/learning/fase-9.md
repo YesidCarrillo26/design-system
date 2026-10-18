@@ -93,3 +93,18 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 - **Decisión:** se renombran a `X.example.tsx` y `tsdown.config.ts` los excluye (`!src/**/*.example.tsx`), igual que `*.stories.tsx` y `*.test.tsx`. Siguen junto al componente (colocation, como recomienda Storybook). No hace falta ADR: no cambia la estructura de carpetas.
 - **No se renombró** `x.variants.ts`: la minúscula es la convención de todo el repo.
 - **Se descartó** crear subcarpetas `stories/` y `__tests__/`: obligaba a cambiar los globs de Storybook, imports y reglas de oxlint en +30 componentes por un beneficio solo visual.
+
+
+## 2026-10-18 — Primera publicación a npm (`0.1.0`)
+
+**Cómo se hizo:** organización `chroma-yesid` creada en npmjs.com, `npm login` en el navegador y, desde una terminal interactiva, `pnpm publish --access public --no-git-checks` en `packages/tokens` y luego en `packages/ui` (npm pide autenticación web/2FA en cada publicación: un agente sin terminal interactiva no puede hacerlo; falla con `ERR_PNPM_OTP_NON_INTERACTIVE`). Antes: `turbo run build --force` y `--dry-run` de ambos.
+
+**Qué se vio en el registro:**
+- Aparece una versión `0.0.0-stage` con `"stub": true`: es un marcador que npm/pnpm crea para reservar el nombre antes de la primera publicación. No contiene código y `latest` apunta a `0.1.0`.
+- Justo después de publicar, `npm view` aún mostraba solo el marcador (propagación del registro): reintentar tras unos segundos antes de concluir que falló.
+- ⚠️ El `dist` local estaba obsoleto (turbo restauró una build de caché con `DialogExample` ya renombrado): **antes de publicar a mano, `turbo run build --force`**.
+
+**Bug encontrado al consumir el paquete (`0.1.0`):** `peerDependencies` con `catalog:` se publican como **versiones exactas** (`react: 19.3.0`…). Un proyecto con React 19.3.1 falla con `ERESOLVE`. `publint` y `attw` no lo detectan.
+- Arreglo (`0.1.1`): rangos `>=19 <20`, `>=0.88 <1`, `>=15 <16`, y `packages/ui/scripts/check-peers.mjs` (`pnpm check:peers`, paso de CI) que falla si un peer es exacto o `catalog:`. Se comprobó que falla con el `package.json` anterior y pasa con el nuevo.
+- Verificación como consumidor: proyecto vacío, `npm install` de los dos `.tgz` + `react@19.3.1`, y `renderToString` de `Pagination`, `Table`, `Skeleton` y `Button` (`nav`, `aria-current`, `<caption>` y clases semánticas presentes).
+- Una versión publicada no se puede reutilizar: `0.1.0` queda con el defecto; los consumidores deben usar `>=0.1.1`. (Se puede marcar con `npm deprecate @chroma-yesid/ui@0.1.0 "peerDependencies exactos; usa >=0.1.1"` cuando salga la `0.1.1`.)
