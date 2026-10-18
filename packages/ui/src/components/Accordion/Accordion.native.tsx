@@ -13,11 +13,11 @@ export function Accordion({ items, multiple = false, defaultValue = [], classNam
   const toggle = (value: string) =>
     setOpen((current) => (current.includes(value) ? current.filter((v) => v !== value) : multiple ? [...current, value] : [value]));
   return (
-    <View className={s.root({ className })}>
-      {items.map((item) => {
+    <View className={s.root({ className: `overflow-hidden ${className ?? ''}`.trim() })}>
+      {items.map((item, index) => {
         const expanded = open.includes(item.value);
         return (
-          <View key={item.value} className={s.item()}>
+          <View key={item.value} className={s.item({ className: index === items.length - 1 ? 'border-b-0' : undefined })}>
             <Pressable role="button" aria-expanded={expanded} aria-label={item.title} onPress={() => toggle(item.value)} className={`${s.trigger()} active:bg-muted`}>
               <Text className={s.title()}>{item.title}</Text>
               <Icon name="chevron-right" size="sm" tone="muted" />

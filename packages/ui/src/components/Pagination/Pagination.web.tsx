@@ -1,5 +1,4 @@
 import { Button } from '../Button';
-import { Stack } from '../Stack';
 import { Text } from '../Text';
 import type { PaginationBaseProps } from './Pagination.types';
 import { usePagination } from './usePagination';
@@ -11,7 +10,7 @@ export function Pagination({ label = 'Paginación', className, ...options }: Pag
   const { current, items, goTo, hasPrevious, hasNext } = usePagination(options);
   return (
     <nav aria-label={label} className={className}>
-      <Stack direction="row" gap="xs" align="center">
+      <div className="flex flex-wrap items-center gap-1">
         <Button variant="outline" size="sm" disabled={!hasPrevious} onPress={() => goTo(current - 1)}>
           Anterior
         </Button>
@@ -36,7 +35,7 @@ export function Pagination({ label = 'Paginación', className, ...options }: Pag
         <Button variant="outline" size="sm" disabled={!hasNext} onPress={() => goTo(current + 1)}>
           Siguiente
         </Button>
-      </Stack>
+      </div>
     </nav>
   );
 }
