@@ -32,8 +32,8 @@ Un PR por fase; cada merge lo aprueba la persona.
 - [x] **PR 4 fusionado — movimiento de overlays** (web con `data-starting-style`; native con `Animated`, sin Reanimated; ADR 0006). Falta probarlo a mano en el simulador.
 - [x] **PR 5 fusionado — `Alert`, `Progress`, `Chip`, `SegmentedControl`, `Kbd`.**
 - [x] **PR 6 fusionado — `OtpInput` y `Combobox`** (sin agrupación en `Combobox` por ahora).
-- [~] **PR 7 — `Table` con orden y selección de filas.**
-- [ ] **PR 8 — patrones:** `SettingsGroup`, `OnboardingStep`, `StatCard`, `SelectableCardGroup`; `ListItem` pasa a componente.
+- [x] **PR 7 fusionado — `Table` con orden y selección de filas.**
+- [~] **PR 8 — patrones:** `SettingsGroup`, `OnboardingStep`, `StatCard`, `SelectableCardGroup`; `ListItem` pasa a componente.
 - [ ] **PR 9 — `CommandPalette` y cierre** (guidelines, README, skill `chroma-design-system`).
 
 ## 3. Fase 9+ del plan (mejoras futuras, independientes)
@@ -57,7 +57,7 @@ Un PR por fase; cada merge lo aprueba la persona.
 - [ ] **Componentes:** `Popover` posicionado en native (el `Select` con búsqueda ya existe como `Combobox`); `Sheet` con arrastre (`@gorhom/bottom-sheet`) si hace falta. Hechos: `Skeleton`, `Pagination`, `Table` (con orden y selección).
 - [ ] **Validación de formularios** (esquemas y mensajes), fuera de alcance hasta ahora.
 - [ ] **Pruebas de overlays native en dispositivo real** (foco, lectores de pantalla): hoy solo hay Jest y el export de Metro.
-- [ ] **Taskbox native** reutilizando store y stories de patrones.
+- [ ] **Taskbox native** reutilizando store y stories de patrones (ahora también `SettingsGroup`, `OnboardingStep`, `StatCard`).
 - [ ] **Segundo proyecto de Chromatic** para capturas aproximadas del Storybook native en el navegador.
 - [x] **`knip`** (paso en CI, config en `knip.json`). Pendiente: `size-limit`.
 - [ ] **Probar el flujo MCP con un agente real** (`.mcp.json`, `docs-list`/`docs-show`/`test-run`) y dejarlo en una guía.
