@@ -143,3 +143,16 @@ valor y nada usa aún los estilos nuevos.
 **Lecciones**
 - Un test que compara el orden de filas por texto deja claro el comportamiento; el de "F-2 antes que F-10" evita el orden alfabético simple.
 - Al repartir relleno entre un botón y su texto (native) hay que dar un slot solo de texto: aplicar la misma clase a los dos duplica el relleno.
+
+## 2026-10-20 — PR 8: patrones de producto
+
+**Qué:** `ListItem` pasa de patrón a componente web/native (`onPress`, `value`, `showChevron`, `destructive`, `disabled`); nuevo componente `SelectableCardGroup`; nuevos patrones `SettingsGroup`, `OnboardingStep` y `StatCard`. Cada uno con stories que citan la referencia de Mobbin y tests native.
+
+**Decisiones**
+- `ListItem` debía ser componente: un patrón solo puede componer primitivas y no puede renderizar un `<button>`/`Pressable` propio. La importación desde el paquete no cambia; solo cambia la ubicación (y el id de la story: de *Patterns* a *Components*).
+- `SettingsGroup` avisa a sus filas por contexto (`ListItemGroupContext`) para que omitan su borde y dibuja los separadores él mismo, sin línea tras la última. Evita clonar elementos o pedir una prop a cada fila.
+- `SelectableCardGroup`: `value` siempre es una lista (en `single`, de un elemento) para tener un solo contrato; `maxSelected` cubre "elige hasta N".
+- `StatCard`: el signo va en el texto (`+420 %`) y `sentiment` es independiente de `direction`, porque subir no siempre es bueno (más errores).
+- En ARIA, `aria-valuenow` es el valor dentro del rango (`aria-valuemax`), no un porcentaje: el progreso de `OnboardingStep` expone paso 2 de 5.
+
+**Cómo se verificó:** todos los pasos de `ci.yml` en local (ver `AGENTS.md`).
