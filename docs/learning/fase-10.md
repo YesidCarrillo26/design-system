@@ -109,3 +109,20 @@ valor y nada usa aún los estilos nuevos.
 **Lecciones**
 - `getByRole` de Testing Library exige `accessible`: `ActivityIndicator` con `accessibilityRole` no basta. Se corrigió en `Spinner`, lo que además mejora la accesibilidad real.
 - Si turbo falla en una tarea, cancela las demás: un fallo en `test:storybook` puede ser solo la cancelación. Repite esa tarea sola antes de buscar un error.
+
+## 2026-10-20 — PR 6: OtpInput y Combobox
+
+**Qué:** `OtpInput` y `Combobox` en web y native, con `lib/filterOptions.ts` compartido (normaliza acentos y mayúsculas) y sus tests. Resuelve el pendiente "`Select` con búsqueda (`Combobox`)".
+
+**Decisiones**
+- Native de `OtpInput`: un único `TextInput` invisible sobre casillas decorativas (`aria-hidden`), no un input por casilla. Así pegar y el autocompletado del SMS funcionan con un solo campo.
+- `Combobox`: sin agrupación de opciones (`options[].group` del plan queda fuera de esta entrega); el contrato es el de `Select` más búsqueda. Si hace falta, se añade después sin romper nada.
+- Web: la etiqueta de `Field` apunta al disparador (`htmlFor`) y el popup lleva `aria-label`.
+
+**Cómo se verificó:** todos los pasos de `ci.yml` en local; 224 tests web (con a11y) y 76 native.
+
+**Lecciones**
+- En esta versión de Testing Library `render` y `fireEvent` son asíncronos: sin `await`, el estado no se actualiza y el test falla de forma confusa (la lista no se filtraba).
+- Los elementos con `aria-hidden` o `importantForAccessibility="no-hide-descendants"` no aparecen en `getByText`; usar `{ includeHiddenElements: true }` solo para elementos decorativos.
+- Base UI nombra el grupo y el primer campo del `OTPField` con la misma etiqueta: en los `play`, `getByRole('textbox', { name })` en vez de `getByLabelText`.
+- `test:storybook` puede fallar en frío con "iframe did not become ready" o "Failed to fetch dynamically imported module": repetir con `--force` antes de buscar un error de código.
