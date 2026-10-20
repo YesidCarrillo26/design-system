@@ -30,8 +30,8 @@ Un PR por fase; cada merge lo aprueba la persona.
 - [x] **PR 2** fusionado (superficies y tipografía aplicadas).
 - [x] **PR 3 fusionado — mejoras a componentes existentes:** `Button`, `Badge`, `Toast`, `TextField`, `Card`, `Tabs`, `Icon`, `Spinner` (sin `interactive` en `Card`, ver `fase-10.md`).
 - [x] **PR 4 fusionado — movimiento de overlays** (web con `data-starting-style`; native con `Animated`, sin Reanimated; ADR 0006). Falta probarlo a mano en el simulador.
-- [~] **PR 5 — `Alert`, `Progress`, `Chip`, `SegmentedControl`, `Kbd`.**
-- [ ] **PR 6 — `OtpInput` y `Combobox`.**
+- [x] **PR 5 fusionado — `Alert`, `Progress`, `Chip`, `SegmentedControl`, `Kbd`.**
+- [~] **PR 6 — `OtpInput` y `Combobox`** (sin agrupación en `Combobox` por ahora).
 - [ ] **PR 7 — `Table` con orden y selección de filas.**
 - [ ] **PR 8 — patrones:** `SettingsGroup`, `OnboardingStep`, `StatCard`, `SelectableCardGroup`; `ListItem` pasa a componente.
 - [ ] **PR 9 — `CommandPalette` y cierre** (guidelines, README, skill `chroma-design-system`).
@@ -54,7 +54,7 @@ Un PR por fase; cada merge lo aprueba la persona.
 
 - [x] **Tema oscuro del panel de Storybook** (`manager.ts`, sigue la preferencia del sistema).
 - [x] **Páginas de Guidelines:** accesibilidad, reglas multiplataforma y contribución (`apps/storybook-web/docs/guidelines`).
-- [ ] **Componentes:** `Select` con búsqueda (`Combobox`) y `Popover` posicionado en native; `Sheet` con arrastre (`@gorhom/bottom-sheet`) si hace falta. Hechos: `Skeleton`, `Pagination`, `Table` (solo lectura; faltan orden y selección de filas).
+- [ ] **Componentes:** `Popover` posicionado en native (el `Select` con búsqueda ya existe como `Combobox`); `Sheet` con arrastre (`@gorhom/bottom-sheet`) si hace falta. Hechos: `Skeleton`, `Pagination`, `Table` (solo lectura; faltan orden y selección de filas).
 - [ ] **Validación de formularios** (esquemas y mensajes), fuera de alcance hasta ahora.
 - [ ] **Pruebas de overlays native en dispositivo real** (foco, lectores de pantalla): hoy solo hay Jest y el export de Metro.
 - [ ] **Taskbox native** reutilizando store y stories de patrones.
