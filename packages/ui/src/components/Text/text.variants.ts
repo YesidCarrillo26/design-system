@@ -8,7 +8,8 @@ export const textStyles = tv({
       'body-sm': 'text-body-sm',
       'body-md': 'text-body-md',
       'body-lg': 'text-body-lg',
-      title: 'text-title font-semibold',
+      overline: 'text-overline font-medium uppercase',
+      title: 'text-heading-lg font-semibold',
     },
     tone: {
       default: 'text-foreground',

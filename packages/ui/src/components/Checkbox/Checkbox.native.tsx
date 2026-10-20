@@ -5,7 +5,7 @@ import { Icon } from '../Icon';
 import type { CheckboxBaseProps } from './Checkbox.types';
 import { checkboxStyles } from './checkbox.variants';
 
-const checkboxNativeStyles = tv({ extend: checkboxStyles, slots: { root: 'active:opacity-80' } });
+const checkboxNativeStyles = tv({ extend: checkboxStyles, slots: { root: 'active:opacity-pressed' } });
 
 export type CheckboxProps = CheckboxBaseProps;
 

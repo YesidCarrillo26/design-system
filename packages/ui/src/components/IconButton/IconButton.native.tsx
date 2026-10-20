@@ -4,7 +4,7 @@ import { Icon } from '../Icon';
 import type { IconButtonBaseProps } from './IconButton.types';
 import { iconButtonStyles, iconButtonTone } from './iconButton.variants';
 
-const iconButtonNativeStyles = tv({ extend: iconButtonStyles, base: 'active:opacity-80' });
+const iconButtonNativeStyles = tv({ extend: iconButtonStyles, base: 'active:opacity-pressed' });
 
 export type IconButtonProps = IconButtonBaseProps & Omit<PressableProps, keyof IconButtonBaseProps | 'children'>;
 

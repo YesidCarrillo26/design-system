@@ -26,8 +26,8 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 
 Un PR por fase; cada merge lo aprueba la persona.
 
-- [~] **PR 1 — tokens de fundación** (`feat/tokens-fundamentos`): rampas, superficies, estados, tipografía, pesos, capas, opacidades, test de contraste.
-- [ ] **PR 2 — superficies y tipografía aplicadas** (cambio visual; revisar baselines de Chromatic; decidir `primary-foreground` en oscuro).
+- [x] **PR 1** fusionado.
+- [~] **PR 2 — superficies y tipografía aplicadas** (cambio visual; revisar baselines de Chromatic). `primary-foreground` oscuro se mantiene.
 - [ ] **PR 3 — mejoras a componentes existentes:** `Button` (ghost, destructive, loading, iconos), `Badge`, `Toast`, `TextField`, `Card`, `Tabs`, más iconos.
 - [ ] **PR 4 — movimiento de overlays** (web con `data-starting-style`; native con `Animated`, sin Reanimated; ADR 0006).
 - [ ] **PR 5 — `Alert`, `Progress`, `Chip`, `SegmentedControl`, `Kbd`.**

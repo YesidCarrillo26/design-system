@@ -11,7 +11,7 @@ export const iconButtonTone: Record<IconButtonVariant, IconTone> = {
 };
 
 export const iconButtonStyles = tv({
-  base: 'items-center justify-center rounded-md border disabled:opacity-50',
+  base: 'items-center justify-center rounded-md border disabled:opacity-disabled',
   variants: {
     variant: {
       primary: 'border-transparent bg-primary',

@@ -2,7 +2,7 @@ import { tv } from '../../lib/tv';
 
 export const tableStyles = tv({
   slots: {
-    root: 'w-full rounded-lg border border-border bg-background',
+    root: 'w-full rounded-lg border border-border bg-card',
     caption: 'px-3 py-2 text-left text-body-sm font-medium text-muted-foreground',
     row: 'border-b border-border',
     head: 'px-3 py-2 text-body-sm font-medium text-muted-foreground',

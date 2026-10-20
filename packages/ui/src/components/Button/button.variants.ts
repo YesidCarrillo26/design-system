@@ -11,7 +11,7 @@ import { tv } from '../../lib/tv';
  */
 export const buttonStyles = tv({
   slots: {
-    root: 'flex-row items-center justify-center rounded-md border disabled:opacity-50',
+    root: 'flex-row items-center justify-center rounded-md border disabled:opacity-disabled',
     label: 'font-medium',
   },
   variants: {

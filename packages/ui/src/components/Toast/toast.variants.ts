@@ -7,7 +7,7 @@ export const toastStyles = tv({
   },
   variants: {
     variant: {
-      default: { item: 'border-border bg-background', message: 'text-foreground' },
+      default: { item: 'border-border bg-card', message: 'text-foreground' },
       destructive: { item: 'border-transparent bg-destructive', message: 'text-destructive-foreground' },
     },
   },

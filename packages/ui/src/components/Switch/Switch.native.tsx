@@ -4,7 +4,7 @@ import { useControllableState } from '../../lib/useControllableState';
 import type { SwitchBaseProps } from './Switch.types';
 import { switchStyles } from './switch.variants';
 
-const switchNativeStyles = tv({ extend: switchStyles, slots: { root: 'active:opacity-80' } });
+const switchNativeStyles = tv({ extend: switchStyles, slots: { root: 'active:opacity-pressed' } });
 
 export type SwitchProps = SwitchBaseProps;
 

@@ -2,7 +2,7 @@
   "color": {
     "$type": "color",
     "background": {
-      "$value": "{color.neutral.0}",
+      "$value": "{color.neutral.50}",
       "$description": "Fondo de la página"
     },
     "foreground": {
