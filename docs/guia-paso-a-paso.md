@@ -76,14 +76,14 @@ pnpm turbo run typecheck
 
 **Idea:** colores, radios, sombras, textos… definidos **una vez** en JSON y generados para cada plataforma.
 
-1. **Fuente** (`tokens/`): `primitives/` (paleta cruda), `semantic/light|dark/` (roles: `background`, `primary`…), `shared/` (radios, texto, sombra, movimiento, breakpoints, fuentes). Las referencias se escriben `{color.neutral.950}`.
+1. **Fuente** (`tokens/`): `primitives/` (rampas de color: `neutral`, `brand`, `red`, `green`, `amber`, `blue`), `semantic/light|dark/` (roles: `background`, `card`, `popover`, `primary`, y por estado `success|warning|info|destructive` con `X`, `X-foreground`, `X-subtle`, `X-subtle-foreground`), `shared/` (radios, texto, pesos, sombra, movimiento, z-index, opacidad, breakpoints, fuentes). Las referencias se escriben `{color.neutral.950}`.
 2. **Generador** `sd/build.ts` (Node 24 ejecuta TS directo): Style Dictionary resuelve referencias y el script escribe:
    - `dist/web.css` → `@theme` de Tailwind v4 + variables `--ds-*` por tema (`[data-theme="dark"]`).
    - `dist/native.css` → `@layer theme { :root { @variant light/dark/ios/android … } }` para Uniwind.
-   - `dist/index.js|d.ts` → constantes TS (`colors`, `radius`, `text`, `shadow`, `breakpoint`…).
+   - `dist/index.js|d.ts` → constantes TS (`colors`, `radius`, `text` con `letterSpacing` en px, `fontWeight`, `shadow`, `easing` como tuplas bezier para `Easing.bezier`, `zIndex`, `opacity`, `breakpoint`…). Los tipos salen de los datos.
    - `dist/tokens.json` → alimenta las páginas de Foundations.
    - `dist/tw-merge.js` → configuración para que `tailwind-merge` entienda `text-body-md` como tamaño y no como color.
-3. **Prueba:** `sd/tw-merge.test.ts` demuestra el bug y su corrección.
+3. **Pruebas** (`sd/*.test.ts`): `tw-merge` demuestra el bug y su corrección; `contrast.test.ts` comprueba el contraste WCAG de cada par texto/fondo en ambos temas (4.5:1 texto, 3:1 foco); `web-css` y `native-css` fijan lo que se emite (resets de Tailwind, espaciado entre letras en `em` en web y px en native).
 
 ```sh
 pnpm --filter @chroma-yesid/tokens build        # regenerar dist/
@@ -128,7 +128,7 @@ React Native no hereda el color de texto del contenedor, así que el botón defi
 
 ### Los primitivos (en orden)
 
-Fase 1: `Text`, `Stack`, `Button` · Fase 4: `Box`, `Heading`, `Icon`, `IconButton`, `Spinner`, `Badge`, `Avatar`, `Card`, `Divider`, `Link` · Fase 5: `Field`, `TextField`, `TextArea`, `Checkbox`, `RadioGroup`, `Switch`, `Select` · Fase 6: `Dialog`, `Sheet`, `Popover`, `Menu`, `Tooltip`, `Tabs`, `Accordion`, `Toast` · Fase 7: patrones `EmptyState`, `ListItem`, `PageHeader` (un solo archivo, sin sufijos).
+Fase 1: `Text`, `Stack`, `Button` · Fase 4: `Box`, `Heading`, `Icon`, `IconButton`, `Spinner`, `Badge`, `Avatar`, `Card`, `Divider`, `Link` · Fase 5: `Field`, `TextField`, `TextArea`, `Checkbox`, `RadioGroup`, `Switch`, `Select` · Fase 6: `Dialog`, `Sheet`, `Popover`, `Menu`, `Tooltip`, `Tabs`, `Accordion`, `Toast` · Fase 7: patrones `EmptyState`, `ListItem`, `PageHeader` (un solo archivo, sin sufijos) · Fase 10: `Alert`, `Progress`, `SegmentedControl`, `Chip`, `Kbd`, `OtpInput`, `Combobox`, `SelectableCardGroup`, `CommandPalette`; `ListItem` pasa a componente; patrones `SettingsGroup`, `OnboardingStep`, `StatCard` (ver sección 9c).
 
 Lo compartido entre implementaciones: `useControllableState` (controlado/no controlado), `useAvatar`, `useToastQueue`, y `useTokenColor.native` (colores reales para SVG y spinner en native).
 
@@ -268,7 +268,7 @@ Recomendación: **tarball o enlace local para probar ya**, npm público cuando q
 
 ## 9. Patrones y Taskbox
 
-- **Patrones:** componen primitivas y se escriben una vez (`EmptyState`, `ListItem`, `PageHeader`).
+- **Patrones:** componen primitivas y se escriben una vez (`EmptyState`, `PageHeader`, `SettingsGroup`, `OnboardingStep`, `StatCard`). Si necesitan un elemento pulsable o una librería (`ListItem`, `SelectableCardGroup`, `CommandPalette`), son componentes con `.web`/`.native`.
 - **`examples/taskbox`** (Storybook en el puerto 6007):
   - `makeStore(preloadedState)` en un decorador (un store por story).
   - MSW: cada story hace `beforeEach: ({ msw }) => msw.use(http.get(...))` (éxito, `delay('infinite')`, vacío, 500, reintento).
@@ -296,6 +296,31 @@ pnpm --filter @chroma-yesid/storybook-native-web storybook         # :6008
 pnpm --filter @chroma-yesid/storybook-native-web build-storybook
 pnpm --filter @chroma-yesid/storybook-native-web check:bundle      # ¿solo implementaciones native?
 ```
+
+---
+
+## 9c. Fase 10: llevar el sistema al siguiente nivel
+
+Objetivo: que deje de verse como el Tailwind por defecto. Dirección **"neutral preciso"** (Linear, Klaviyo, Devin en web; listas agrupadas estilo iOS en native), con el índigo de marca. Se trabajó en **un PR por fase**, y el detalle de cada uno está en `docs/learning/fase-10.md` y los ADR 0005 y 0006.
+
+1. **Referencias reales (Mobbin).** Antes de diseñar cada pieza se buscaron pantallas de apps reales con el MCP de Mobbin y se anotó la referencia en las stories (`parameters.docs.description`). Sirve para que el diseño parta de patrones probados, no de la intuición. No se copian marcas ni contenido.
+2. **Tokens primero** (`feat/tokens-fundamentos`): rampas, superficies (`card`, `popover`), estados con cuarteto `X / X-foreground / X-subtle / X-subtle-foreground`, jerarquía tipográfica (`display`, `heading-*`, `overline`), pesos, z-index y opacidad. Un test de contraste evita que un valor nuevo rompa la accesibilidad en silencio. Un PR aditivo, sin cambio visual, para poder revisarlo sin ruido.
+3. **Aplicarlos** (superficies, velos con `bg-overlay`, `Heading` con `size`), y después **mejorar lo existente** (`Button` con ghost/destructive/loading/íconos, `Badge`, `Toast`, `TextField`, `Card`, `Tabs`, 20 íconos).
+4. **Movimiento de overlays:** web con `data-starting-style` / `data-ending-style` de Base UI; native con `Animated` de React Native (sin Reanimated, ADR 0006), con velo y panel animados por separado y duraciones y curvas de los tokens. Respeta "Reducir movimiento".
+5. **Componentes nuevos:** `Alert`, `Progress`, `SegmentedControl`, `Chip`, `Kbd`, `OtpInput`, `Combobox`, `SelectableCardGroup`, `CommandPalette`; `Table` con orden y selección; patrones `SettingsGroup`, `OnboardingStep`, `StatCard`.
+
+**Cómo se verifica un PR (los mismos pasos que `ci.yml`).** Reproducirlos todos en local, no solo `turbo`:
+
+```sh
+pnpm lint && pnpm knip
+pnpm turbo run typecheck test:unit build test:storybook test:native
+(cd packages/ui && npx publint && pnpm check:peers && npx attw --pack . --profile esm-only --exclude-entrypoints web.css native.css)
+pnpm turbo run build-storybook --filter=@chroma-yesid/storybook-native-web
+pnpm --filter @chroma-yesid/storybook-native-web check:bundle
+! grep -rlE 'from.?.react-native.' examples/next-app/.next/static
+```
+
+Para comprobar que una utilidad nueva existe de verdad: compilar los candidatos con `@tailwindcss/node` (web) y exportar la app native con `expo export --platform ios --no-bytecode` buscando la clase en el bundle (Uniwind solo emite las clases que encuentra en el código).
 
 ---
 

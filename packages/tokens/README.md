@@ -39,13 +39,16 @@ Importa los tokens directamente en tu CSS de entrada: Uniwind no descubre los te
 ### TypeScript
 
 ```ts
-import { colors, radius, text, shadow, duration, ease, breakpoint, fontFamily } from '@chroma-yesid/tokens';
+import { colors, radius, text, fontWeight, shadow, duration, ease, easing, zIndex, opacity, breakpoint, fontFamily } from '@chroma-yesid/tokens';
 
 colors.light.primary; // valor del color en el tema claro
 radius.md;            // número, en px
+text['heading-lg'];   // { size, lineHeight, letterSpacing }, los tres en px
+fontWeight.semibold;  // 600
+easing.out;           // [0, 0, 0.2, 1], para Easing.bezier(...easing.out) en React Native
 ```
 
-Los tipos `ColorToken`, `RadiusToken`, `TextToken` y `ThemeName` también se exportan.
+Los tipos `ColorToken`, `RadiusToken`, `TextToken`, `FontWeightToken`, `ShadowToken`, `DurationToken`, `EaseToken`, `ZIndexToken`, `OpacityToken` y `ThemeName` también se exportan.
 
 ### `tailwind-merge`
 
@@ -57,6 +60,15 @@ const twMerge = extendTailwindMerge(twMergeConfig);
 ```
 
 Sin esta configuración, `tailwind-merge` confunde `text-body-md` (tamaño) con un color de texto.
+
+## Qué incluye
+
+- **Color:** semánticos con valor claro y oscuro. Superficies (`background`, `card`, `popover`), acciones (`primary`, `secondary`, `accent`), bordes (`border`, `input`, `ring`), `overlay` y, para cada estado (`destructive`, `success`, `warning`, `info`), `X`, `X-foreground`, `X-subtle` y `X-subtle-foreground`. El texto o icono de estado usa `X-subtle-foreground`; `warning` no se usa como color de texto.
+- **Tipografía:** `display`, `heading-xl|lg|md|sm`, `body-lg|md|sm`, `caption`, `overline` (y `title`, obsoleto). Pesos `font-normal|medium|semibold|bold`.
+- **Otros:** radios, sombras (`xs`…`lg`), movimiento (`duration`, `ease`), capas `z-overlay|popover|toast` (solo web) y opacidades `opacity-disabled|pressed`.
+- **Contraste:** cada par texto/fondo se comprueba en cada build (4.5:1 el texto, 3:1 el anillo de foco).
+
+> Los CSS **eliminan** los tamaños y pesos de texto por defecto de Tailwind (`text-xs`…`text-9xl`, `font-light`…) y la paleta de color, como ya se hacía con los colores. Usa los estilos del sistema.
 
 ## Exports
 
