@@ -21,12 +21,12 @@ Requiere `react` `>=19 <20`. En mobile también `react-native` `>=0.88 <1` y `re
 ```
 
 ```tsx
-import { Button, Stack, Text } from '@chroma-yesid/ui';
+import { Button, Heading, Stack } from '@chroma-yesid/ui';
 
 export function App() {
   return (
     <Stack gap="md">
-      <Text variant="title">Hola</Text>
+      <Heading level={1}>Hola</Heading>
       <Button onPress={() => console.log('clic')}>Continuar</Button>
     </Stack>
   );
@@ -49,10 +49,11 @@ Los tokens se importan en tu propio CSS porque Uniwind no descubre los temas a t
 
 ## Componentes
 
-- **Base:** Avatar, Badge, Box, Button, Card, Divider, Heading, Icon, IconButton, Link, Skeleton, Spinner, Stack, Text
-- **Formularios:** Checkbox, Field, Pagination, RadioGroup, Select, Switch, Table, TextArea, TextField
-- **Superposiciones y navegación:** Accordion, Dialog, Menu, Popover, Sheet, Tabs, Toast, Tooltip
-- **Patrones:** EmptyState, ListItem, PageHeader
+- **Base:** Avatar, Badge, Box, Button, Card, Chip, Divider, Heading, Icon, IconButton, Kbd, Link, ListItem, Skeleton, Spinner, Stack, Text
+- **Formularios:** Checkbox, Combobox, Field, OtpInput, RadioGroup, SegmentedControl, SelectableCardGroup, Select, Switch, TextArea, TextField
+- **Datos y estado:** Alert, Pagination, Progress, Table (con orden y selección de filas), Toast
+- **Superposiciones y navegación:** Accordion, CommandPalette, Dialog, Menu, Popover, Sheet, Tabs, Tooltip
+- **Patrones:** EmptyState, OnboardingStep, PageHeader, SettingsGroup, StatCard
 
 Las props de cada componente, sus variantes y ejemplos están en el Storybook del repositorio. Los eventos se llaman igual en ambas plataformas (`onPress`; en web se conecta a `onClick`).
 

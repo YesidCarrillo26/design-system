@@ -5,6 +5,7 @@ export * from './components/Box';
 export * from './components/Button';
 export * from './components/Card';
 export * from './components/Chip';
+export * from './components/CommandPalette';
 export * from './components/Divider';
 export * from './components/Heading';
 export * from './components/Icon';

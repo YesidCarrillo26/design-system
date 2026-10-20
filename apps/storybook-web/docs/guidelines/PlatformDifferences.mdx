@@ -18,6 +18,7 @@ Los componentes comparten contrato (props), variantes y stories. Donde la plataf
 | `Toast` | Región `aria-live` abajo a la derecha | Capa superior abajo |
 | `Pagination` | `<nav>` con `aria-current="page"` y botones `sm` | `role="navigation"`, página actual como seleccionada, botones `md` (44 pt) |
 | `Table` | `<table>` real con `<caption>` y `scope="col"`; desplazamiento horizontal | `View`s con `role` de tabla (solo metadatos: un `View` no es elemento de accesibilidad salvo que sea `accessible`); columnas de igual ancho |
+| `CommandPalette` | Diálogo con `Autocomplete` en línea, atajos de teclado (`Kbd`) y pie de teclas | Hoja alta con búsqueda y lista agrupada; sin atajos (no hay teclado físico) |
 | `OtpInput` | Base UI `OTPField`: una casilla por carácter, pegar y autocompletar, flechas | Un único `TextInput` invisible (`oneTimeCode` / `sms-otp`) tras casillas decorativas |
 | `Combobox` | Base UI `Combobox` con el campo de búsqueda dentro del popup anclado | Hoja inferior con campo de búsqueda y lista de opciones |
 | `Progress`, `SegmentedControl`, `Chip`, `Alert` | Marcado propio con roles (`progressbar`, radios reales, `aria-pressed`, `alert`/`status`) | Mismos roles con `View`/`Pressable`; el rol de `Alert` va en el texto |

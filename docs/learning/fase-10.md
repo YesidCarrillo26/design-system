@@ -156,3 +156,24 @@ valor y nada usa aún los estilos nuevos.
 - En ARIA, `aria-valuenow` es el valor dentro del rango (`aria-valuemax`), no un porcentaje: el progreso de `OnboardingStep` expone paso 2 de 5.
 
 **Cómo se verificó:** todos los pasos de `ci.yml` en local (ver `AGENTS.md`).
+
+## 2026-10-20 — PR 9: CommandPalette y cierre de la fase
+
+**Qué:** `CommandPalette` (web con Base UI `Autocomplete` en línea dentro de un `Dialog`; native, hoja alta con búsqueda y `SectionList`). Cierre de la fase: guía paso a paso (sección 9c), READMEs de `ui` y `tokens`, introducción de Storybook, `buenas-practicas.md` (sección "Diseño visual"), tabla de diferencias de plataforma, plan y pendientes. La skill `chroma-design-system` (en `~/.claude/skills`, fuera del repo) se actualizó con la API y los tokens nuevos.
+
+**Decisiones**
+- El foco inicial va al buscador (`initialFocus` con una ref): por defecto Base UI enfoca el primer elemento tabulable, y una paleta debe poder escribirse al abrir.
+- Búsqueda por `label`, `description` y `keywords`, sin acentos ni mayúsculas, con `filterOptions` compartido; los grupos sin coincidencias se ocultan.
+- En native no hay pie de teclas ni atajos: en un teléfono no hay teclado físico. Queda documentado en la guía y en la story.
+
+**Lecciones**
+- ⚠️ La animación de salida (PR 4) deja el popup montado cuando corre axe: el `listbox` sin nombre del `Combobox` (un fallo real, de un PR anterior) solo apareció ahora. Los overlays con `role="listbox"` necesitan `aria-label`.
+- En los `play` hay que esperar el foco (`waitFor(() => expect(input).toHaveFocus())`) antes de pulsar teclas: el campo existe antes de recibirlo.
+
+**Cómo se verificó:** todos los pasos de `ci.yml` en local (ver `AGENTS.md`).
+
+## Balance de la Fase 10
+
+9 PR: tokens de fundación, superficies y tipografía, mejoras a componentes, movimiento de overlays, componentes de feedback y selección, OTP y Combobox, Table con orden y selección, patrones de producto y paleta de comandos. El sistema pasó de 31 componentes y 3 patrones a más de 45 componentes y 5 patrones, con 36 colores semánticos por tema (antes 12), jerarquía tipográfica y animación de overlays.
+
+**Pendiente tras la fase** (ver `docs/pendientes.md`): probar a mano en el simulador iOS y en Android las animaciones, el pegado en `OtpInput` y el teclado sobre las hojas; agrupación de opciones en `Combobox`; revisión visual en Chromatic; publicar la versión con el PR "Version Packages".

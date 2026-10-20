@@ -69,7 +69,7 @@ export function Combobox({ label, options, value, defaultValue = '', placeholder
             <BaseCombobox.Popup aria-label={label} className={popupClasses}>
               <BaseCombobox.Input placeholder={searchPlaceholder ?? 'Buscar…'} aria-label={`Buscar en ${label}`} className={s.search()} />
               <BaseCombobox.Empty className={s.empty()}>{emptyText ?? 'Sin resultados'}</BaseCombobox.Empty>
-              <BaseCombobox.List className="max-h-64 overflow-auto overscroll-contain">
+              <BaseCombobox.List aria-label={label} className="max-h-64 overflow-auto overscroll-contain">
                 {(option: SelectOption) => (
                   <BaseCombobox.Item key={option.value} value={option} disabled={option.disabled} className={s.option()}>
                     <span className="inline-flex size-4 shrink-0">

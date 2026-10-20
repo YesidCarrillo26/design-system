@@ -114,6 +114,41 @@ Decisiones que ya se tomaron (y por qué), en formato **"si pasa X, hazlo así"*
 - Los `peerDependencies` son rangos; el catálogo (`catalog:`) fija versiones exactas solo para desarrollo.
 - Antes de publicar a mano: `turbo run build --force` y `pnpm publish --dry-run`. Cada versión publicada es definitiva (el número no se reutiliza).
 
+## Diseño visual (Fase 10)
+
+**Si añades un color o un estado**
+- Ponlo como token en **ambos** temas y pasa el test de contraste (`sd/contrast.test.ts`). Texto o icono de estado: `X-subtle-foreground`; `X` solo como relleno; `warning` nunca como texto (2.15:1 sobre blanco).
+- Tinte de un color: el modificador de opacidad (`border-success-subtle-foreground/20`), no un valor suelto.
+
+**Si cambias un token o un nombre de clase**
+- Busca también en `scripts/` y en los tests: `check-bundle.mjs` busca clases literales (`active:opacity-pressed`) para saber qué implementación cargó cada Storybook.
+- Antes de decir "hecho" reproduce **todos** los pasos de `ci.yml` en local, no solo `turbo`.
+
+**Si una utilidad nueva "no hace nada"**
+- Comprueba que existe: compila los candidatos con `@tailwindcss/node` (web) y exporta la app native (`expo export --platform ios --no-bytecode`), buscando la clase en el bundle. Uniwind solo emite lo que aparece en el código.
+- `em` en native se resuelve contra 16px: entrega el espaciado entre letras ya calculado en px.
+
+**Si animas un overlay**
+- Web: transiciones sobre `data-starting-style` / `data-ending-style`, sin `useState`. Native: `Animated` con el driver nativo, el contenido montado hasta que acabe la salida y duración 0 con "Reducir movimiento". No hace falta Reanimated (ADR 0006).
+- Con la animación de salida el popup sigue montado cuando corre axe: un `listbox` sin nombre accesible o un foco mal gestionado aparecen entonces.
+
+**Si un componente es interactivo**
+- Un patrón solo compone primitivas: si necesita un `<button>`/`Pressable` propio o una librería, es un componente (`ListItem`, `SelectableCardGroup`, `CommandPalette`).
+- Un contenedor que quieres localizar con `getByRole` en native debe ser accesible: usa `Pressable`, no un `View` con `role`.
+- No dejes un elemento con hover pero sin rol ni foco: engaña a la accesibilidad.
+
+**Si escribes pruebas native con Testing Library**
+- `render` y `fireEvent` son asíncronos: haz `await`. Los elementos con `aria-hidden` no salen en `getByText` (usa `includeHiddenElements` solo con decorativos).
+- Jest completa las animaciones al instante: para probar el orden (animar y luego desmontar) espía `Animated.timing`.
+- `aria-valuenow` es el valor dentro del rango (`aria-valuemax`), no un porcentaje.
+
+**Si `test:storybook` falla en frío**
+- "iframe did not become ready" o "Failed to fetch dynamically imported module": repite con `--force` antes de buscar un error de código.
+- Si turbo falla en una tarea, cancela las demás: un fallo en otra tarea puede ser solo la cancelación.
+
+**Si trabajas con git en macOS**
+- No restaures con `git checkout --` un archivo con cambios sin commitear: borra el trabajo. Haz copia antes. `sed -i` pide `-i ''`.
+
 ## Agentes remotos
 
 **Si escribes un issue para un agente** (plantilla *Tarea para un agente*)
