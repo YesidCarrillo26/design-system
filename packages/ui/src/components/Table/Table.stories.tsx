@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Badge } from '../Badge';
 import { Table, type TableProps } from './Table';
-import { type Invoice, invoiceColumns, invoices } from './table.fixtures';
+import { type Invoice, invoiceColumns, invoices, sortableInvoiceColumns } from './table.fixtures';
 
 const meta = {
   component: Table<Invoice>,
@@ -38,3 +38,19 @@ export const WithCustomCells: Story = {
 };
 
 export const Empty: Story = { args: { rows: [], emptyText: 'No hay facturas' } };
+
+/** Encabezados ordenables: ascendente → descendente → sin ordenar. */
+export const Sortable: Story = { args: { columns: sortableInvoiceColumns } };
+
+export const SortedByTotalDescending: Story = {
+  args: { columns: sortableInvoiceColumns, defaultSort: { key: 'total', direction: 'desc' } },
+};
+
+/** Con `selectable` aparece una columna de casillas y "seleccionar todas" (mixto si solo hay algunas). */
+export const Selectable: Story = {
+  args: { selectable: true, defaultSelectedKeys: ['F-002'], getRowLabel: (row: Invoice) => row.client },
+};
+
+export const SortableAndSelectable: Story = {
+  args: { columns: sortableInvoiceColumns, selectable: true, defaultSelectedKeys: ['F-001', 'F-003'], getRowLabel: (row: Invoice) => row.client },
+};

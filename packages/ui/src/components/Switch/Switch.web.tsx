@@ -20,7 +20,7 @@ const switchWebStyles = tv({
 export type SwitchProps = SwitchBaseProps;
 
 /** Interruptor accesible (`role="switch"`). El botón completo es el control, y el texto su nombre. */
-export function Switch({ label, checked, defaultChecked = false, onCheckedChange, disabled = false, className }: SwitchProps) {
+export function Switch({ label, checked, defaultChecked = false, onCheckedChange, hideLabel = false, disabled = false, className }: SwitchProps) {
   const [value, setValue] = useControllableState({ value: checked, defaultValue: defaultChecked, onChange: onCheckedChange });
   const s = switchWebStyles({ checked: value, disabled });
   return (
@@ -28,7 +28,7 @@ export function Switch({ label, checked, defaultChecked = false, onCheckedChange
       <span aria-hidden className={s.track()}>
         <span className={s.thumb()} />
       </span>
-      <span className={s.label()}>{label}</span>
+      <span className={hideLabel ? 'sr-only' : s.label()}>{label}</span>
     </button>
   );
 }

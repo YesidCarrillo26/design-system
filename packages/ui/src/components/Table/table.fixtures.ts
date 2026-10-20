@@ -18,3 +18,17 @@ export const invoiceColumns: TableColumn<Invoice>[] = [
   { key: 'client', header: 'Cliente' },
   { key: 'total', header: 'Total', align: 'end', render: (row) => `$${row.total.toLocaleString('es-CO')}` },
 ];
+
+/** Facturas con columnas ordenables, para las stories de orden y selección. */
+export const sortableInvoiceColumns: TableColumn<Invoice>[] = [
+  { key: 'id', header: 'Factura', sortable: true },
+  { key: 'client', header: 'Cliente', sortable: true },
+  { key: 'total', header: 'Total', align: 'end', sortable: true, render: (row) => `$${row.total.toLocaleString('es-CO')}` },
+];
+
+/** Para probar el orden con textos con acentos y números dentro del texto. */
+export const mixedInvoices: Invoice[] = [
+  { id: 'F-10', client: 'Álvaro Díaz', status: 'Pendiente', total: 300 },
+  { id: 'F-2', client: 'Zoe Pérez', status: 'Pagada', total: 1200 },
+  { id: 'F-1', client: 'álvaro Núñez', status: 'Pagada', total: 50 },
+];

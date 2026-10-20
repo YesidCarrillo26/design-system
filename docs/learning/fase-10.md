@@ -126,3 +126,20 @@ valor y nada usa aún los estilos nuevos.
 - Los elementos con `aria-hidden` o `importantForAccessibility="no-hide-descendants"` no aparecen en `getByText`; usar `{ includeHiddenElements: true }` solo para elementos decorativos.
 - Base UI nombra el grupo y el primer campo del `OTPField` con la misma etiqueta: en los `play`, `getByRole('textbox', { name })` en vez de `getByLabelText`.
 - `test:storybook` puede fallar en frío con "iframe did not become ready" o "Failed to fetch dynamically imported module": repetir con `--force` antes de buscar un error de código.
+
+## 2026-10-20 — PR 7: Table con orden y selección
+
+**Qué:** `Table` ordenable y con selección de filas; `Checkbox` con `indeterminate` y `hideLabel`; `Switch` con `hideLabel`. La lógica vive en `Table/useTableState.ts`, compartida por web y native (sin imports de plataforma).
+
+**Decisiones**
+- Orden: `localeCompare` con `numeric` y `sensitivity: 'base'` (acentos y mayúsculas no cuentan; `F-2` < `F-10`); los vacíos van al final en ambas direcciones; es estable.
+- `manualSorting` para orden en el servidor: la tabla solo muestra el indicador y avisa.
+- La selección se informa con las claves en el orden original de `rows`, no en el visual, y descarta las claves de filas que ya no existen.
+- En native no existe `aria-sort`: la dirección va en la etiqueta del botón ("Total, orden ascendente"). Los textos de los botones web usan la misma etiqueta.
+- Cada casilla de fila se nombra "Seleccionar <getRowLabel>" (por defecto "fila n").
+
+**Cómo se verificó:** todos los pasos de `ci.yml` en local (ver `AGENTS.md`).
+
+**Lecciones**
+- Un test que compara el orden de filas por texto deja claro el comportamiento; el de "F-2 antes que F-10" evita el orden alfabético simple.
+- Al repartir relleno entre un botón y su texto (native) hay que dar un slot solo de texto: aplicar la misma clase a los dos duplica el relleno.

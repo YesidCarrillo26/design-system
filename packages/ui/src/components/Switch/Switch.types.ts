@@ -12,6 +12,11 @@ export interface SwitchBaseProps {
   /** Se invoca con el nuevo estado al cambiar. */
   onCheckedChange?: (checked: boolean) => void;
   /**
+   * Oculta el texto sin quitar el nombre accesible (p. ej. en filas de ajustes que ya tienen su propio título).
+   * @default false
+   */
+  hideLabel?: boolean;
+  /**
    * Deshabilita el control.
    * @default false
    */

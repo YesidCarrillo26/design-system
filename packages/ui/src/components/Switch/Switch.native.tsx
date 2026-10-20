@@ -9,7 +9,7 @@ const switchNativeStyles = tv({ extend: switchStyles, slots: { root: 'active:opa
 export type SwitchProps = SwitchBaseProps;
 
 /** Interruptor accesible (`role="switch"`). */
-export function Switch({ label, checked, defaultChecked = false, onCheckedChange, disabled = false, className }: SwitchProps) {
+export function Switch({ label, checked, defaultChecked = false, onCheckedChange, hideLabel = false, disabled = false, className }: SwitchProps) {
   const [value, setValue] = useControllableState({ value: checked, defaultValue: defaultChecked, onChange: onCheckedChange });
   const s = switchNativeStyles({ checked: value, disabled });
   return (
@@ -17,7 +17,7 @@ export function Switch({ label, checked, defaultChecked = false, onCheckedChange
       <View className={s.track()}>
         <View className={s.thumb()} />
       </View>
-      <Text className={s.label()}>{label}</Text>
+      {hideLabel ? null : <Text className={s.label()}>{label}</Text>}
     </Pressable>
   );
 }
