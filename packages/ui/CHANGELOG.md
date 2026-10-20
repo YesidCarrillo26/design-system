@@ -1,5 +1,64 @@
 # @chroma-yesid/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- c42dee5: Componentes nuevos, en web y native.
+
+  - **`Alert`:** mensaje de estado dentro de la página (`neutral|info|success|warning|destructive`), con `title`, ícono por tono, `action`, `onDismiss` y `layout="banner"`. No anuncia nada salvo que se pida con `live`.
+  - **`Progress`:** barra o anillo (`variant`), `size`, `tone`, `showValue`; indeterminado con `value={null}`. `label` es obligatorio. Respeta movimiento reducido.
+  - **`SegmentedControl`:** elegir una vista entre pocas; usa radios reales en web (flechas del teclado) y `radiogroup` en native.
+  - **`Chip`:** etiqueta que puede alternarse (`aria-pressed`) y/o quitarse; el botón de quitar es un hermano, no está anidado.
+  - **`Kbd`:** una tecla o atajo.
+  - **`Spinner` (native):** ahora expone `role="progressbar"` y es accesible para lectores de pantalla.
+  - **Tokens:** `web.css` define `animate-indeterminate` y su `@keyframes`.
+
+- 3a32eed: **`CommandPalette`:** búsqueda y acciones rápidas por grupos (`groups` con `label` e `items`; cada comando con `label`, `description`, `icon`, `shortcut`, `keywords` y `onSelect`). En web es un diálogo con Base UI `Autocomplete` en línea: el foco inicial va al buscador, flechas para moverse, Enter para elegir, Escape para cerrar, y un pie con las teclas. Filtra sin distinguir acentos ni mayúsculas, también por `keywords`, y oculta los grupos sin coincidencias. En native es una hoja alta con búsqueda y lista agrupada, sin atajos.
+
+  También: el `listbox` de `Combobox` web tiene ahora nombre accesible.
+
+- 16ab641: Mejoras a componentes existentes, con los tokens de estado y las superficies nuevas.
+
+  - **`Button`:** variantes `ghost` y `destructive`; props `loading` (spinner, `aria-busy` + `aria-disabled`, mantiene el foco y bloquea `onPress`), `leadingIcon`, `trailingIcon` y `fullWidth`. `outline` pasa a `bg-card` con borde `input`.
+  - **`Badge`:** `tone` (`neutral|primary|success|warning|info|destructive`) × `appearance` (`solid|subtle|outline`) e `icon`. `variant` sigue funcionando pero está obsoleto.
+  - **`Toast`:** variantes `success`, `warning` e `info` con su ícono de estado; `title` y `action`. Corrige el color del ícono de cerrar sobre `destructive`.
+  - **`TextField`:** `leadingIcon`, `trailingIcon`, `prefix` y `suffix`. **Cambio:** `className` ahora va al contenedor con borde, no al `<input>`.
+  - **`Card`:** `variant` (`default|muted|outline`) y padding `sm`.
+  - **`Tabs`:** `variant="pill"` (control segmentado) además del subrayado.
+  - **`Icon`:** 20 íconos nuevos (search, chevrons, flechas, minus, circle-check/alert/x, eye, eye-off, settings, bell, user, mail, lock) y tonos `success`, `warning`, `info`, `on-destructive`, `on-success`, `on-warning`, `on-info`.
+  - **`Spinner`:** prop `tone` (incluye `on-*` para usarlo sobre un relleno).
+
+- 24b59b2: Los overlays tienen animación de entrada y salida, con las duraciones y curvas de los tokens y respetando "Reducir movimiento".
+
+  - **Web:** `Dialog`, `Sheet`, `Popover`, `Menu` y `Tooltip` se funden (con escala leve, o subiendo desde abajo en `Sheet`); el velo se funde aparte. El `Toast` entra con una transición corta.
+  - **Native:** `Dialog`, `Popover`, `Menu`, `Select` y `Sheet` dejan de usar el `animationType` del `Modal` de React Native: el velo y el panel se animan por separado con `Animated` (sin Reanimated) y el contenido espera a que termine la salida antes de desmontarse. El velo ya no sube junto con la hoja.
+
+- 44e4f00: Componentes nuevos, en web y native.
+
+  - **`OtpInput`:** código de un solo uso en casillas (`length`, `numeric` o `alphanumeric`, `mask`, `onComplete`). En web usa Base UI `OTPField` (pegar, autocompletar del SMS, flechas); en native, un único `TextInput` invisible con `oneTimeCode` / `sms-otp`. Cada casilla web tiene nombre accesible ("Carácter n de N").
+  - **`Combobox`:** `Select` con búsqueda para listas largas; mismas props que `Select` más `searchPlaceholder` y `emptyText`. Filtra sin distinguir acentos ni mayúsculas (`Bogotá` coincide con `bogota`). En web, Base UI `Combobox` con el campo dentro del popup; en native, una hoja inferior con campo de búsqueda.
+
+- 8c690c4: Patrones de producto y `ListItem` como componente.
+
+  - **`ListItem`** pasa de patrón a componente (la importación desde `@chroma-yesid/ui` no cambia) para poder ser pulsable: `onPress` (toda la fila es un botón), `value`, `showChevron`, `destructive` y `disabled`. Sin `onPress` se comporta como antes.
+  - **`SelectableCardGroup`:** tarjetas grandes elegibles, `single` (radios) o `multiple` (casillas) con `maxSelected`; `value` es siempre una lista, en el orden de `options`.
+  - **`SettingsGroup`** (patrón): título, tarjeta con filas separadas y nota al pie; los `ListItem` de dentro omiten su borde.
+  - **`OnboardingStep`** (patrón): progreso, título, contenido y acciones principal y secundaria.
+  - **`StatCard`** (patrón): indicador con cifra, variación (signo visible, `sentiment` independiente de la dirección), comparación y estado de carga.
+
+- 6a4b29c: `Table` con orden y selección de filas; `Checkbox` y `Switch` con texto oculto.
+
+  - **`Table`:** columnas `sortable` (ascendente → descendente → sin ordenar; `sortValue`, `sort` / `defaultSort` / `onSortChange` y `manualSorting` para ordenar en el servidor). Orden estable, sin distinguir acentos ni mayúsculas, con números naturales (`F-2` antes que `F-10`) y vacíos al final. En web, `aria-sort` y un botón en el encabezado; en native, el botón anuncia el orden en su etiqueta.
+  - **`Table` `selectable`:** columna de casillas con "seleccionar todas" en estado mixto; `selectedKeys` / `defaultSelectedKeys` / `onSelectionChange` (claves en el orden de `rows`) y `getRowLabel` para nombrar cada fila a los lectores de pantalla.
+  - **`Checkbox`:** `indeterminate` (se anuncia como `mixed`) y `hideLabel`.
+  - **`Switch`:** `hideLabel`.
+
+### Patch Changes
+
+- Updated dependencies [c42dee5]
+  - @chroma-yesid/tokens@0.4.0
+
 ## 0.2.0
 
 ### Minor Changes
