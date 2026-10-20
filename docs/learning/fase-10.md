@@ -93,3 +93,19 @@ valor y nada usa aún los estilos nuevos.
 - En Jest las animaciones terminan al instante: para probar el orden (salida y luego desmontar) hay que espiar `Animated.timing`.
 - `sed -i` de BSD (macOS) exige `-i ''`; con comillas en el script lo toma como extensión.
 - Pendiente de verificar a mano: cómo se sienten las animaciones en el simulador y que la hoja native sube bien con la altura real (usa la altura de la ventana como recorrido).
+
+## 2026-10-20 — PR 5: Alert, Progress, Chip, SegmentedControl y Kbd
+
+**Qué:** cinco componentes nuevos con su contrato, variantes compartidas, stories (citan la referencia de Mobbin), `play` web y test native. Más el `@keyframes` del progreso indeterminado en los tokens (aplazado desde el PR 1).
+
+**Decisiones**
+- `Progress` no usa el `Progress` de Base UI: el marcado propio (`role="progressbar"` + `aria-value*`) es idéntico en web y native y comparte el cálculo. El anillo indeterminado en native reutiliza `Spinner`.
+- `Alert` no anuncia nada por defecto (`live=false`): un mensaje fijo no debe interrumpir al lector de pantalla. Con `live`, `alert` para error y advertencia, `status` para el resto. En native el rol va en el texto, no en el contenedor, para no ocultar el botón de cerrar.
+- `Chip` solo es botón de alternancia si recibe `selected`, `defaultSelected` u `onSelectedChange`; si no, es una etiqueta (un botón sin función engaña). El botón de quitar es hermano, nunca está anidado.
+- Con movimiento reducido el progreso indeterminado queda como una barra llena y atenuada, no como una animación a 1ms (que lo dejaría fuera de la pista).
+
+**Cómo se verificó:** todos los pasos de `ci.yml` en local; 203 tests web (con a11y) y 64 native.
+
+**Lecciones**
+- `getByRole` de Testing Library exige `accessible`: `ActivityIndicator` con `accessibilityRole` no basta. Se corrigió en `Spinner`, lo que además mejora la accesibilidad real.
+- Si turbo falla en una tarea, cancela las demás: un fallo en `test:storybook` puede ser solo la cancelación. Repite esa tarea sola antes de buscar un error.
