@@ -1,6 +1,6 @@
 # Tareas pendientes
 
-Lista para continuar más adelante. Estado al 2026-10-20, tras la Fase 10 (siguiente nivel visual, ver `docs/learning/fase-10.md`); la última versión publicada es la `0.1.2` y el PR "Version Packages" con la Fase 10 espera a que se fusione. Referencias: plan en `docs/plan/plan-inicial.md`, bitácoras en `docs/learning/`, errores en `docs/learning/errores-y-soluciones.md`.
+Lista para continuar más adelante. Estado al 2026-10-20, tras la Fase 10 (siguiente nivel visual, ver `docs/learning/fase-10.md`); la Fase 10 está publicada en npm (`@chroma-yesid/ui@0.3.0` y `@chroma-yesid/tokens@0.4.0`, con procedencia firmada). Referencias: plan en `docs/plan/plan-inicial.md`, bitácoras en `docs/learning/`, errores en `docs/learning/errores-y-soluciones.md`.
 
 ## 1. Acciones tuyas (bloquean cosas ya preparadas)
 
@@ -34,8 +34,8 @@ Un PR por fase; cada merge lo aprueba la persona.
 - [x] **PR 6 fusionado — `OtpInput` y `Combobox`** (sin agrupación en `Combobox` por ahora).
 - [x] **PR 7 fusionado — `Table` con orden y selección de filas.**
 - [x] **PR 8 fusionado — patrones:** `SettingsGroup`, `OnboardingStep`, `StatCard`, `SelectableCardGroup`; `ListItem` pasa a componente.
-- [~] **PR 9 — `CommandPalette` y cierre** (guía, READMEs, skill `chroma-design-system`, buenas prácticas).
-- [ ] **Publicar la Fase 10:** fusionar el PR "Version Packages" (sube `tokens` y `ui` a una versión minor; hay cambios visuales y de API, ver los changesets) y comprobar la publicación con procedencia.
+- [x] **PR 9 fusionado — `CommandPalette` y cierre** (guía, READMEs, skill `chroma-design-system`, buenas prácticas).
+- [x] **Publicar la Fase 10** (2026-10-20): "Version Packages" fusionado; `release.yml` publicó `ui@0.3.0` y `tokens@0.4.0` con procedencia SLSA. Probado como consumidor (ver `docs/learning/fase-10.md`).
 - [ ] **Probar la Fase 10 a mano:** en el simulador iOS y en Android, las animaciones de overlays, pegar y autocompletar en `OtpInput`, el teclado sobre las hojas de `Combobox` y `CommandPalette`, y la hoja que sube desde abajo.
 - [ ] **Mejoras que quedaron fuera:** agrupación de opciones en `Combobox`; `Card` interactiva (como componente pulsable aparte); animación de salida del `Toast`.
 

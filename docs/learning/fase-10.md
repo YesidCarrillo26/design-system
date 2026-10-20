@@ -177,3 +177,18 @@ valor y nada usa aún los estilos nuevos.
 9 PR: tokens de fundación, superficies y tipografía, mejoras a componentes, movimiento de overlays, componentes de feedback y selección, OTP y Combobox, Table con orden y selección, patrones de producto y paleta de comandos. El sistema pasó de 31 componentes y 3 patrones a más de 45 componentes y 5 patrones, con 36 colores semánticos por tema (antes 12), jerarquía tipográfica y animación de overlays.
 
 **Pendiente tras la fase** (ver `docs/pendientes.md`): probar a mano en el simulador iOS y en Android las animaciones, el pegado en `OtpInput` y el teclado sobre las hojas; agrupación de opciones en `Combobox`; revisión visual en Chromatic; publicar la versión con el PR "Version Packages".
+
+## 2026-10-20 — Publicación y prueba como consumidor
+
+**Qué:** el PR "Version Packages" publicó `@chroma-yesid/ui@0.3.0` y `@chroma-yesid/tokens@0.4.0` (procedencia SLSA verificada con `npm view <pkg>@<versión> dist.attestations`). Las versiones anteriores de la fase ya se habían publicado en `ui@0.2.0` / `tokens@0.3.0` al fusionar los "Version Packages" intermedios, así que los números no coinciden con los previstos en el plan.
+
+**Prueba como consumidor** (proyecto vacío fuera del repo, lo **publicado** en npm, no el código local):
+- `npm install react@19 @chroma-yesid/ui@0.3.0` sin `--force`: sin errores de peers; `tokens@0.4.0` llega como dependencia.
+- Una pantalla con 20 componentes de la fase (Alert, Progress, Combobox, OtpInput, Table con orden y selección, CommandPalette, SettingsGroup, StatCard…): `tsc` sin errores con `skipLibCheck: false` (los tipos publicados son correctos), `vite build` con Tailwind v4 en verde.
+- CSS generado: existen `text-display`, `bg-card`, `bg-popover`, `bg-success-subtle`, `bg-overlay`, `animate-indeterminate` (con su `@keyframes`), `opacity-disabled`, `z-popover` y `data-starting-style`; **no** existen `text-xs`, `font-light`, `text-2xl` ni `bg-red-500` (el reset funciona).
+- El bundle web no contiene `react-native`.
+- Render en servidor con `renderToString`: sin errores y con `h1`, `role="progressbar"` y `aria-sort` en el HTML.
+
+**Lecciones:** un script de prueba fuera del `include` del tsconfig usa el JSX clásico y falla con "React is not defined": se confunde con un fallo del paquete. Ponlo dentro de `src/`.
+
+**No cubierto:** la versión native (Expo/Uniwind) del paquete publicado: solo está probada con los tests de Jest y el export de Metro del repo.
