@@ -14,3 +14,6 @@ type Story = StoryObj<typeof meta>;
 export const Off: Story = {};
 export const On: Story = { args: { defaultChecked: true } };
 export const Disabled: Story = { args: { disabled: true } };
+
+/** Sin texto visible: el nombre accesible se conserva. */
+export const HiddenLabel: Story = { args: { label: 'Notificaciones', hideLabel: true } };

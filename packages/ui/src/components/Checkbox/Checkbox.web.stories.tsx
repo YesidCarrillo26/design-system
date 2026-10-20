@@ -31,3 +31,18 @@ export const TogglesWithSpace: Story = {
     await expect(canvas.getByRole('checkbox')).not.toBeChecked();
   },
 };
+
+export const IndeterminateIsAnnouncedAsMixed: Story = {
+  args: { label: 'Seleccionar todas', indeterminate: true },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('checkbox', { name: 'Seleccionar todas' })).toBePartiallyChecked();
+  },
+};
+
+export const HiddenLabelKeepsTheAccessibleName: Story = {
+  args: { label: 'Seleccionar fila 1', hideLabel: true },
+  play: async ({ canvas, args, userEvent }) => {
+    await userEvent.click(canvas.getByRole('checkbox', { name: 'Seleccionar fila 1' }));
+    await expect(args.onCheckedChange).toHaveBeenLastCalledWith(true);
+  },
+};

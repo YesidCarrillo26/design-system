@@ -1,8 +1,11 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react-native';
+import { render, screen, userEvent } from '@testing-library/react-native';
+import { fn } from 'storybook/test';
 import * as stories from './Table.stories';
 
-const { Default, Empty } = composeStories(stories);
+const { Default, Empty, Sortable, SortedByTotalDescending, Selectable } = composeStories(stories);
+
+jest.useFakeTimers();
 
 // Un `View` con `role` no es un elemento de accesibilidad si no es `accessible`, así que
 // `getByRole` no lo encuentra. Se cuenta la estructura en el árbol renderizado.
@@ -48,5 +51,71 @@ describe('Table (native)', () => {
 
     expect(screen.getByText('No hay facturas')).toBeOnTheScreen();
     expect(countRole(tree(), 'row')).toBe(1);
+  });
+
+  describe('orden', () => {
+    const clients = () => screen.getAllByText(/Lovelace|Hopper|Turing/).map((node) => node.props.children as string);
+
+    test('el botón del encabezado recorre ascendente → descendente → sin ordenar y lo anuncia', async () => {
+      const user = userEvent.setup();
+      const onSortChange = fn();
+      await render(<Sortable onSortChange={onSortChange} />);
+
+      await user.press(screen.getByRole('button', { name: 'Total, ordenar' }));
+      expect(clients()).toEqual(['Grace Hopper', 'Ada Lovelace', 'Alan Turing']);
+      expect(onSortChange).toHaveBeenLastCalledWith({ key: 'total', direction: 'asc' });
+
+      await user.press(screen.getByRole('button', { name: 'Total, orden ascendente' }));
+      expect(clients()).toEqual(['Alan Turing', 'Ada Lovelace', 'Grace Hopper']);
+
+      await user.press(screen.getByRole('button', { name: 'Total, orden descendente' }));
+      expect(clients()).toEqual(['Ada Lovelace', 'Grace Hopper', 'Alan Turing']);
+      expect(onSortChange).toHaveBeenLastCalledWith(null);
+    });
+
+    test('arranca con el orden inicial', async () => {
+      await render(<SortedByTotalDescending />);
+
+      expect(clients()).toEqual(['Alan Turing', 'Ada Lovelace', 'Grace Hopper']);
+      expect(screen.getByRole('button', { name: 'Total, orden descendente' })).toBeOnTheScreen();
+    });
+
+    test('una columna sin sortable no es un botón', async () => {
+      await render(<Default />);
+
+      expect(screen.queryByRole('button', { name: /ordenar/ })).not.toBeOnTheScreen();
+    });
+  });
+
+  describe('selección', () => {
+    test('elegir una fila notifica sus claves y deja "seleccionar todas" en estado mixto', async () => {
+      const user = userEvent.setup();
+      const onSelectionChange = fn();
+      await render(<Selectable defaultSelectedKeys={[]} onSelectionChange={onSelectionChange} />);
+
+      await user.press(screen.getByRole('checkbox', { name: 'Seleccionar Grace Hopper' }));
+
+      expect(onSelectionChange).toHaveBeenLastCalledWith(['F-002']);
+      expect(screen.getByRole('checkbox', { name: 'Seleccionar todas las filas' })).toBePartiallyChecked();
+    });
+
+    test('"seleccionar todas" elige y desmarca todas las filas', async () => {
+      const user = userEvent.setup();
+      const onSelectionChange = fn();
+      await render(<Selectable defaultSelectedKeys={[]} onSelectionChange={onSelectionChange} />);
+
+      await user.press(screen.getByRole('checkbox', { name: 'Seleccionar todas las filas' }));
+      expect(onSelectionChange).toHaveBeenLastCalledWith(['F-001', 'F-002', 'F-003']);
+      expect(screen.getByRole('checkbox', { name: 'Seleccionar todas las filas' })).toBeChecked();
+
+      await user.press(screen.getByRole('checkbox', { name: 'Seleccionar todas las filas' }));
+      expect(onSelectionChange).toHaveBeenLastCalledWith([]);
+    });
+
+    test('sin selectable no hay casillas', async () => {
+      await render(<Default />);
+
+      expect(screen.queryByRole('checkbox')).not.toBeOnTheScreen();
+    });
   });
 });
