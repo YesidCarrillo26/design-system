@@ -10,7 +10,7 @@ const code = readdirSync(dir)
   .map((file) => readFileSync(join(dir, file), 'utf8'))
   .join('\n');
 
-const mustHave = ['active:opacity-80']; // feedback al presionar: solo native
+const mustHave = ['active:opacity-pressed']; // feedback al presionar: solo native
 const mustNotHave = ['hover:opacity-90', 'focus-visible:ring-2', '@base-ui']; // solo web
 
 const problems = [
