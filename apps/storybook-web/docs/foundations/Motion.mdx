@@ -18,3 +18,11 @@ Tres duraciones y tres curvas. En web se usan como variables CSS; en native est�
 
 ## Breakpoints
 <TokenTable type="breakpoint" />
+
+## Overlays
+
+Diálogos, hojas, popovers, menús y tooltips entran y salen con una transición. Los overlays centrados y anclados (diálogo, popover, menú) se funden con una escala leve; las hojas suben desde abajo; el tooltip solo se funde; el velo siempre se funde por separado. La salida es más corta que la entrada (`fast` frente a `base`, `slow` en la hoja) y usa la curva `in`.
+
+- **Web:** clases de `lib/overlayMotion.web.ts` sobre los atributos `data-starting-style` / `data-ending-style` de Base UI. El `Toast` entra con `starting:` y se quita sin animación de salida.
+- **Native:** `lib/Modal.native.tsx` anima con `Animated` de React Native (sin Reanimated) y mantiene el contenido montado hasta que termina la salida.
+- **Movimiento reducido:** en web el CSS global lleva las duraciones a 1ms; en native las animaciones duran 0 con "Reducir movimiento".

@@ -80,3 +80,16 @@ valor y nada usa aún los estilos nuevos.
 **Lecciones**
 - ⚠️ Al probar un cambio a propósito, no restaures con `git checkout --` un archivo con cambios sin commitear: borra el trabajo. Haz una copia antes o commitea primero.
 - En stories **compartidas** no uses `div`: rompe en native. Usa `Stack`.
+
+## 2026-10-20 — PR 4: movimiento de overlays
+
+**Qué:** entrada y salida animadas en `Dialog`, `Sheet`, `Popover`, `Menu`, `Tooltip` (web) y `Dialog`, `Popover`, `Menu`, `Select`, `Sheet` (native); `Toast` web entra con `starting:`. Decisión y motivos en el ADR 0006 (sin Reanimated).
+
+**Cómo se verificó:** todos los pasos de `ci.yml` en local; 51 tests native. Se comprobó con el compilador de Tailwind que `data-starting-style:`, `data-ending-style:`, `origin-(--transform-origin)` y `starting:` generan CSS. El test de `Modal` falla si se rompe la regla de movimiento reducido.
+
+**Lecciones**
+- ⚠️ El lint con React Compiler rechaza `setState` síncrono dentro de un efecto y leer `ref.current` en render. Para un valor animado, `useState(() => new Animated.Value(0))`; para "montado hasta que acabe la salida", ajustar el estado durante el render al abrir y desmontar desde el callback de la animación.
+- Un `View` con `role="dialog"` no cuenta como accesible para Testing Library; un `Pressable` sí. No cambiar el contenedor sin pensar en cómo lo ven los lectores de pantalla.
+- En Jest las animaciones terminan al instante: para probar el orden (salida y luego desmontar) hay que espiar `Animated.timing`.
+- `sed -i` de BSD (macOS) exige `-i ''`; con comillas en el script lo toma como extensión.
+- Pendiente de verificar a mano: cómo se sienten las animaciones en el simulador y que la hoja native sube bien con la altura real (usa la altura de la ventana como recorrido).

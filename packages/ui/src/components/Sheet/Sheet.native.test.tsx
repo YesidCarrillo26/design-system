@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, userEvent } from '@testing-library/react-native';
+import { render, screen, userEvent, waitFor } from '@testing-library/react-native';
 import * as stories from './Sheet.stories';
 
 const { Default } = composeStories(stories);
@@ -14,6 +14,6 @@ describe('Sheet (native)', () => {
     expect(screen.getByRole('dialog', { name: 'Filtros' })).toBeOnTheScreen();
 
     await user.press(screen.getByRole('button', { name: 'Cerrar' }));
-    expect(screen.queryByRole('dialog')).not.toBeOnTheScreen();
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeOnTheScreen());
   });
 });

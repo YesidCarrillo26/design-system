@@ -1,6 +1,7 @@
 'use client';
 
 import { Popover as BasePopover } from '@base-ui/react/popover';
+import { overlayMotion } from '../../lib/overlayMotion.web';
 import { tv } from '../../lib/tv';
 import type { PopoverBaseProps } from './Popover.types';
 import { popoverStyles } from './popover.variants';
@@ -14,7 +15,7 @@ const popoverWebStyles = tv({
       'focus-visible:ring-offset-2 focus-visible:ring-offset-background',
     ],
     triggerLabel: 'inline-flex',
-    popup: 'flex max-w-xs flex-col outline-none',
+    popup: ['flex max-w-xs flex-col outline-none', ...overlayMotion.popupScale],
   },
 });
 

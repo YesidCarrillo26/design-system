@@ -28,8 +28,8 @@ Un PR por fase; cada merge lo aprueba la persona.
 
 - [x] **PR 1** fusionado.
 - [x] **PR 2** fusionado (superficies y tipografía aplicadas).
-- [~] **PR 3 — mejoras a componentes existentes:** `Button`, `Badge`, `Toast`, `TextField`, `Card`, `Tabs`, `Icon`, `Spinner` (sin `interactive` en `Card`, ver `fase-10.md`).
-- [ ] **PR 4 — movimiento de overlays** (web con `data-starting-style`; native con `Animated`, sin Reanimated; ADR 0006).
+- [x] **PR 3 fusionado — mejoras a componentes existentes:** `Button`, `Badge`, `Toast`, `TextField`, `Card`, `Tabs`, `Icon`, `Spinner` (sin `interactive` en `Card`, ver `fase-10.md`).
+- [~] **PR 4 — movimiento de overlays** (web con `data-starting-style`; native con `Animated`, sin Reanimated; ADR 0006). Falta probarlo a mano en el simulador.
 - [ ] **PR 5 — `Alert`, `Progress`, `Chip`, `SegmentedControl`, `Kbd`.**
 - [ ] **PR 6 — `OtpInput` y `Combobox`.**
 - [ ] **PR 7 — `Table` con orden y selección de filas.**
@@ -42,7 +42,7 @@ Un PR por fase; cada merge lo aprueba la persona.
 - [ ] **Addon propio "Platform Parity"** (`packages/storybook-addon-parity`): panel que lee `parameters.platforms`, enlaza la story equivalente en native y muestra una captura; estados en el sidebar.
 - [ ] **Migrar a CSF Next** (`preview.meta`, `meta.story`, `.test()`): primero las stories web-only. Las compartidas siguen en CSF3 hasta comprobar soporte en Storybook native.
 - [ ] **i18n y RTL:** globals `locale` y `dir` con un decorador; en React Native `I18nManager` exige recargar; comprobar `rtl:` en Uniwind.
-- [ ] **Movimiento:** tokens ya existen; faltan las animaciones de entrada/salida de overlays (CSS en web, Reanimated en native). `prefers-reduced-motion` global ya está hecho (web y native, ver `docs/learning/fase-9.md`); las animaciones nuevas deben respetarlo.
+- [~] **Movimiento:** animaciones de entrada/salida de overlays hechas en el PR 4 de la Fase 10 (CSS en web, `Animated` en native, sin Reanimated). `prefers-reduced-motion` global ya está hecho (web y native, ver `docs/learning/fase-9.md`); las animaciones nuevas deben respetarlo.
 - [ ] **Figma:** `parameters.design` (addon-designs ya instalado) y Code Connect; Figma Variables → DTCG.
 - [ ] **Paquete de iconos** (SVGR + `react-native-svg`) en lugar de la lista de paths en `Icon/icons.ts`.
 - [ ] **Multi-marca:** `extraThemes` de Uniwind y temas extra en `web.css`.
