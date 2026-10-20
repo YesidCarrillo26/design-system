@@ -31,3 +31,8 @@ test('web.css define pesos, capas y opacidades', () => {
   assert.match(css, /--z-index-overlay: 40;/);
   assert.match(css, /--opacity-disabled: 0\.5;/);
 });
+
+test('web.css define la animación del progreso indeterminado', () => {
+  assert.match(css, /--animate-indeterminate: indeterminate 1\.4s/);
+  assert.match(css, /@keyframes indeterminate/);
+});

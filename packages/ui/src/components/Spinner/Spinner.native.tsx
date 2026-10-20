@@ -21,7 +21,8 @@ export function Spinner({ size = 'md', tone = 'primary', label = 'Cargando' }: S
       size={size === 'lg' ? 'large' : 'small'}
       color={color}
       accessibilityLabel={label}
-      accessibilityRole="progressbar"
+      role="progressbar"
+      accessible
     />
   );
 }

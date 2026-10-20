@@ -153,6 +153,18 @@ ${lines(ease.map((t) => `  --ease-${t.path[1]}: ${t.value};`))}
 ${lines(breakpoint.map((t) => `  --breakpoint-${t.path[1]}: ${toRem(t.value)};`))}
 
 ${lines(families.map((f) => `  --font-${f}: ${fontValue(f, 'web')};`))}
+
+  /* Barra de progreso indeterminada: un tramo que cruza la pista (utilidad animate-indeterminate). */
+  --animate-indeterminate: indeterminate 1.4s var(--ease-standard) infinite;
+
+  @keyframes indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(250%);
+    }
+  }
 }
 
 /* Duraciones: no son un namespace de Tailwind; se usan como duration-(--ds-duration-base). */

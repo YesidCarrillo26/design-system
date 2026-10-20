@@ -29,8 +29,8 @@ Un PR por fase; cada merge lo aprueba la persona.
 - [x] **PR 1** fusionado.
 - [x] **PR 2** fusionado (superficies y tipografía aplicadas).
 - [x] **PR 3 fusionado — mejoras a componentes existentes:** `Button`, `Badge`, `Toast`, `TextField`, `Card`, `Tabs`, `Icon`, `Spinner` (sin `interactive` en `Card`, ver `fase-10.md`).
-- [~] **PR 4 — movimiento de overlays** (web con `data-starting-style`; native con `Animated`, sin Reanimated; ADR 0006). Falta probarlo a mano en el simulador.
-- [ ] **PR 5 — `Alert`, `Progress`, `Chip`, `SegmentedControl`, `Kbd`.**
+- [x] **PR 4 fusionado — movimiento de overlays** (web con `data-starting-style`; native con `Animated`, sin Reanimated; ADR 0006). Falta probarlo a mano en el simulador.
+- [~] **PR 5 — `Alert`, `Progress`, `Chip`, `SegmentedControl`, `Kbd`.**
 - [ ] **PR 6 — `OtpInput` y `Combobox`.**
 - [ ] **PR 7 — `Table` con orden y selección de filas.**
 - [ ] **PR 8 — patrones:** `SettingsGroup`, `OnboardingStep`, `StatCard`, `SelectableCardGroup`; `ListItem` pasa a componente.
