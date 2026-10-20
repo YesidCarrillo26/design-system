@@ -52,6 +52,15 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - **Flujo de cambios:** `main` está protegida (exige PR y el check `verify`; solo `--rebase` o squash). Rama → PR → `gh pr merge --rebase`.
 - **Secretos:** nunca en el repo. Los tokens de Chromatic y npm van solo en GitHub secrets. 
 
+## Antes de abrir o actualizar un PR
+
+Reproduce en local **todos** los pasos de `.github/workflows/ci.yml`, no solo `turbo`: `pnpm lint`, `pnpm knip`,
+`pnpm turbo run typecheck test:unit build test:storybook test:native`, en `packages/ui` `npx publint`,
+`pnpm check:peers` y `npx attw --pack . --profile esm-only --exclude-entrypoints web.css native.css`,
+`pnpm turbo run build-storybook --filter=@chroma-yesid/storybook-native-web && pnpm --filter @chroma-yesid/storybook-native-web check:bundle`
+y `! grep -rlE 'from.?.react-native.' examples/next-app/.next/static`. Si renombras una clase, busca también
+en `scripts/` y tests: `check-bundle.mjs` busca clases concretas.
+
 ## Storybook MCP (agentes)
 
 Con `pnpm storybook` corriendo, el servidor MCP está en `http://localhost:6006/mcp` (ver `.mcp.json`).
