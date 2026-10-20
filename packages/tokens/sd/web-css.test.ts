@@ -15,3 +15,19 @@ test('web.css no desactiva el movimiento fuera de la media query', () => {
   const outside = css.slice(0, css.indexOf('@media (prefers-reduced-motion: reduce)'));
   assert.doesNotMatch(outside, /animation-duration: 1ms/);
 });
+
+test('web.css elimina los tamaños y pesos por defecto de Tailwind', () => {
+  assert.match(css, /--text-\*: initial;/);
+  assert.match(css, /--font-weight-\*: initial;/);
+});
+
+test('web.css define el espaciado entre letras en em, relativo al tamaño de cada texto', () => {
+  assert.match(css, /--text-display--letter-spacing: -0\.022em;/);
+  assert.match(css, /--text-overline--letter-spacing: 0\.04em;/);
+});
+
+test('web.css define pesos, capas y opacidades', () => {
+  assert.match(css, /--font-weight-semibold: 600;/);
+  assert.match(css, /--z-index-overlay: 40;/);
+  assert.match(css, /--opacity-disabled: 0\.5;/);
+});

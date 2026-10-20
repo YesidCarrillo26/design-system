@@ -7,6 +7,25 @@ import { ColorSwatches } from '../blocks/ColorSwatches';
 
 Solo existen **colores semánticos**: describen el rol (`primary`, `foreground`…) y no el tono. Cada uno tiene un valor por tema, así que los componentes no necesitan variantes `dark:`. Cambia el tema en la barra superior.
 
-<ColorSwatches />
-
 Uso: `bg-primary`, `text-muted-foreground`, `border-border`. Funcionan igual en web (Tailwind) y native (Uniwind).
+
+## Cómo elegir
+
+- **Superficies:** `background` es la página; `card` y `popover` van encima (tarjetas, tablas, campos; diálogos, menús). Cada una trae su `*-foreground` para el texto.
+- **Estados:** `destructive`, `success`, `warning` e `info` tienen cuatro tokens cada uno:
+
+| Token | Para qué |
+|---|---|
+| `success` | Relleno (botón, insignia sólida, barra de progreso) |
+| `success-foreground` | Texto sobre ese relleno |
+| `success-subtle` | Fondo suave (alertas, insignias suaves) |
+| `success-subtle-foreground` | **Texto e iconos de estado**, sobre `success-subtle`, `background` o `card` |
+
+- **No uses `warning` como color de texto**: el ámbar sobre blanco da 2.15:1. Para escribir "advertencia" usa `warning-subtle-foreground`.
+- **Bordes:** `border` separa; `input` delimita los controles de formulario. Son decorativos: ningún control depende solo de su borde para ser reconocible.
+- **Capas:** `overlay` es el velo detrás de diálogos y hojas (semitransparente, distinto en cada tema).
+- **Opacidad:** para un tinte usa el modificador estándar, p. ej. `border-success-subtle-foreground/20`.
+
+El contraste de cada par texto/fondo se comprueba en cada build (`packages/tokens/sd/contrast.test.ts`): 4.5:1 para texto y 3:1 para el anillo de foco, en claro y oscuro.
+
+<ColorSwatches />
