@@ -13,16 +13,15 @@ export type DialogProps = DialogBaseProps;
 export function Dialog({ open, onOpenChange, title, description, children }: DialogProps) {
   const s = dialogNativeStyles();
   return (
-    <Modal transparent animationType="fade" visible={open} onRequestClose={() => onOpenChange(false)}>
-      <Pressable className={`flex-1 items-center justify-center p-4 ${s.backdrop()}`} onPress={() => onOpenChange(false)} aria-label="Cerrar" accessible={false}>
-        {/* Un View intermedio evita que tocar el contenido cierre el diálogo. */}
-        <Pressable accessibilityViewIsModal aria-modal role="dialog" aria-label={title} className={s.popup()}>
-          <Text role="heading" className={s.title()}>{title}</Text>
-          {description ? <Text className={s.description()}>{description}</Text> : null}
-          <View>{children}</View>
-          <Pressable role="button" aria-label="Cerrar" onPress={() => onOpenChange(false)} className={`${s.close()} active:bg-muted`}>
-            <Icon name="x" />
-          </Pressable>
+    <Modal visible={open} onRequestClose={() => onOpenChange(false)} contentClassName="p-4">
+      {/* El velo es un hermano del contenido: tocar el diálogo no lo cierra. */}
+      {/* Pressable (accesible por defecto) como contenedor del diálogo, igual que antes del movimiento. */}
+      <Pressable accessibilityViewIsModal aria-modal role="dialog" aria-label={title} className={s.popup()}>
+        <Text role="heading" className={s.title()}>{title}</Text>
+        {description ? <Text className={s.description()}>{description}</Text> : null}
+        <View>{children}</View>
+        <Pressable role="button" aria-label="Cerrar" onPress={() => onOpenChange(false)} className={`${s.close()} active:bg-muted`}>
+          <Icon name="x" />
         </Pressable>
       </Pressable>
     </Modal>

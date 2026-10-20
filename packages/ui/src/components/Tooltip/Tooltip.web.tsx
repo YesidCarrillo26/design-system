@@ -1,8 +1,12 @@
 'use client';
 
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip';
+import { overlayMotion } from '../../lib/overlayMotion.web';
+import { tv } from '../../lib/tv';
 import type { TooltipBaseProps } from './Tooltip.types';
 import { tooltipStyles } from './tooltip.variants';
+
+const tooltipWebStyles = tv({ extend: tooltipStyles, base: overlayMotion.popupFade });
 
 export type TooltipProps = TooltipBaseProps;
 
@@ -14,7 +18,7 @@ export function Tooltip({ content, children }: TooltipProps) {
         <BaseTooltip.Trigger render={children} />
         <BaseTooltip.Portal>
           <BaseTooltip.Positioner sideOffset={6}>
-            <BaseTooltip.Popup className={tooltipStyles()}>{content}</BaseTooltip.Popup>
+            <BaseTooltip.Popup className={tooltipWebStyles()}>{content}</BaseTooltip.Popup>
           </BaseTooltip.Positioner>
         </BaseTooltip.Portal>
       </BaseTooltip.Root>

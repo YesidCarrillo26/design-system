@@ -15,9 +15,8 @@ export function Menu({ trigger, label, items }: MenuProps) {
       <Pressable role="button" aria-label={label} aria-haspopup="menu" aria-expanded={open} onPress={() => setOpen(true)} className={`${base.trigger()} active:opacity-pressed`}>
         {typeof trigger === 'string' ? <Text className={base.triggerLabel()}>{trigger}</Text> : trigger}
       </Pressable>
-      <Modal transparent animationType="slide" visible={open} onRequestClose={() => setOpen(false)}>
-        <Pressable className="flex-1 justify-end bg-overlay" onPress={() => setOpen(false)} aria-label="Cerrar" accessible={false}>
-          <View role="menu" aria-label={label} className="rounded-t-lg bg-popover pb-6 pt-2">
+      <Modal visible={open} onRequestClose={() => setOpen(false)} placement="bottom">
+        <View role="menu" aria-label={label} className="rounded-t-lg bg-popover pb-6 pt-2">
             {items.map((item) => {
               const s = menuStyles({ destructive: item.destructive, disabled: item.disabled });
               return (
@@ -37,7 +36,6 @@ export function Menu({ trigger, label, items }: MenuProps) {
               );
             })}
           </View>
-        </Pressable>
       </Modal>
     </>
   );

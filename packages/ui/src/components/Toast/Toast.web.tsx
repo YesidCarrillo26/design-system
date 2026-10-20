@@ -7,7 +7,11 @@ import { ToastContext } from './ToastContext';
 import { toastCloseTone, toastIcon, toastStyles } from './toast.variants';
 import { useToastQueue } from './useToastQueue';
 
-const toastWebStyles = tv({ extend: toastStyles, slots: { item: 'pointer-events-auto' } });
+/** Entran con `starting:` (@starting-style); al cerrarse se quitan sin salida animada (el aviso ya no existe en el DOM). */
+const toastWebStyles = tv({
+  extend: toastStyles,
+  slots: { item: 'pointer-events-auto transition-[opacity,transform] duration-(--ds-duration-base) ease-out starting:translate-y-2 starting:opacity-0' },
+});
 
 export type ToastProviderProps = ToastProviderBaseProps;
 

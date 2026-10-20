@@ -1,6 +1,7 @@
 'use client';
 
 import { Dialog as BaseDialog } from '@base-ui/react/dialog';
+import { overlayMotion } from '../../lib/overlayMotion.web';
 import { tv } from '../../lib/tv';
 import { Icon } from '../Icon';
 import type { DialogBaseProps } from './Dialog.types';
@@ -9,8 +10,8 @@ import { dialogStyles } from './dialog.variants';
 const dialogWebStyles = tv({
   extend: dialogStyles,
   slots: {
-    backdrop: 'fixed inset-0',
-    popup: 'relative flex flex-col outline-none',
+    backdrop: ['fixed inset-0', ...overlayMotion.backdrop],
+    popup: ['relative flex flex-col outline-none', ...overlayMotion.popupScale],
     close: [
       'inline-flex cursor-pointer hover:bg-muted',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',

@@ -1,6 +1,7 @@
 'use client';
 
 import { Menu as BaseMenu } from '@base-ui/react/menu';
+import { overlayMotion } from '../../lib/overlayMotion.web';
 import { tv } from '../../lib/tv';
 import type { MenuBaseProps } from './Menu.types';
 import { menuStyles } from './menu.variants';
@@ -13,7 +14,7 @@ const menuWebStyles = tv({
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
       'focus-visible:ring-offset-2 focus-visible:ring-offset-background',
     ],
-    popup: 'flex flex-col outline-none',
+    popup: ['flex flex-col outline-none', ...overlayMotion.popupScale],
     item: 'cursor-pointer outline-none data-[highlighted]:bg-muted data-[disabled]:cursor-not-allowed',
   },
 });

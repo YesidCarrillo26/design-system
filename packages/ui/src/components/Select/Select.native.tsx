@@ -28,8 +28,7 @@ export function Select({ label, options, value, defaultValue = '', placeholder, 
         <Text className={s.value()}>{selected?.label ?? placeholder ?? 'Selecciona…'}</Text>
         <Icon name="chevron-right" size="sm" tone="muted" />
       </Pressable>
-      <Modal transparent animationType="fade" visible={open} onRequestClose={() => setOpen(false)}>
-        <Pressable className="flex-1 justify-end bg-overlay" onPress={() => setOpen(false)} aria-label="Cerrar">
+      <Modal visible={open} onRequestClose={() => setOpen(false)} placement="bottom">
           <View role="radiogroup" aria-label={label} className="rounded-t-lg bg-popover pb-6 pt-2">
             {options.map((option) => (
               <Pressable
@@ -49,7 +48,6 @@ export function Select({ label, options, value, defaultValue = '', placeholder, 
               </Pressable>
             ))}
           </View>
-        </Pressable>
       </Modal>
     </Field>
   );

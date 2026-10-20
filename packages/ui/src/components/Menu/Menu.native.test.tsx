@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, userEvent } from '@testing-library/react-native';
+import { render, screen, userEvent, waitFor } from '@testing-library/react-native';
 import { fn } from 'storybook/test';
 import * as stories from './Menu.stories';
 
@@ -16,7 +16,7 @@ describe('Menu (native)', () => {
     await user.press(screen.getByRole('menuitem', { name: 'Renombrar' }));
 
     expect(onSelect).toHaveBeenCalledTimes(1);
-    expect(screen.queryByRole('menuitem')).not.toBeOnTheScreen();
+    await waitFor(() => expect(screen.queryByRole('menuitem')).not.toBeOnTheScreen());
   });
 
   test('una acción deshabilitada no se ejecuta', async () => {

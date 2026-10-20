@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, userEvent } from '@testing-library/react-native';
+import { render, screen, userEvent, waitFor } from '@testing-library/react-native';
 import * as stories from './Dialog.stories';
 
 const { Default } = composeStories(stories);
@@ -15,7 +15,7 @@ describe('Dialog (native)', () => {
     expect(screen.getByRole('dialog', { name: 'Eliminar proyecto' })).toBeOnTheScreen();
 
     await user.press(screen.getByRole('button', { name: 'Cancelar' }));
-    expect(screen.queryByRole('dialog')).not.toBeOnTheScreen();
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeOnTheScreen());
   });
 
   test('el botón de cerrar también lo cierra', async () => {
@@ -25,6 +25,6 @@ describe('Dialog (native)', () => {
 
     await user.press(screen.getByRole('button', { name: 'Cerrar' }));
 
-    expect(screen.queryByRole('dialog')).not.toBeOnTheScreen();
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeOnTheScreen());
   });
 });

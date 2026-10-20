@@ -1,11 +1,12 @@
 'use client';
 
 import { Dialog as BaseDialog } from '@base-ui/react/dialog';
+import { overlayMotion } from '../../lib/overlayMotion.web';
 import { tv } from '../../lib/tv';
 import type { SheetBaseProps } from './Sheet.types';
 import { sheetStyles } from './sheet.variants';
 
-const sheetWebStyles = tv({ extend: sheetStyles, slots: { backdrop: 'fixed inset-0', popup: 'flex flex-col outline-none' } });
+const sheetWebStyles = tv({ extend: sheetStyles, slots: { backdrop: ['fixed inset-0', ...overlayMotion.backdrop], popup: ['flex flex-col outline-none', ...overlayMotion.popupSlideUp] } });
 
 export type SheetProps = SheetBaseProps;
 
