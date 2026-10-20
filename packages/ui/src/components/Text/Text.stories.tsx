@@ -34,7 +34,8 @@ export const Title: Story = {
 export const TypeScale: Story = {
   render: () => (
     <Stack gap="sm">
-      <Text variant="title">Title 24/32</Text>
+      <Text variant="title">Title 24/32 (obsoleto: usa Heading)</Text>
+      <Text variant="overline" tone="muted">Overline 12/16</Text>
       <Text variant="body-lg">Body large 18/28</Text>
       <Text variant="body-md">Body medium 16/24</Text>
       <Text variant="body-sm">Body small 14/20</Text>

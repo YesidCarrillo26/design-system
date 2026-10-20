@@ -16,7 +16,7 @@ export function Tabs({ items, value, defaultValue, onValueChange, className }: T
         {items.map((item) => {
           const s = tabsStyles({ selected: item.value === current });
           return (
-            <Pressable key={item.value} role="tab" aria-selected={item.value === current} aria-label={item.label} onPress={() => setCurrent(item.value)} className={`${s.tab()} active:opacity-80`}>
+            <Pressable key={item.value} role="tab" aria-selected={item.value === current} aria-label={item.label} onPress={() => setCurrent(item.value)} className={`${s.tab()} active:opacity-pressed`}>
               <Text className={s.tabLabel()}>{item.label}</Text>
             </Pressable>
           );

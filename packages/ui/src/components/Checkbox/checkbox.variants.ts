@@ -9,9 +9,9 @@ export const checkboxStyles = tv({
   variants: {
     checked: {
       true: { box: 'border-primary bg-primary' },
-      false: { box: 'border-border bg-background' },
+      false: { box: 'border-border bg-card' },
     },
-    disabled: { true: { root: 'opacity-50' }, false: {} },
+    disabled: { true: { root: 'opacity-disabled' }, false: {} },
   },
   defaultVariants: { checked: false, disabled: false },
 });

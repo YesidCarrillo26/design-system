@@ -4,7 +4,7 @@ import { useControllableState } from '../../lib/useControllableState';
 import type { RadioGroupBaseProps } from './RadioGroup.types';
 import { radioGroupStyles } from './radioGroup.variants';
 
-const radioNativeStyles = tv({ extend: radioGroupStyles, slots: { item: 'active:opacity-80' } });
+const radioNativeStyles = tv({ extend: radioGroupStyles, slots: { item: 'active:opacity-pressed' } });
 
 export type RadioGroupProps = RadioGroupBaseProps;
 

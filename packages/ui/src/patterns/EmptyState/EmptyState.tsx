@@ -30,7 +30,7 @@ export function EmptyState({ icon = 'info', title, description, headingLevel = 2
   return (
     <Stack align="center" gap="sm" className="px-6 py-10">
       <Icon name={icon} size="lg" tone="muted" />
-      <Heading level={headingLevel}>{title}</Heading>
+      <Heading level={headingLevel} size="md">{title}</Heading>
       {description ? <Text tone="muted" className="text-center">{description}</Text> : null}
       {children}
     </Stack>

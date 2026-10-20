@@ -11,7 +11,7 @@ export const radioGroupStyles = tv({
   },
   variants: {
     selected: { true: { circle: 'border-primary' }, false: { circle: 'border-border' } },
-    disabled: { true: { item: 'opacity-50' }, false: {} },
+    disabled: { true: { item: 'opacity-disabled' }, false: {} },
   },
   defaultVariants: { selected: false, disabled: false },
 });

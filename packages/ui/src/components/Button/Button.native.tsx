@@ -7,7 +7,7 @@ import { buttonStyles } from './button.variants';
 const buttonNativeStyles = tv({
   extend: buttonStyles,
   slots: {
-    root: 'active:opacity-80',
+    root: 'active:opacity-pressed',
   },
 });
 

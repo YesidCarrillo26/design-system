@@ -52,3 +52,15 @@ valor y nada usa aún los estilos nuevos.
   un PR "sin cambio visual", y `neutral.950` sobre `brand.400` da 6.67:1, más que `brand.950`). Se decide
   en el PR 2 viéndolo en pantalla.
 - El `@keyframes` del progreso indeterminado se emite en el PR 5, que es el que lo usa.
+
+## 2026-10-20 — PR 2: superficies y tipografía aplicadas (cambio visual)
+
+**Qué**
+- `background` claro → `neutral.50`. Las superficies elevadas pasan a `bg-card` y los popups a `bg-popover` (ver el changeset para la lista). Cambio mecánico por patrón, sin tocar la lógica.
+- Velos → `bg-overlay`. Antes `bg-foreground/40` era un velo **claro** en oscuro y `Select` native usaba `bg-black/40`.
+- `opacity-50` → `opacity-disabled`; `active:opacity-80` → `active:opacity-pressed`.
+- `Heading` gana `size` y sus niveles usan `heading-*`; `EmptyState` usa `size="md"` para no crecer de más. `Text` gana `overline`.
+
+**Decisión:** `primary-foreground` en oscuro se queda en `neutral.950`: da 6.67:1 sobre `brand.400`, frente a 5.36:1 con `brand.950`.
+
+**Cómo verificarlo:** `pnpm turbo run build typecheck test:unit test:storybook test:native` y revisar los baselines de Chromatic en claro y oscuro.

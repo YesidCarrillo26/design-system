@@ -23,14 +23,14 @@ export function Select({ label, options, value, defaultValue = '', placeholder, 
         aria-expanded={open}
         disabled={disabled}
         onPress={() => setOpen(true)}
-        className={s.trigger({ className: `active:opacity-80 ${className ?? ''}` })}
+        className={s.trigger({ className: `active:opacity-pressed ${className ?? ''}` })}
       >
         <Text className={s.value()}>{selected?.label ?? placeholder ?? 'Selecciona…'}</Text>
         <Icon name="chevron-right" size="sm" tone="muted" />
       </Pressable>
       <Modal transparent animationType="fade" visible={open} onRequestClose={() => setOpen(false)}>
-        <Pressable className="flex-1 justify-end bg-black/40" onPress={() => setOpen(false)} aria-label="Cerrar">
-          <View role="radiogroup" aria-label={label} className="rounded-t-lg bg-background pb-6 pt-2">
+        <Pressable className="flex-1 justify-end bg-overlay" onPress={() => setOpen(false)} aria-label="Cerrar">
+          <View role="radiogroup" aria-label={label} className="rounded-t-lg bg-popover pb-6 pt-2">
             {options.map((option) => (
               <Pressable
                 key={option.value}
@@ -42,7 +42,7 @@ export function Select({ label, options, value, defaultValue = '', placeholder, 
                   setCurrent(option.value);
                   setOpen(false);
                 }}
-                className={`${s.option()} active:bg-muted ${option.disabled ? 'opacity-50' : ''}`}
+                className={`${s.option()} active:bg-muted ${option.disabled ? 'opacity-disabled' : ''}`}
               >
                 <Text className={s.optionLabel()}>{option.label}</Text>
                 {option.value === current ? <Icon name="check" size="sm" tone="primary" /> : null}

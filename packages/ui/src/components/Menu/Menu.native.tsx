@@ -12,12 +12,12 @@ export function Menu({ trigger, label, items }: MenuProps) {
   const base = menuStyles();
   return (
     <>
-      <Pressable role="button" aria-label={label} aria-haspopup="menu" aria-expanded={open} onPress={() => setOpen(true)} className={`${base.trigger()} active:opacity-80`}>
+      <Pressable role="button" aria-label={label} aria-haspopup="menu" aria-expanded={open} onPress={() => setOpen(true)} className={`${base.trigger()} active:opacity-pressed`}>
         {typeof trigger === 'string' ? <Text className={base.triggerLabel()}>{trigger}</Text> : trigger}
       </Pressable>
       <Modal transparent animationType="slide" visible={open} onRequestClose={() => setOpen(false)}>
-        <Pressable className="flex-1 justify-end bg-foreground/40" onPress={() => setOpen(false)} aria-label="Cerrar" accessible={false}>
-          <View role="menu" aria-label={label} className="rounded-t-lg bg-background pb-6 pt-2">
+        <Pressable className="flex-1 justify-end bg-overlay" onPress={() => setOpen(false)} aria-label="Cerrar" accessible={false}>
+          <View role="menu" aria-label={label} className="rounded-t-lg bg-popover pb-6 pt-2">
             {items.map((item) => {
               const s = menuStyles({ destructive: item.destructive, disabled: item.disabled });
               return (
