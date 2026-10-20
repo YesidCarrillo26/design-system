@@ -17,7 +17,8 @@ Monorepo pnpm + Turborepo con un design system para web (React DOM, Tailwind v4)
 - `docs/plan` — el plan inicial con el estado por fase.
 - `docs/learning` — bitácora de lo aprendido de Storybook por fase.
   Después de la Fase 8, los cambios se registran en `docs/learning/fase-9.md` (bitácora cronológica;
-  actualízala en el mismo cambio que introduce algo, sin reescribir el pasado).
+  actualízala en el mismo cambio que introduce algo, sin reescribir el pasado). El trabajo de la
+  Fase 10 (siguiente nivel visual, un PR por fase) va en `docs/learning/fase-10.md`.
   Antes de depurar, lee `docs/learning/errores-y-soluciones.md`; al resolver algo nuevo, agrégalo ahí.
   Las decisiones de diseño y su "si pasa X, hazlo así" están en `docs/learning/buenas-practicas.md`.
 

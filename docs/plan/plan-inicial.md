@@ -288,6 +288,7 @@ Un generador `turbo gen component` crea todo el andamiaje.
 | **7. Patrones + Taskbox** | EmptyState, ListItem, PageHeader en `ui/patterns`; Taskbox modernizado | Decoradores de providers por story, MSW por story, `sb.mock`/`mocked`, tests de pantalla, **composición con `refs`** |
 | **8. Native en el navegador** | Tercer Storybook (`@storybook/react-native-web-vite`) con un plugin de Vite que prefiere `.native.tsx` solo para `packages/ui`, compuesto en el web con `refs` | Frameworks alternativos, plugins de builder, composición en dev y en prod |
 | **9+. Futuro** | Registro shadcn (`registry.json`); addon propio **"Platform Parity"** (panel que lee `parameters.platforms`); migración a CSF Next (primero las stories web-only); i18n/RTL; motion; Figma Code Connect; paquete de iconos; multi-marca; spike de react-strict-dom | Crear addons (presets, channels, `useParameter`, status API), CSF Next (`preview.meta`, `.test()`), indexers personalizados |
+| **10. Siguiente nivel visual** | Dirección "neutral preciso" (referencias de Mobbin): tokens de superficies, estados y tipografía; mejoras a componentes; Alert, Progress, Chip, SegmentedControl, OtpInput, Combobox; patrones SettingsGroup, StatCard, OnboardingStep; CommandPalette; animación de overlays; `Table` con orden y selección. Un PR por fase | Tokens con tests de contraste, utilidades generadas por Tailwind/Uniwind, animación en overlays, composición de patrones sobre primitivos |
 
 ---
 

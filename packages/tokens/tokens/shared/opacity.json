@@ -1,0 +1,13 @@
+{
+  "opacity": {
+    "$type": "number",
+    "disabled": {
+      "$value": 0.5,
+      "$description": "Controles deshabilitados"
+    },
+    "pressed": {
+      "$value": 0.8,
+      "$description": "Retroalimentación al presionar (native)"
+    }
+  }
+}

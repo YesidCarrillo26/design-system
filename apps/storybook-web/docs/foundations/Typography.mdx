@@ -1,12 +1,29 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { TypeSpecimens } from '../blocks/Specimens';
+import { FontWeightSpecimens, TypeSpecimens } from '../blocks/Specimens';
 import { TokenTable } from '../blocks/TokenTable';
 
 <Meta title="Foundations/Typography" />
 
 # Tipografía
 
+Cada estilo fija tamaño, alto de línea y, en los títulos, un espaciado entre letras ligeramente negativo que mantiene compactos los tamaños grandes. Se usan con `text-<nombre>`, p. ej. `text-heading-lg`.
+
+- **`display` y `heading-*`** son para títulos; llevan `font-semibold` (el peso no va dentro del estilo, así que se elige por componente).
+- **`body-*`** es el texto de lectura y **`caption`** el de apoyo.
+- **`overline`** es una etiqueta corta sobre un bloque o grupo; añade `uppercase` al usarla.
+- **`title`** está **obsoleto**: equivale a `heading-lg` y se conserva para no romper a quien ya lo usa.
+
 <TypeSpecimens />
+
+## Pesos
+
+Solo existen cuatro. Los demás de Tailwind (`font-light`, `font-black`…) se eliminan para que el sistema no se mezcle con valores sueltos.
+
+<FontWeightSpecimens />
+
+## Espaciado entre letras
+
+En web se define en `em` (escala con el tamaño). En native se entrega ya calculado en px, porque Uniwind resuelve `em` contra 16px y no contra el tamaño del propio texto; los valores están en la constante `text` de `@chroma-yesid/tokens`.
 
 ## Familias
 

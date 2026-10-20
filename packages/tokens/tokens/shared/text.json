@@ -5,6 +5,11 @@
       "size": { "$value": "12px" },
       "line-height": { "$value": "16px" }
     },
+    "overline": {
+      "size": { "$value": "12px" },
+      "line-height": { "$value": "16px" },
+      "letter-spacing": { "$value": "0.04em" }
+    },
     "body-sm": {
       "size": { "$value": "14px" },
       "line-height": { "$value": "20px" }
@@ -16,6 +21,30 @@
     "body-lg": {
       "size": { "$value": "18px" },
       "line-height": { "$value": "28px" }
+    },
+    "heading-sm": {
+      "size": { "$value": "16px" },
+      "line-height": { "$value": "24px" }
+    },
+    "heading-md": {
+      "size": { "$value": "20px" },
+      "line-height": { "$value": "28px" },
+      "letter-spacing": { "$value": "-0.01em" }
+    },
+    "heading-lg": {
+      "size": { "$value": "24px" },
+      "line-height": { "$value": "32px" },
+      "letter-spacing": { "$value": "-0.016em" }
+    },
+    "heading-xl": {
+      "size": { "$value": "30px" },
+      "line-height": { "$value": "38px" },
+      "letter-spacing": { "$value": "-0.02em" }
+    },
+    "display": {
+      "size": { "$value": "36px" },
+      "line-height": { "$value": "44px" },
+      "letter-spacing": { "$value": "-0.022em" }
     },
     "title": {
       "size": { "$value": "24px" },

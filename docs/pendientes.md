@@ -22,6 +22,20 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
   - Nota: Pages en un repo **privado** requiere plan de pago; alternativa: repo público o Chromatic/Vercel.
 - [ ] Definir `DS_STORYBOOK_URL` (Taskbox) y `NATIVE_STORYBOOK_URL` (Storybook web) con las URLs publicadas, para que `refs` funcione fuera de desarrollo.
 
+## 2b. Fase 10 — siguiente nivel visual (en curso, ver `docs/learning/fase-10.md`)
+
+Un PR por fase; cada merge lo aprueba la persona.
+
+- [~] **PR 1 — tokens de fundación** (`feat/tokens-fundamentos`): rampas, superficies, estados, tipografía, pesos, capas, opacidades, test de contraste.
+- [ ] **PR 2 — superficies y tipografía aplicadas** (cambio visual; revisar baselines de Chromatic; decidir `primary-foreground` en oscuro).
+- [ ] **PR 3 — mejoras a componentes existentes:** `Button` (ghost, destructive, loading, iconos), `Badge`, `Toast`, `TextField`, `Card`, `Tabs`, más iconos.
+- [ ] **PR 4 — movimiento de overlays** (web con `data-starting-style`; native con `Animated`, sin Reanimated; ADR 0006).
+- [ ] **PR 5 — `Alert`, `Progress`, `Chip`, `SegmentedControl`, `Kbd`.**
+- [ ] **PR 6 — `OtpInput` y `Combobox`.**
+- [ ] **PR 7 — `Table` con orden y selección de filas.**
+- [ ] **PR 8 — patrones:** `SettingsGroup`, `OnboardingStep`, `StatCard`, `SelectableCardGroup`; `ListItem` pasa a componente.
+- [ ] **PR 9 — `CommandPalette` y cierre** (guidelines, README, skill `chroma-design-system`).
+
 ## 3. Fase 9+ del plan (mejoras futuras, independientes)
 
 - [ ] **Registro estilo shadcn** (`registry.json` + `shadcn build`): los nombres semánticos de los tokens ya son compatibles. Evaluar una vía para native.

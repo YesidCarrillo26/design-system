@@ -13,6 +13,22 @@
       "$value": "{color.neutral.600}",
       "$description": "Texto secundario"
     },
+    "card": {
+      "$value": "{color.neutral.0}",
+      "$description": "Superficie elevada sobre el fondo: tarjetas, tablas, campos"
+    },
+    "card-foreground": {
+      "$value": "{color.neutral.950}",
+      "$description": "Texto sobre card"
+    },
+    "popover": {
+      "$value": "{color.neutral.0}",
+      "$description": "Superficie flotante: diálogos, menús, popovers"
+    },
+    "popover-foreground": {
+      "$value": "{color.neutral.950}",
+      "$description": "Texto sobre popover"
+    },
     "primary": {
       "$value": "{color.brand.600}",
       "$description": "Acción principal"
@@ -20,6 +36,14 @@
     "primary-foreground": {
       "$value": "{color.neutral.0}",
       "$description": "Texto sobre primary"
+    },
+    "primary-subtle": {
+      "$value": "{color.brand.50}",
+      "$description": "Fondo suave de marca: selección, énfasis"
+    },
+    "primary-subtle-foreground": {
+      "$value": "{color.brand.700}",
+      "$description": "Texto e iconos de marca sobre primary-subtle"
     },
     "secondary": {
       "$value": "{color.neutral.100}",
@@ -29,9 +53,21 @@
       "$value": "{color.neutral.900}",
       "$description": "Texto sobre secondary"
     },
+    "accent": {
+      "$value": "{color.neutral.100}",
+      "$description": "Resaltado de hover y de elemento activo en listas y menús"
+    },
+    "accent-foreground": {
+      "$value": "{color.neutral.900}",
+      "$description": "Texto sobre accent"
+    },
     "border": {
       "$value": "{color.neutral.200}",
       "$description": "Bordes y divisores"
+    },
+    "input": {
+      "$value": "{color.neutral.300}",
+      "$description": "Borde de los controles de formulario"
     },
     "ring": {
       "$value": "{color.brand.500}",
@@ -41,13 +77,73 @@
       "$value": "{color.neutral.100}",
       "$description": "Superficies atenuadas"
     },
+    "overlay": {
+      "$value": "#09090b66",
+      "$description": "Velo detrás de diálogos y hojas"
+    },
     "destructive": {
-      "$value": "#b91c1c",
-      "$description": "Acciones destructivas y errores"
+      "$value": "{color.red.700}",
+      "$description": "Acciones destructivas y errores (relleno)"
     },
     "destructive-foreground": {
       "$value": "{color.neutral.0}",
       "$description": "Texto sobre destructive"
+    },
+    "destructive-subtle": {
+      "$value": "{color.red.50}",
+      "$description": "Fondo suave de error"
+    },
+    "destructive-subtle-foreground": {
+      "$value": "{color.red.800}",
+      "$description": "Texto e iconos de error sobre destructive-subtle"
+    },
+    "success": {
+      "$value": "{color.green.700}",
+      "$description": "Éxito (relleno)"
+    },
+    "success-foreground": {
+      "$value": "{color.neutral.0}",
+      "$description": "Texto sobre success"
+    },
+    "success-subtle": {
+      "$value": "{color.green.50}",
+      "$description": "Fondo suave de éxito"
+    },
+    "success-subtle-foreground": {
+      "$value": "{color.green.800}",
+      "$description": "Texto e iconos de éxito sobre success-subtle"
+    },
+    "warning": {
+      "$value": "{color.amber.500}",
+      "$description": "Advertencia (relleno). No usar como color de texto"
+    },
+    "warning-foreground": {
+      "$value": "{color.amber.950}",
+      "$description": "Texto sobre warning"
+    },
+    "warning-subtle": {
+      "$value": "{color.amber.50}",
+      "$description": "Fondo suave de advertencia"
+    },
+    "warning-subtle-foreground": {
+      "$value": "{color.amber.800}",
+      "$description": "Texto e iconos de advertencia sobre warning-subtle"
+    },
+    "info": {
+      "$value": "{color.blue.600}",
+      "$description": "Información (relleno)"
+    },
+    "info-foreground": {
+      "$value": "{color.neutral.0}",
+      "$description": "Texto sobre info"
+    },
+    "info-subtle": {
+      "$value": "{color.blue.50}",
+      "$description": "Fondo suave de información"
+    },
+    "info-subtle-foreground": {
+      "$value": "{color.blue.800}",
+      "$description": "Texto e iconos de información sobre info-subtle"
     }
   }
 }

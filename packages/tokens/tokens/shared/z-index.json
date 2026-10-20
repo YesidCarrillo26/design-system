@@ -1,0 +1,17 @@
+{
+  "z-index": {
+    "$type": "number",
+    "overlay": {
+      "$value": 40,
+      "$description": "Velo de diálogos y hojas (solo web: en native el orden lo da el Modal)"
+    },
+    "popover": {
+      "$value": 50,
+      "$description": "Popovers, menús y tooltips (solo web)"
+    },
+    "toast": {
+      "$value": 60,
+      "$description": "Toasts, siempre por encima del resto (solo web)"
+    }
+  }
+}

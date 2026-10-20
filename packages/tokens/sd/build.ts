@@ -54,6 +54,9 @@ const shadow = group(shared, 'shadow');
 const duration = group(shared, 'duration');
 const ease = group(shared, 'ease');
 const breakpoint = group(shared, 'breakpoint');
+const fontWeight = group(shared, 'font-weight');
+const zIndex = group(shared, 'z-index');
+const opacity = group(shared, 'opacity');
 const font = group(shared, 'font');
 /** font.sans.ios → ['sans', 'ios'] */
 const fontValue = (family: string, platform: string) =>
@@ -75,13 +78,46 @@ const BANNER = '/* Generado por @chroma-yesid/tokens (pnpm --filter @chroma-yesi
 /** Web usa rem (respeta el tamaño de fuente del usuario); native usa px. */
 const toRem = (px: string) => `${Number.parseFloat(px) / 16}rem`;
 
-/** Variables de texto: `text.body-md.size` → `--text-body-md`, `...line-height` → `--text-body-md--line-height`. */
-function textVars(format: (px: string) => string): string[] {
-  return text.map((t) => {
-    const [, name, prop] = t.path;
-    const suffix = prop === 'line-height' ? '--line-height' : '';
-    return `  --text-${name}${suffix}: ${format(t.value)};`;
-  });
+/** Estilo de texto: tamaño y alto de línea en px; `letterSpacing` en em (como en el token). */
+interface TextStyle {
+  size: number;
+  lineHeight: number;
+  letterSpacing: number;
+}
+
+/** Agrupa `text.<nombre>.size|line-height|letter-spacing` por nombre. */
+const textStyles: Record<string, TextStyle> = {};
+for (const t of text) {
+  const [, name, prop] = t.path;
+  if (!name) continue;
+  const style = (textStyles[name] ??= { size: 0, lineHeight: 0, letterSpacing: 0 });
+  const value = Number.parseFloat(t.value);
+  if (prop === 'size') style.size = value;
+  else if (prop === 'line-height') style.lineHeight = value;
+  else if (prop === 'letter-spacing') style.letterSpacing = value;
+  else throw new Error(`Propiedad de texto desconocida: text.${name}.${String(prop)}`);
+}
+for (const [name, style] of Object.entries(textStyles)) {
+  if (!style.size || !style.lineHeight) throw new Error(`El texto "${name}" necesita size y line-height`);
+}
+
+const round2 = (n: number) => Math.round(n * 100) / 100;
+/**
+ * Native recibe el espaciado entre letras en px: Uniwind resuelve `em` contra 16px (`--uniwind-em`)
+ * y no contra el tamaño del propio texto, así que `-0.02em` saldría mal calculado.
+ */
+const letterSpacingPx = (style: TextStyle) => round2(style.letterSpacing * style.size);
+
+/**
+ * Variables de texto: `--text-body-md`, `--text-body-md--line-height` y, si el estilo lo define,
+ * `--text-body-md--letter-spacing` (Tailwind las lee las tres al usar `text-body-md`).
+ */
+function textVars(format: { length: (px: number) => string; letterSpacing: (style: TextStyle) => string }): string[] {
+  return Object.entries(textStyles).flatMap(([name, style]) => [
+    `  --text-${name}: ${format.length(style.size)};`,
+    `  --text-${name}--line-height: ${format.length(style.lineHeight)};`,
+    ...(style.letterSpacing ? [`  --text-${name}--letter-spacing: ${format.letterSpacing(style)};`] : []),
+  ]);
 }
 
 const lines = (items: string[]) => items.join('\n');
@@ -98,7 +134,17 @@ const webCss = `${BANNER}
 
 ${lines(radius.map((t) => `  --radius-${t.path[1]}: ${toRem(t.value)};`))}
 
-${lines(textVars(toRem))}
+  /* Igual con los tamaños y pesos de texto: text-xs…text-9xl y font-light/black dejan de existir. */
+  --text-*: initial;
+  --font-weight-*: initial;
+
+${lines(textVars({ length: (px) => `${px / 16}rem`, letterSpacing: (style) => `${style.letterSpacing}em` }))}
+
+${lines(fontWeight.map((t) => `  --font-weight-${t.path[1]}: ${t.value};`))}
+
+${lines(zIndex.map((t) => `  --z-index-${t.path[1]}: ${t.value};`))}
+
+${lines(opacity.map((t) => `  --opacity-${t.path[1]}: ${t.value};`))}
 
 ${lines(shadow.map((t) => `  --shadow-${t.path[1]}: ${t.value};`))}
 
@@ -158,7 +204,14 @@ const nativeCss = `${BANNER}
 @theme {
 ${lines(radius.map((t) => `  --radius-${t.path[1]}: ${t.value};`))}
 
-${lines(textVars((px) => px))}
+  --text-*: initial;
+  --font-weight-*: initial;
+
+${lines(textVars({ length: (px) => `${px}px`, letterSpacing: (style) => `${letterSpacingPx(style)}px` }))}
+
+${lines(fontWeight.map((t) => `  --font-weight-${t.path[1]}: ${t.value};`))}
+
+${lines(opacity.map((t) => `  --opacity-${t.path[1]}: ${t.value};`))}
 
 ${lines(shadow.map((t) => `  --shadow-${t.path[1]}: ${t.value};`))}
 }
@@ -188,13 +241,19 @@ ${lines(darkColors.map((t) => `      --color-${colorName(t)}: ${t.value};`))}
 const colorsObject = (tokens: Token[]) =>
   Object.fromEntries(tokens.map((t) => [colorName(t), t.value]));
 const radiusObject = Object.fromEntries(radius.map((t) => [t.path[1], Number.parseFloat(t.value)]));
-const textObject: Record<string, { size: number; lineHeight: number }> = {};
-for (const t of text) {
-  const [, name, prop] = t.path;
-  if (!name) continue;
-  const entry = (textObject[name] ??= { size: 0, lineHeight: 0 });
-  if (prop === 'size') entry.size = Number.parseFloat(t.value);
-  else entry.lineHeight = Number.parseFloat(t.value);
+const textObject = Object.fromEntries(
+  Object.entries(textStyles).map(([name, style]) => [
+    name,
+    { size: style.size, lineHeight: style.lineHeight, letterSpacing: letterSpacingPx(style) },
+  ]),
+);
+
+/** `cubic-bezier(0.2, 0, 0, 1)` → `[0.2, 0, 0, 1]`, el formato de `Easing.bezier(...)` en React Native. */
+function parseBezier(name: string, value: string): [number, number, number, number] {
+  const match = /^cubic-bezier\(([^)]+)\)$/.exec(value);
+  const nums = match?.[1]?.split(',').map((n) => Number.parseFloat(n)) ?? [];
+  if (nums.length !== 4 || nums.some(Number.isNaN)) throw new Error(`La curva "${name}" no es un cubic-bezier válido: ${value}`);
+  return nums as [number, number, number, number];
 }
 
 const constants = {
@@ -204,6 +263,10 @@ const constants = {
   shadow: Object.fromEntries(shadow.map((t) => [t.path[1], t.value])),
   duration: Object.fromEntries(duration.map((t) => [t.path[1], Number.parseFloat(t.value)])),
   ease: Object.fromEntries(ease.map((t) => [t.path[1], t.value])),
+  easing: Object.fromEntries(ease.map((t) => [t.path[1], parseBezier(t.path[1] ?? '', t.value)])),
+  fontWeight: Object.fromEntries(fontWeight.map((t) => [t.path[1], Number.parseInt(t.value, 10)])),
+  zIndex: Object.fromEntries(zIndex.map((t) => [t.path[1], Number.parseInt(t.value, 10)])),
+  opacity: Object.fromEntries(opacity.map((t) => [t.path[1], Number.parseFloat(t.value)])),
   breakpoint: Object.fromEntries(breakpoint.map((t) => [t.path[1], Number.parseFloat(t.value)])),
   fontFamily: Object.fromEntries(
     families.map((f) => [f, { web: fontValue(f, 'web'), ios: fontValue(f, 'ios'), android: fontValue(f, 'android') }]),
@@ -216,8 +279,11 @@ export const colors = ${JSON.stringify(constants.colors, null, 2)};
 /** Radios en px. */
 export const radius = ${JSON.stringify(constants.radius, null, 2)};
 
-/** Tamaño de fuente y alto de línea en px. */
+/** Tamaño de fuente, alto de línea y espaciado entre letras, los tres en px. */
 export const text = ${JSON.stringify(constants.text, null, 2)};
+
+/** Pesos de fuente (400–700). */
+export const fontWeight = ${JSON.stringify(constants.fontWeight, null, 2)};
 
 /** Sombras como valor CSS box-shadow (web y React Native 0.76+). */
 export const shadow = ${JSON.stringify(constants.shadow, null, 2)};
@@ -225,7 +291,17 @@ export const shadow = ${JSON.stringify(constants.shadow, null, 2)};
 /** Duraciones en ms. */
 export const duration = ${JSON.stringify(constants.duration, null, 2)};
 
+/** Curvas como valor CSS \`cubic-bezier(...)\`. */
 export const ease = ${JSON.stringify(constants.ease, null, 2)};
+
+/** Las mismas curvas como \`[x1, y1, x2, y2]\`, para \`Easing.bezier(...easing.standard)\` en React Native. */
+export const easing = ${JSON.stringify(constants.easing)};
+
+/** Capas z-index. Solo web: en native el orden lo da el Modal. */
+export const zIndex = ${JSON.stringify(constants.zIndex, null, 2)};
+
+/** Opacidades (0–1). */
+export const opacity = ${JSON.stringify(constants.opacity, null, 2)};
 
 /** Breakpoints en px. */
 export const breakpoint = ${JSON.stringify(constants.breakpoint, null, 2)};
@@ -234,38 +310,60 @@ export const fontFamily = ${JSON.stringify(constants.fontFamily, null, 2)};
 `;
 
 const union = (keys: string[]) => keys.map((k) => JSON.stringify(k)).join(' | ');
+const names = (tokens: Token[]) => union(tokens.map((t) => t.path[1] ?? ''));
 const indexDts = `// Generado por @chroma-yesid/tokens. No editar a mano.
 export type ColorToken = ${union([...lightNames])};
-export type RadiusToken = ${union(radius.map((t) => t.path[1] ?? ''))};
+export type RadiusToken = ${names(radius)};
 export type TextToken = ${union(Object.keys(textObject))};
+export type FontWeightToken = ${names(fontWeight)};
+export type ShadowToken = ${names(shadow)};
+export type DurationToken = ${names(duration)};
+export type EaseToken = ${names(ease)};
+export type ZIndexToken = ${names(zIndex)};
+export type OpacityToken = ${names(opacity)};
 export type ThemeName = 'light' | 'dark';
 
 export declare const colors: Record<ThemeName, Record<ColorToken, string>>;
 export declare const radius: Record<RadiusToken, number>;
-export declare const text: Record<TextToken, { size: number; lineHeight: number }>;
-export declare const shadow: Record<'sm' | 'md' | 'lg', string>;
-export declare const duration: Record<'fast' | 'base' | 'slow', number>;
-export declare const ease: Record<'standard' | 'in' | 'out', string>;
-export declare const breakpoint: Record<'sm' | 'md' | 'lg' | 'xl', number>;
-export declare const fontFamily: Record<'sans' | 'mono', { web: string; ios: string; android: string }>;
+export declare const text: Record<TextToken, { size: number; lineHeight: number; letterSpacing: number }>;
+export declare const fontWeight: Record<FontWeightToken, number>;
+export declare const shadow: Record<ShadowToken, string>;
+export declare const duration: Record<DurationToken, number>;
+export declare const ease: Record<EaseToken, string>;
+export declare const easing: Record<EaseToken, [number, number, number, number]>;
+export declare const zIndex: Record<ZIndexToken, number>;
+export declare const opacity: Record<OpacityToken, number>;
+export declare const breakpoint: Record<${names(breakpoint)}, number>;
+export declare const fontFamily: Record<${union(families)}, { web: string; ios: string; android: string }>;
 `;
 
 // ── tw-merge ─────────────────────────────────────────────────────────────────
 // tailwind-merge clasifica `text-<valor desconocido>` como color. Sin esto,
 // `text-body-md` (tamaño) y `text-foreground` (color) se pisan entre sí.
+// Lo mismo pasa con `z-overlay` y `opacity-disabled`: sin declararlos, tailwind-merge no sabe
+// que son del mismo grupo y conserva los dos en vez de quedarse con el último.
 const textNames = Object.keys(textObject);
+const zIndexNames = zIndex.map((t) => t.path[1] ?? '');
+const opacityNames = opacity.map((t) => t.path[1] ?? '');
 const twMergeJs = `// Generado por @chroma-yesid/tokens. No editar a mano.
 export const twMergeConfig = {
   extend: {
     theme: {
       text: ${JSON.stringify(textNames)},
     },
+    classGroups: {
+      z: [{ z: ${JSON.stringify(zIndexNames)} }],
+      opacity: [{ opacity: ${JSON.stringify(opacityNames)} }],
+    },
   },
 };
 `;
 const twMergeDts = `// Generado por @chroma-yesid/tokens. No editar a mano.
 export declare const twMergeConfig: {
-  extend: { theme: { text: string[] } };
+  extend: {
+    theme: { text: string[] };
+    classGroups: { z: { z: string[] }[]; opacity: { opacity: string[] }[] };
+  };
 };
 `;
 
@@ -287,12 +385,18 @@ const docsTokens = [
     cssVar: `--radius-${t.path[1]}`,
     values: { all: t.value },
   })),
-  ...Object.entries(textObject).map(([name, v]) => ({
+  ...Object.entries(textStyles).map(([name, v]) => ({
     name,
     type: 'text',
     cssVar: `--text-${name}`,
-    values: { all: `${v.size}px / ${v.lineHeight}px` },
+    values: {
+      all: `${v.size}px / ${v.lineHeight}px`,
+      ...(v.letterSpacing ? { letterSpacing: `${v.letterSpacing}em` } : {}),
+    },
   })),
+  ...fontWeight.map((t) => ({ name: t.path[1], type: 'font-weight', cssVar: `--font-weight-${t.path[1]}`, values: { all: t.value } })),
+  ...zIndex.map((t) => ({ name: t.path[1], type: 'z-index', cssVar: `--z-index-${t.path[1]}`, values: { all: t.value }, description: t.description })),
+  ...opacity.map((t) => ({ name: t.path[1], type: 'opacity', cssVar: `--opacity-${t.path[1]}`, values: { all: t.value }, description: t.description })),
   ...shadow.map((t) => ({ name: t.path[1], type: 'shadow', cssVar: `--shadow-${t.path[1]}`, values: { all: t.value }, description: t.description })),
   ...duration.map((t) => ({ name: t.path[1], type: 'duration', cssVar: `--ds-duration-${t.path[1]}`, values: { all: t.value } })),
   ...ease.map((t) => ({ name: t.path[1], type: 'ease', cssVar: `--ease-${t.path[1]}`, values: { all: t.value } })),
@@ -312,5 +416,5 @@ await Promise.all([
 ]);
 
 console.log(
-  `tokens: ${lightNames.size} colores × 2 temas, ${radius.length} radios, ${textNames.length} tamaños de texto → dist/`,
+  `tokens: ${lightNames.size} colores × 2 temas, ${radius.length} radios, ${textNames.length} estilos de texto, ${fontWeight.length} pesos, ${zIndex.length} capas, ${opacity.length} opacidades → dist/`,
 );

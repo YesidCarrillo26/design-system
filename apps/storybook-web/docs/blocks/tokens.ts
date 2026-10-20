@@ -2,7 +2,18 @@ import tokensJson from '@chroma-yesid/tokens/tokens.json';
 
 export interface DocToken {
   name: string;
-  type: 'color' | 'radius' | 'text' | 'shadow' | 'duration' | 'ease' | 'breakpoint' | 'font';
+  type:
+    | 'color'
+    | 'radius'
+    | 'text'
+    | 'font-weight'
+    | 'z-index'
+    | 'opacity'
+    | 'shadow'
+    | 'duration'
+    | 'ease'
+    | 'breakpoint'
+    | 'font';
   cssVar: string;
   values: Record<string, string | undefined>;
   description?: string;

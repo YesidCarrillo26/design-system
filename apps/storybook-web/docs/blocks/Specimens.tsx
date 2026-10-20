@@ -1,11 +1,18 @@
 import { useState } from 'react';
 import { tokensOfType } from './tokens';
 
+// Clases literales: Tailwind escanea el código y no ve nombres armados con plantillas.
 const textClass: Record<string, string> = {
   caption: 'text-caption',
+  overline: 'text-overline font-medium uppercase',
   'body-sm': 'text-body-sm',
   'body-md': 'text-body-md',
   'body-lg': 'text-body-lg',
+  'heading-sm': 'text-heading-sm font-semibold',
+  'heading-md': 'text-heading-md font-semibold',
+  'heading-lg': 'text-heading-lg font-semibold',
+  'heading-xl': 'text-heading-xl font-semibold',
+  display: 'text-display font-semibold',
   title: 'text-title font-semibold',
 };
 
@@ -16,6 +23,30 @@ export function TypeSpecimens() {
         <div key={t.name} className="flex items-baseline gap-4 border-b border-border pb-3">
           <code className="w-28 shrink-0 text-caption text-muted-foreground">{t.name}</code>
           <span className={textClass[t.name]}>El veloz murciélago hindú comía feliz</span>
+          <code className="ml-auto shrink-0 text-caption text-muted-foreground">
+            {t.values.all}
+            {t.values.letterSpacing ? ` · ${t.values.letterSpacing}` : ''}
+          </code>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const weightClass: Record<string, string> = {
+  normal: 'font-normal',
+  medium: 'font-medium',
+  semibold: 'font-semibold',
+  bold: 'font-bold',
+};
+
+export function FontWeightSpecimens() {
+  return (
+    <div className="flex flex-col gap-3">
+      {tokensOfType('font-weight').map((t) => (
+        <div key={t.name} className="flex items-baseline gap-4 border-b border-border pb-3">
+          <code className="w-28 shrink-0 text-caption text-muted-foreground">{t.name}</code>
+          <span className={`text-body-lg ${weightClass[t.name]}`}>El veloz murciélago hindú comía feliz</span>
           <code className="ml-auto text-caption text-muted-foreground">{t.values.all}</code>
         </div>
       ))}
@@ -38,7 +69,7 @@ export function RadiusSpecimens() {
   );
 }
 
-const shadowClass: Record<string, string> = { sm: 'shadow-sm', md: 'shadow-md', lg: 'shadow-lg' };
+const shadowClass: Record<string, string> = { xs: 'shadow-xs', sm: 'shadow-sm', md: 'shadow-md', lg: 'shadow-lg' };
 
 export function ShadowSpecimens() {
   return (
