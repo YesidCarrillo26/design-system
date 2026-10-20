@@ -1,5 +1,12 @@
 # @chroma-yesid/ui
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [b4ed1f6]
+  - @chroma-yesid/tokens@0.2.0
+
 ## 0.1.2
 
 ### Patch Changes
