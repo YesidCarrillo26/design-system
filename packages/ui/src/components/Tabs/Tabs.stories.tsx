@@ -17,3 +17,4 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 export const StartsOnSecond: Story = { args: { defaultValue: 'actividad' } };
+export const Pill: Story = { args: { variant: 'pill' } };

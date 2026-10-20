@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
+import type { IconName } from '../Icon/icons';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 /**
@@ -18,6 +19,20 @@ export interface ButtonBaseProps {
    * @default 'md'
    */
   size?: ButtonSize;
+  /**
+   * Muestra un spinner y bloquea la acción sin perder el foco del teclado (`aria-busy` + `aria-disabled`).
+   * @default false
+   */
+  loading?: boolean;
+  /** Ícono delante del texto. Con `loading`, lo reemplaza el spinner. */
+  leadingIcon?: IconName;
+  /** Ícono detrás del texto. */
+  trailingIcon?: IconName;
+  /**
+   * Ocupa todo el ancho disponible.
+   * @default false
+   */
+  fullWidth?: boolean;
   /**
    * Deshabilita la interacción y atenúa el botón.
    * @default false

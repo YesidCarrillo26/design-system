@@ -11,18 +11,24 @@ const tabsWebStyles = tv({
     list: 'flex',
     tab: [
       'inline-flex cursor-pointer text-muted-foreground hover:text-foreground',
-      'aria-selected:border-primary aria-selected:text-foreground',
+      'aria-selected:text-foreground',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset',
     ],
     panel: 'outline-none',
+  },
+  variants: {
+    variant: {
+      underline: { tab: 'aria-selected:border-primary' },
+      pill: { tab: 'aria-selected:bg-card aria-selected:shadow-xs' },
+    },
   },
 });
 
 export type TabsProps = TabsBaseProps;
 
 /** Pestañas accesibles: flechas para moverse entre ellas, un panel por pestaña. */
-export function Tabs({ items, value, defaultValue, onValueChange, className }: TabsProps) {
-  const s = tabsWebStyles();
+export function Tabs({ items, value, defaultValue, onValueChange, variant, className }: TabsProps) {
+  const s = tabsWebStyles({ variant });
   return (
     <BaseTabs.Root
       value={value}

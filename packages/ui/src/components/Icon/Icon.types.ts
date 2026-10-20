@@ -1,7 +1,20 @@
 import type { IconName } from './icons';
 
 export type IconSize = 'sm' | 'md' | 'lg';
-export type IconTone = 'default' | 'muted' | 'primary' | 'destructive' | 'on-primary' | 'on-secondary';
+export type IconTone =
+  | 'default'
+  | 'muted'
+  | 'primary'
+  | 'destructive'
+  | 'success'
+  | 'warning'
+  | 'info'
+  | 'on-primary'
+  | 'on-secondary'
+  | 'on-destructive'
+  | 'on-success'
+  | 'on-warning'
+  | 'on-info';
 
 /** Contrato compartido de `Icon`. */
 export interface IconBaseProps {

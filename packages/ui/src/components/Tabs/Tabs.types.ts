@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+export type TabsVariant = 'underline' | 'pill';
+
 export interface TabItem {
   /** Identificador de la pestaña. */
   value: string;
@@ -19,6 +21,11 @@ export interface TabsBaseProps {
   defaultValue?: string;
   /** Se invoca con la pestaña elegida. */
   onValueChange?: (value: string) => void;
+  /**
+   * Aspecto: `underline` (línea bajo la activa) o `pill` (control segmentado sobre fondo atenuado).
+   * @default 'underline'
+   */
+  variant?: TabsVariant;
   /** Clases adicionales para el contenedor. */
   className?: string;
 }

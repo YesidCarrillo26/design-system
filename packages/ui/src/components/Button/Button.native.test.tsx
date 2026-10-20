@@ -4,7 +4,7 @@ import { fn } from 'storybook/test';
 import * as stories from './Button.stories';
 
 // Reutiliza las stories compartidas como casos de prueba (portable stories).
-const { Primary, Disabled } = composeStories(stories);
+const { Primary, Disabled, Loading } = composeStories(stories);
 
 jest.useFakeTimers();
 
@@ -32,6 +32,18 @@ describe('Button (native)', () => {
 
     await user.press(screen.getByRole('button', { name: 'Button' }));
 
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  test('con loading no llama a onPress, pero sigue en el árbol de accesibilidad', async () => {
+    const user = userEvent.setup();
+    const onPress = fn();
+    await render(<Loading onPress={onPress} />);
+
+    const button = screen.getByRole('button', { name: /Guardando/ });
+    await user.press(button);
+
+    expect(button).toBeOnTheScreen();
     expect(onPress).not.toHaveBeenCalled();
   });
 });

@@ -1,3 +1,5 @@
+import type { IconName } from '../Icon/icons';
+
 export type TextFieldType = 'text' | 'email' | 'password' | 'number';
 
 /** Contrato compartido de `TextField`: campo de texto de una línea con etiqueta. */
@@ -31,6 +33,14 @@ export interface TextFieldBaseProps {
   disabled?: boolean;
   /** Se invoca con el nuevo texto en cada cambio. */
   onChangeText?: (text: string) => void;
-  /** Clases adicionales para el control. */
+  /** Ícono al inicio del campo (p. ej. `search`). */
+  leadingIcon?: IconName;
+  /** Ícono al final del campo. */
+  trailingIcon?: IconName;
+  /** Texto fijo antes del valor (p. ej. `$`). */
+  prefix?: string;
+  /** Texto fijo después del valor (p. ej. `kg`). */
+  suffix?: string;
+  /** Clases adicionales para el contenedor con borde del campo. */
   className?: string;
 }

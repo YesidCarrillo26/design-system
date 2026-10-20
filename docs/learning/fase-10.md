@@ -64,3 +64,19 @@ valor y nada usa aún los estilos nuevos.
 **Decisión:** `primary-foreground` en oscuro se queda en `neutral.950`: da 6.67:1 sobre `brand.400`, frente a 5.36:1 con `brand.950`.
 
 **Cómo verificarlo:** `pnpm turbo run build typecheck test:unit test:storybook test:native` y revisar los baselines de Chromatic en claro y oscuro.
+
+## 2026-10-20 — PR 3: mejoras a componentes existentes
+
+**Qué:** `Button` (ghost, destructive, `loading`, íconos, `fullWidth`), `Badge` (`tone` × `appearance`, `icon`), `Toast` (success/warning/info, `title`, `action`), `TextField` (íconos, `prefix`, `suffix`), `Card` (`variant`, padding `sm`), `Tabs` (`pill`), `Icon` (20 íconos y tonos de estado) y `Spinner` (`tone`). Detalle en el changeset.
+
+**Decisiones**
+- `Card` **no** gana `interactive` (estaba en el plan): un contenedor con hover pero sin rol ni foco engaña a la accesibilidad. Si hace falta, será un componente pulsable aparte.
+- `loading` deja el botón enfocable (`aria-busy` + `aria-disabled`) y bloquea `onPress`; `disabled` lo saca del orden de tabulación.
+- `TextField`: el borde pasa al contenedor para alojar adornos; `TextArea` conserva `textInputStyles`.
+- Los íconos de estado sobre superficies neutras usan `*-subtle-foreground` (ADR 0005).
+
+**Cómo se verificó:** todos los pasos de `ci.yml` en local (ver `AGENTS.md`), 49 tests native. Los paths de los 20 íconos nuevos se dibujaron en una hoja SVG y se revisaron a ojo. El test native de `loading` falla si se quita el bloqueo.
+
+**Lecciones**
+- ⚠️ Al probar un cambio a propósito, no restaures con `git checkout --` un archivo con cambios sin commitear: borra el trabajo. Haz una copia antes o commitea primero.
+- En stories **compartidas** no uses `div`: rompe en native. Usa `Stack`.

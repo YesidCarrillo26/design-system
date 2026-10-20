@@ -1,13 +1,23 @@
 import type { ReactNode } from 'react';
 
-export type ToastVariant = 'default' | 'destructive';
+export type ToastVariant = 'default' | 'success' | 'warning' | 'info' | 'destructive';
+
+/** Acción opcional del aviso (p. ej. "Deshacer"). Cierra el aviso al activarse. */
+export interface ToastAction {
+  label: string;
+  onPress: () => void;
+}
 
 export interface ToastOptions {
   /**
-   * Estilo del aviso. `destructive` se anuncia como alerta.
+   * Estilo del aviso. `destructive` se anuncia como alerta; los demás, como estado.
    * @default 'default'
    */
   variant?: ToastVariant;
+  /** Título en negrita sobre el mensaje. */
+  title?: string;
+  /** Botón de texto a la derecha del mensaje. */
+  action?: ToastAction;
   /**
    * Milisegundos hasta que se oculta solo. `0` lo deja hasta que se cierre.
    * @default 4000
