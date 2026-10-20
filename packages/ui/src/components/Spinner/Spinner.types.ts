@@ -1,4 +1,5 @@
 export type SpinnerSize = 'sm' | 'md' | 'lg';
+export type SpinnerTone = 'primary' | 'muted' | 'on-primary' | 'on-secondary' | 'on-destructive';
 
 /** Contrato compartido de `Spinner`: indicador de carga indeterminado. */
 export interface SpinnerBaseProps {
@@ -7,6 +8,11 @@ export interface SpinnerBaseProps {
    * @default 'md'
    */
   size?: SpinnerSize;
+  /**
+   * Color. Usa `on-*` cuando el spinner va sobre un relleno (p. ej. un botón con `loading`).
+   * @default 'primary'
+   */
+  tone?: SpinnerTone;
   /**
    * Nombre accesible del estado de carga.
    * @default 'Cargando'

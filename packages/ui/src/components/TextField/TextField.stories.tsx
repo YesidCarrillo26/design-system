@@ -18,3 +18,6 @@ export const WithError: Story = { args: { error: 'Ingresa un correo válido.', d
 export const Required: Story = { args: { required: true } };
 export const Password: Story = { args: { label: 'Contraseña', type: 'password', placeholder: '' } };
 export const Disabled: Story = { args: { disabled: true, defaultValue: 'No editable' } };
+export const WithLeadingIcon: Story = { args: { label: 'Buscar', placeholder: 'Buscar proyectos', leadingIcon: 'search' } };
+export const WithPrefixAndSuffix: Story = { args: { label: 'Peso', type: 'number', placeholder: '0', suffix: 'kg', prefix: '≈' } };
+export const WithTrailingIcon: Story = { args: { label: 'Contraseña', type: 'password', placeholder: '', trailingIcon: 'lock' } };

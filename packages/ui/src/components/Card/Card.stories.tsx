@@ -7,7 +7,7 @@ import { Card } from './Card';
 
 const meta = {
   component: Card,
-  argTypes: { padding: { control: 'inline-radio' }, elevation: { control: 'inline-radio' } },
+  argTypes: { variant: { control: 'inline-radio' }, padding: { control: 'inline-radio' }, elevation: { control: 'inline-radio' } },
   render: (args) => (
     <Card {...args}>
       <Stack gap="sm">
@@ -26,3 +26,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 export const Raised: Story = { args: { elevation: 'md', padding: 'lg' } };
 export const Flat: Story = { args: { elevation: 'none' } };
+export const Muted: Story = { args: { variant: 'muted', elevation: 'none' } };
+export const Outline: Story = { args: { variant: 'outline', elevation: 'none' } };
+export const Compact: Story = { args: { padding: 'sm' } };

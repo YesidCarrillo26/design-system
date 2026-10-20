@@ -25,10 +25,19 @@ export const buttonStyles = tv({
         label: 'text-secondary-foreground',
       },
       outline: {
-        root: 'border-border bg-transparent',
+        root: 'border-input bg-card',
         label: 'text-foreground',
       },
+      ghost: {
+        root: 'border-transparent bg-transparent',
+        label: 'text-foreground',
+      },
+      destructive: {
+        root: 'border-transparent bg-destructive',
+        label: 'text-destructive-foreground',
+      },
     },
+    fullWidth: { true: { root: 'w-full' }, false: {} },
     size: {
       sm: { root: 'h-9 gap-1.5 px-3', label: 'text-body-sm' },
       md: { root: 'h-11 gap-2 px-4', label: 'text-body-md' },
@@ -38,5 +47,15 @@ export const buttonStyles = tv({
   defaultVariants: {
     variant: 'primary',
     size: 'md',
+    fullWidth: false,
   },
 });
+
+/** Tono de ícono y de spinner que se lee bien sobre el fondo de cada variante. */
+export const buttonContentTone = {
+  primary: { icon: 'on-primary', spinner: 'on-primary' },
+  secondary: { icon: 'on-secondary', spinner: 'on-secondary' },
+  outline: { icon: 'default', spinner: 'muted' },
+  ghost: { icon: 'default', spinner: 'muted' },
+  destructive: { icon: 'on-destructive', spinner: 'on-destructive' },
+} as const;

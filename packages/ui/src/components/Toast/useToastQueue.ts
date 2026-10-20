@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { ToastApi, ToastVariant } from './Toast.types';
+import type { ToastAction, ToastApi, ToastVariant } from './Toast.types';
 
 export interface ToastEntry {
   id: string;
   message: string;
   variant: ToastVariant;
+  title?: string;
+  action?: ToastAction;
 }
 
 /** Cola de avisos con cierre automático. La comparten el provider web y el native. */
@@ -21,10 +23,10 @@ export function useToastQueue(): ToastApi & { toasts: ToastEntry[] } {
   }, []);
 
   const show = useCallback<ToastApi['show']>(
-    (message, { variant = 'default', duration = 4000 } = {}) => {
+    (message, { variant = 'default', title, action, duration = 4000 } = {}) => {
       counter.current += 1;
       const id = `toast-${counter.current}`;
-      setToasts((current) => [...current, { id, message, variant }]);
+      setToasts((current) => [...current, { id, message, variant, title, action }]);
       if (duration > 0) timers.current.set(id, setTimeout(() => dismiss(id), duration));
       return id;
     },

@@ -12,6 +12,9 @@ function Buttons({ duration }: Pick<ToastOptions, 'duration'>) {
       <Button variant="outline" onPress={() => toast.show('No se pudo guardar', { variant: 'destructive', duration })}>
         Mostrar error
       </Button>
+      <Button variant="outline" onPress={() => toast.show('Se archivó la conversación', { variant: 'success', title: 'Listo', action: { label: 'Deshacer', onPress: () => {} }, duration })}>
+        Éxito con acción
+      </Button>
     </Stack>
   );
 }

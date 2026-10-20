@@ -60,3 +60,19 @@ export const Hovered: Story = {
 export const FocusVisible: Story = {
   parameters: { pseudo: { focusVisible: true } },
 };
+
+export const IgnoresPressWhileLoading: Story = {
+  args: { loading: true },
+  play: async ({ canvas, args, userEvent }) => {
+    const button = canvas.getByRole('button', { name: /Button/ });
+
+    await expect(button).toHaveAttribute('aria-busy', 'true');
+    await expect(button).toHaveAttribute('aria-disabled', 'true');
+    // Sigue enfocable: se bloquea la acción, no el foco.
+    await userEvent.tab();
+    await expect(button).toHaveFocus();
+    await userEvent.click(button);
+    await userEvent.keyboard('{Enter}');
+    await expect(args.onPress).not.toHaveBeenCalled();
+  },
+};

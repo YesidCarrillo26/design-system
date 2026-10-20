@@ -25,3 +25,15 @@ export const Gallery: Story = {
     </Stack>
   ),
 };
+
+/** Tonos de estado: sobre superficies neutras usan los tokens `*-subtle-foreground` (contraste AA en ambos temas). */
+export const StatusTones: Story = {
+  render: () => (
+    <Stack direction="row" gap="md" align="center">
+      <Icon name="circle-check" tone="success" size="lg" label="Éxito" />
+      <Icon name="alert" tone="warning" size="lg" label="Advertencia" />
+      <Icon name="info" tone="info" size="lg" label="Información" />
+      <Icon name="circle-alert" tone="destructive" size="lg" label="Error" />
+    </Stack>
+  ),
+};

@@ -27,8 +27,8 @@ _Decisión: no es necesario por ahora; Chromatic ya publica el Storybook web._
 Un PR por fase; cada merge lo aprueba la persona.
 
 - [x] **PR 1** fusionado.
-- [~] **PR 2 — superficies y tipografía aplicadas** (cambio visual; revisar baselines de Chromatic). `primary-foreground` oscuro se mantiene.
-- [ ] **PR 3 — mejoras a componentes existentes:** `Button` (ghost, destructive, loading, iconos), `Badge`, `Toast`, `TextField`, `Card`, `Tabs`, más iconos.
+- [x] **PR 2** fusionado (superficies y tipografía aplicadas).
+- [~] **PR 3 — mejoras a componentes existentes:** `Button`, `Badge`, `Toast`, `TextField`, `Card`, `Tabs`, `Icon`, `Spinner` (sin `interactive` en `Card`, ver `fase-10.md`).
 - [ ] **PR 4 — movimiento de overlays** (web con `data-starting-style`; native con `Animated`, sin Reanimated; ADR 0006).
 - [ ] **PR 5 — `Alert`, `Progress`, `Chip`, `SegmentedControl`, `Kbd`.**
 - [ ] **PR 6 — `OtpInput` y `Combobox`.**

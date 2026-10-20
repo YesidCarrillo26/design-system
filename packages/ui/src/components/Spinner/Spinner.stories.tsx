@@ -22,3 +22,13 @@ export const Sizes: Story = {
     </Stack>
   ),
 };
+
+/** Sobre un relleno, usa el tono `on-*` que corresponda. */
+export const Tones: Story = {
+  render: () => (
+    <Stack direction="row" gap="md" align="center">
+      <Spinner tone="primary" />
+      <Spinner tone="muted" />
+    </Stack>
+  ),
+};

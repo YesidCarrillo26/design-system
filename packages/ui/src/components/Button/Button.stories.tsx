@@ -43,11 +43,33 @@ export const Large: Story = {
   args: { size: 'lg' },
 };
 
+export const Ghost: Story = {
+  args: { variant: 'ghost' },
+};
+
+export const Destructive: Story = {
+  args: { variant: 'destructive', children: 'Eliminar' },
+};
+
+/** `loading` muestra un spinner y bloquea la acción, pero el botón conserva el foco. */
+export const Loading: Story = {
+  args: { loading: true, children: 'Guardando' },
+};
+
+export const WithIcons: Story = {
+  args: { leadingIcon: 'plus', children: 'Nuevo proyecto' },
+};
+
+export const FullWidth: Story = {
+  args: { fullWidth: true },
+  parameters: { layout: 'padded' },
+};
+
 export const Disabled: Story = {
   args: { disabled: true },
 };
 
-/** Las tres variantes lado a lado, útil para comparar temas y plataformas. */
+/** Las cinco variantes lado a lado, útil para comparar temas y plataformas. */
 export const Variants: Story = {
   render: (args) => (
     <Stack direction="row" gap="md" align="center">
@@ -59,6 +81,12 @@ export const Variants: Story = {
       </Button>
       <Button {...args} variant="outline">
         Outline
+      </Button>
+      <Button {...args} variant="ghost">
+        Ghost
+      </Button>
+      <Button {...args} variant="destructive">
+        Destructive
       </Button>
     </Stack>
   ),
@@ -77,6 +105,21 @@ export const Sizes: Story = {
       <Button {...args} size="lg">
         Large
       </Button>
+    </Stack>
+  ),
+};
+
+/** Íconos delante y detrás del texto, y estado de carga, en todas las variantes. */
+export const IconsAndLoading: Story = {
+  render: (args) => (
+    <Stack gap="md">
+      {(['primary', 'secondary', 'outline', 'ghost', 'destructive'] as const).map((variant) => (
+        <Stack key={variant} direction="row" gap="md" align="center">
+          <Button {...args} variant={variant} leadingIcon="plus">Nuevo</Button>
+          <Button {...args} variant={variant} trailingIcon="arrow-up-right">Abrir</Button>
+          <Button {...args} variant={variant} loading>Guardando</Button>
+        </Stack>
+      ))}
     </Stack>
   ),
 };
