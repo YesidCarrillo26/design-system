@@ -157,3 +157,9 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 ## 2026-10-18 — Piloto del agente: encabezado de `pendientes.md` (issue #17)
 
 Primera tarea completa del agente remoto (Claude) tras corregir el token: actualizar la línea 3 de `docs/pendientes.md` para que el estado sea del 2026-10-18 (tras `0.1.2` y los agentes remotos, ADR 0004). Tarea de solo documentación, elegida a propósito para probar el ciclo issue → rama → commit → PR (`gh pr create`) sin tocar código. Sin changeset: no cambia ningún paquete.
+
+## 2026-10-21 — Presupuesto de tamaño con `size-limit`
+
+**Qué:** `packages/ui` tiene `pnpm --filter @chroma-yesid/ui size` (`.size-limit.json`, preset `small-lib`, esbuild). Mide lo que añade importar `dist/web` (brotli, minificado) con React, Base UI, `tailwind-*` y tokens como externos: todo el paquete 14.3 kB, `Button` 2.3 kB, `Table` 3.4 kB, `Combobox` 3.0 kB, `CommandPalette` 3.1 kB. Los límites quedan ~15 % por encima.
+
+**Detalles:** requiere `pnpm build` antes (mide `dist`). Solo mide web: native depende del bundler de la app. Es una herramienta de desarrollo, sin changeset. **Pendiente para una persona:** añadir el paso a `.github/workflows/ci.yml` (`pnpm --filter @chroma-yesid/ui size`); un agente no toca workflows.

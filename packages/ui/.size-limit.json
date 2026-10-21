@@ -1,0 +1,77 @@
+[
+  {
+    "name": "web: todo el paquete",
+    "path": "dist/web/index.js",
+    "import": "*",
+    "ignore": [
+      "react",
+      "react-dom",
+      "@base-ui/react",
+      "@base-ui/react/*",
+      "tailwind-merge",
+      "tailwind-variants",
+      "@chroma-yesid/tokens"
+    ],
+    "limit": "17 kB"
+  },
+  {
+    "name": "web: Button",
+    "path": "dist/web/components/Button/index.js",
+    "import": "*",
+    "ignore": [
+      "react",
+      "react-dom",
+      "@base-ui/react",
+      "@base-ui/react/*",
+      "tailwind-merge",
+      "tailwind-variants",
+      "@chroma-yesid/tokens"
+    ],
+    "limit": "3 kB"
+  },
+  {
+    "name": "web: Table",
+    "path": "dist/web/components/Table/index.js",
+    "import": "*",
+    "ignore": [
+      "react",
+      "react-dom",
+      "@base-ui/react",
+      "@base-ui/react/*",
+      "tailwind-merge",
+      "tailwind-variants",
+      "@chroma-yesid/tokens"
+    ],
+    "limit": "4 kB"
+  },
+  {
+    "name": "web: Combobox",
+    "path": "dist/web/components/Combobox/index.js",
+    "import": "*",
+    "ignore": [
+      "react",
+      "react-dom",
+      "@base-ui/react",
+      "@base-ui/react/*",
+      "tailwind-merge",
+      "tailwind-variants",
+      "@chroma-yesid/tokens"
+    ],
+    "limit": "3.5 kB"
+  },
+  {
+    "name": "web: CommandPalette",
+    "path": "dist/web/components/CommandPalette/index.js",
+    "import": "*",
+    "ignore": [
+      "react",
+      "react-dom",
+      "@base-ui/react",
+      "@base-ui/react/*",
+      "tailwind-merge",
+      "tailwind-variants",
+      "@chroma-yesid/tokens"
+    ],
+    "limit": "3.5 kB"
+  }
+]

@@ -22,7 +22,8 @@
   "scripts": {
     "build": "tsdown",
     "typecheck": "tsc -b",
-    "check:peers": "node scripts/check-peers.mjs"
+    "check:peers": "node scripts/check-peers.mjs",
+    "size": "size-limit"
   },
   "dependencies": {
     "@base-ui/react": "catalog:",
@@ -44,20 +45,22 @@
     }
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "catalog:",
+    "@chroma-yesid/tsconfig": "workspace:*",
+    "@size-limit/preset-small-lib": "catalog:",
     "@storybook/react": "catalog:",
     "@testing-library/react-native": "catalog:",
     "@types/jest": "catalog:",
     "@types/react": "catalog:",
-    "@arethetypeswrong/cli": "catalog:",
-    "@chroma-yesid/tsconfig": "workspace:*",
     "publint": "catalog:",
     "react": "catalog:",
     "react-native": "catalog:",
+    "react-native-svg": "catalog:",
+    "size-limit": "catalog:",
     "storybook": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",
-    "uniwind": "catalog:",
-    "react-native-svg": "catalog:"
+    "uniwind": "catalog:"
   },
   "files": [
     "dist",

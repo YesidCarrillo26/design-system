@@ -36,6 +36,8 @@ catalog:
   "@arethetypeswrong/cli": ^0.18.5
   turbo: ^2.11.9
   knip: ^6.41.0
+  size-limit: ^14.2.0
+  '@size-limit/preset-small-lib': ^14.2.0
   '@changesets/cli': ^3.0.3
   # Estilos
   tailwindcss: ^4.3.3
