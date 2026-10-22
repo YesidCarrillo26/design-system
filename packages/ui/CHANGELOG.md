@@ -1,5 +1,11 @@
 # @chroma-yesid/ui
 
+## 0.3.1
+
+### Patch Changes
+
+- 8ab092d: **`SelectableCardGroup` (web):** el título y la descripción de cada tarjeta se pintaban en fila porque al cuerpo le faltaba `flex-col` (en native ya era columna). Ahora van en columna en ambas plataformas; se agrega una prueba de regresión.
+
 ## 0.3.0
 
 ### Minor Changes
