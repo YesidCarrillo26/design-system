@@ -22,7 +22,8 @@
   "scripts": {
     "build": "tsdown",
     "typecheck": "tsc -b",
-    "check:peers": "node scripts/check-peers.mjs"
+    "check:peers": "node scripts/check-peers.mjs",
+    "size": "size-limit"
   },
   "dependencies": {
     "@base-ui/react": "catalog:",
@@ -51,6 +52,8 @@
     "@arethetypeswrong/cli": "catalog:",
     "@chroma-yesid/tsconfig": "workspace:*",
     "publint": "catalog:",
+    "size-limit": "catalog:",
+    "@size-limit/preset-small-lib": "catalog:",
     "react": "catalog:",
     "react-native": "catalog:",
     "storybook": "catalog:",

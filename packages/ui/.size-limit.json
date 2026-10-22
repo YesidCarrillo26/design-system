@@ -1,0 +1,44 @@
+[
+  {
+    "name": "web: Button",
+    "path": "dist/web/index.js",
+    "import": "{ Button }",
+    "ignore": [
+      "react",
+      "react-dom"
+    ],
+    "limit": "15 kB"
+  },
+  {
+    "name": "web: todo el paquete",
+    "path": "dist/web/index.js",
+    "ignore": [
+      "react",
+      "react-dom"
+    ],
+    "limit": "100 kB"
+  },
+  {
+    "name": "native: Button",
+    "path": "dist/native/index.js",
+    "import": "{ Button }",
+    "ignore": [
+      "react",
+      "react-native",
+      "react-native-svg",
+      "uniwind"
+    ],
+    "limit": "15 kB"
+  },
+  {
+    "name": "native: todo el paquete",
+    "path": "dist/native/index.js",
+    "ignore": [
+      "react",
+      "react-native",
+      "react-native-svg",
+      "uniwind"
+    ],
+    "limit": "30 kB"
+  }
+]

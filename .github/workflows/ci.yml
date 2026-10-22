@@ -39,6 +39,10 @@ jobs:
       - name: Build
         run: pnpm turbo run build
 
+      - name: Tamaño del paquete (size-limit)
+        working-directory: packages/ui
+        run: pnpm size
+
       - name: Calidad del paquete (publint + attw)
         working-directory: packages/ui
         run: |
