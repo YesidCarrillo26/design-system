@@ -56,3 +56,13 @@ export const ArrowKeysMoveTheRadio: Story = {
     await expect(args.onValueChange).toHaveBeenLastCalledWith(['b']);
   },
 };
+
+export const TitleSitsAboveDescription: Story = {
+  args: { options: [{ value: 'a', title: 'Productividad', description: 'Organiza tus tareas del día.' }] },
+  play: async ({ canvas }) => {
+    const title = canvas.getByText('Productividad').getBoundingClientRect();
+    const description = canvas.getByText('Organiza tus tareas del día.').getBoundingClientRect();
+    // En columna: la descripción empieza debajo del título, no a su derecha.
+    await expect(description.top).toBeGreaterThanOrEqual(title.bottom - 1);
+  },
+};

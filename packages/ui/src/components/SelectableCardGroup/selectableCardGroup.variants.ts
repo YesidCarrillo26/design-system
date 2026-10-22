@@ -4,7 +4,7 @@ export const selectableCardStyles = tv({
   slots: {
     root: 'gap-3',
     card: 'flex-row items-center gap-3 rounded-lg border p-4',
-    body: 'flex-1 gap-0.5',
+    body: 'flex-1 flex-col gap-0.5',
     title: 'text-body-md font-medium text-foreground',
     description: 'text-body-sm text-muted-foreground',
     indicator: 'size-6 items-center justify-center border',
