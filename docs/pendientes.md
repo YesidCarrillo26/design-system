@@ -62,7 +62,7 @@ Un PR por fase; cada merge lo aprueba la persona.
 - [ ] **Pruebas de overlays native en dispositivo real** (foco, lectores de pantalla): hoy solo hay Jest y el export de Metro.
 - [ ] **Taskbox native** reutilizando store y stories de patrones (ahora también `SettingsGroup`, `OnboardingStep`, `StatCard`).
 - [ ] **Segundo proyecto de Chromatic** para capturas aproximadas del Storybook native en el navegador.
-- [x] **`knip`** (paso en CI, config en `knip.json`). Pendiente: `size-limit`.
+- [x] **`knip`** (paso en CI, config en `knip.json`). `size-limit` (paso en CI, límites en `packages/ui/.size-limit.json`).
 - [ ] **Probar el flujo MCP con un agente real** (`.mcp.json`, `docs-list`/`docs-show`/`test-run`) y dejarlo en una guía.
 - [ ] **Docs versionadas** (`/v1`) cuando haya más de una versión publicada.
 

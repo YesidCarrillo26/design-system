@@ -157,3 +157,9 @@ Registro cronológico de lo que se cambia después de la Fase 8. Cada entrada di
 ## 2026-10-18 — Piloto del agente: encabezado de `pendientes.md` (issue #17)
 
 Primera tarea completa del agente remoto (Claude) tras corregir el token: actualizar la línea 3 de `docs/pendientes.md` para que el estado sea del 2026-10-18 (tras `0.1.2` y los agentes remotos, ADR 0004). Tarea de solo documentación, elegida a propósito para probar el ciclo issue → rama → commit → PR (`gh pr create`) sin tocar código. Sin changeset: no cambia ningún paquete.
+
+## 2026-10-21 — `size-limit` en CI
+
+Presupuesto de tamaño para `@chroma-yesid/ui`: `packages/ui/.size-limit.json` y el paso "Tamaño del paquete" de `ci.yml` (`pnpm size`, después de `build`). Usa `@size-limit/preset-small-lib` (esbuild/rolldown), que mide lo que paga un consumidor: `import { Button }` y el paquete entero, por plataforma, con `react`, `react-native`, `react-native-svg` y `uniwind` como externos (son peers).
+
+**Medido (minificado + brotli):** web Button 13,3 kB, web completo 89,8 kB, native Button 13,7 kB, native completo 25,3 kB. Límites con ~10-20 % de margen (15 / 100 / 15 / 30 kB). La web pesa más porque arrastra `@base-ui/react`; native no. Que `Button` casi pese lo mismo que el paquete native entero indica que el barrel no se sacude bien en native: candidato a revisar. Sin changeset: solo cambian devDependencies.

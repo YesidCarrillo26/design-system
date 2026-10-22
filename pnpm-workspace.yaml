@@ -33,6 +33,8 @@ catalog:
   oxlint: ^1.88.0
   tsdown: ^0.23.1
   publint: ^0.3.25
+  size-limit: ^14.2.0
+  "@size-limit/preset-small-lib": ^14.2.0
   "@arethetypeswrong/cli": ^0.18.5
   turbo: ^2.11.9
   knip: ^6.41.0
